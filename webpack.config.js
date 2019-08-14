@@ -1,70 +1,68 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const path = require("path");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 
 module.exports = {
   devServer: {
     historyApiFallback: {
-      disableDotRule: true
-    }
+      disableDotRule: true,
+    },
   },
-  entry: path.join(__dirname, "src", "index.js"),
+  entry: path.join(__dirname, 'src', 'index.js'),
   output: {
-    path: path.join(__dirname, "build"),
-    filename: "bundle.js",
-    publicPath: "/"
+    path: path.join(__dirname, 'build'),
+    filename: 'bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        use: ['babel-loader', 'eslint-loader'],
       },
       {
         test: /.(css|scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
-              modules: false
-            }
+              modules: false,
+            },
           },
-          "sass-loader"
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /.(jpg|jpeg|png|gif|svg)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              name: "[path][name]-[hash:8].[ext]"
-            }
-          }
-        ]
+              name: '[path][name]-[hash:8].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
-          }
-        ]
-      }
-    ]
+            loader: 'html-loader',
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "src/index.html",
-      filename: "index.html"
+      template: 'src/index.html',
+      filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    })
-  ]
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
 };
