@@ -1,0 +1,9 @@
+body {
+  max-width: 850px;
+  margin: 0 auto;
+  color: blue;
+}
+
+nav {
+  padding: 20px 0 20px 0;
+}
