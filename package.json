@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --hot --mode development",
     "build": "webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,12 @@
     "style-loader": "^1.0.0",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.8.0"
+    "webpack-dev-server": "^3.8.0",
+    "jest": "24.8.0",
+    "babel-jest": "24.8.0",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16.3": "1.7.1",
+    "enzyme-to-json": "3.4.0"
   },
   "dependencies": {
     "react": "^16.9.0",
@@ -40,5 +45,13 @@
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./__tests__/setup/setupEnzyme.js"
+    ],
+    "testPathIgnorePatterns": [
+      "./__tests__/setup/"
+    ]
   }
 }
