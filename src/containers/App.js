@@ -9,6 +9,8 @@ import '../assets/css/style.scss';
 import '../assets/scss/main.scss';
 import Home from '../components/Home';
 import PageNotFound from '../components/PageNotFound';
+import PasswordReset from './passwordReset';
+import UpdatePassword from './updatePassword';
 
 
 const App = () => (
@@ -18,6 +20,8 @@ const App = () => (
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
       <Route exact path="/profile" component={Profile} />
+      <Route path="/passwordReset" component={PasswordReset} />
+      <Route path="/updatePassword" component={UpdatePassword} />
       <Route component={PageNotFound} />
     </Switch>
   </BrowserRouter>

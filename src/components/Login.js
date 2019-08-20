@@ -5,6 +5,7 @@ import Input from './common/input';
 import '../assets/scss/components/login.scss';
 import SocialLogin from './socialLogin';
 
+
 class LoginComponet extends Component {
   render() {
     return (
@@ -28,13 +29,13 @@ class LoginComponet extends Component {
           onChange={this.props.onChange}
         />
 
-        <br />
-        <button type="submit" className="button1">Signin</button>
-        <br />
-        <br />
+        <br/>
+        <button type="submit" className="button">Signin</button>
+        <br/><br/>
+        <p><a href="/passwordReset">Forgot Password ?</a> </p><br/>
         <p>Or Login with social media</p>
-        <SocialLogin />
-        <p>Dont have an account<span> <a href='/signup'>Signup</a> </span></p>
+        <SocialLogin/>
+        <p>Dont have an account<span> <a href= '/signup'>Signup</a> </span></p>
       </FormContainer>
     );
   }
