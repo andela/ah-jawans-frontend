@@ -10,7 +10,11 @@
     "test": "jest --watchAll \"-- --coverage\"",
     "test:CI": "jest \"-- --coverage\"",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "cypress": "cypress run",
+    "cy:open": "cypress open",
+    "lint": "eslint ./",
+    "lint-fix": "eslint ./ --fix"
   },
   "repository": {
     "type": "git",
@@ -23,34 +27,68 @@
   },
   "homepage": "https://github.com/andela/ah-jawans-frontend#readme",
   "devDependencies": {
-    "enzyme": "3.10.0",
-    "enzyme-adapter-react-16.3": "1.7.1",
-    "enzyme-to-json": "3.4.0",
-    "eslint": "^6.1.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-loader": "^2.2.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-react": "^7.14.3",
-    "nyc": "^14.1.1",
-    "jest": "24.8.0",
-    "redux-devtools": "^3.5.0"
-  },
-  "dependencies": {
     "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-arrow-functions": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.2",
     "babel-jest": "24.8.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "chai": "^4.2.0",
     "css-loader": "^3.2.0",
+    "cypress": "3.4.1",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.14.0",
+    "enzyme-to-json": "3.4.0",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-loader": "^2.2.1",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "eslint-plugin-cypress": "^2.6.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-react": "^7.14.3",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "24.8.0",
+    "nyc": "^14.1.1",
+    "postcss-loader": "3.0.0",
+    "redux-devtools": "^3.5.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.8.0",
+    "axios-mock-adapter": "1.17.0",
+    "redux-mock-store": "1.5.3"
+  },
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/polyfill": "7.4.4",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.5.5",
+    "axios": "0.19.0",
+    "babel-eslint": "^10.0.2",
+    "babel-jest": "24.8.0",
+    "babel-loader": "^8.0.6",
+    "bootstrap": "4.3.1",
+    "css-loader": "^3.2.0",
+    "dotenv": "8.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "joi-browser": "13.4.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
+    "prop-types": "15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
+    "react-test-renderer": "^16.9.0",
+    "react-toast-notifications": "2.2.4",
+    "react-toastify": "5.3.2",
     "redux": "^4.0.4",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-thunk": "^2.3.0",
@@ -62,11 +100,17 @@
     "webpack-dev-server": "^3.8.0"
   },
   "jest": {
+    "verbose": true,
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js",
+      "\\.(css|scss)$": "<rootDir>/src/__mocks__/styleMock.js"
+    },
     "setupFilesAfterEnv": [
-      "./__tests__/setup/setupEnzyme.js"
+      "./config/enzymeConfig.js"
     ],
     "testPathIgnorePatterns": [
-      "./__tests__/setup/"
+      "./src/__mocks__/",
+      "<rootDir>/cypress/"
     ],
     "collectCoverageFrom": [
       "<rootDir>/**/*.js",
@@ -75,7 +119,8 @@
       "!<rootDir>/src/index.js",
       "!<rootDir>/coverage/**/*.*",
       "!<rootDir>/build/**/*.*",
-      "!<rootDir>/dist/**/*.*"
+      "!<rootDir>/dist/**/*.*",
+      "!<rootDir>/cypress/**/*.*"
     ]
   }
 }
