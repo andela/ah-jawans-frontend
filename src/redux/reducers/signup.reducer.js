@@ -1,9 +1,5 @@
 import * as types from '../actionTypes/actionTypes';
-
-const initialState = {
-  signupSuccess: {},
-  errors: null,
-};
+import initialState from '../store/initialStates/userInitialState';
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {

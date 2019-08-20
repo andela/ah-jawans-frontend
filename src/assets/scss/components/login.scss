@@ -5,7 +5,7 @@
     border-radius: 5px;
 }
 
-.myContainer{
+.myContainer {
     position: fixed;
 }
 
@@ -24,7 +24,7 @@
     color: #000000;
 }
 
-.loginLeftSide h1{
+.loginLeftSide h1 {
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 48px;
@@ -40,7 +40,7 @@
     left: 80px;
 }
 
-.myForm h4{
+.myForm h4 {
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     font-size: 18px;
@@ -48,61 +48,63 @@
     color: #000000;
 }
 
-.myForm p{
+.myForm p {
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
     color: #000000;
 }
-.myForm p span{
+.myForm p span {
     font-weight: bold;
-    color: #12699B;
-    font-size:16px;
+    color: #12699b;
+    font-size: 16px;
 }
 
-.myForm ::placeholder{
+.myForm ::placeholder {
     font-size: 12px;
     font-family: 'Poppins', sans-serif;
 }
 
-.button{
+.button1 {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     width: 120px;
     height: 35px;
-    background-color: #12699B;
-    color: #F4F0F0;
+    background-color: #12699b;
+    color: #f4f0f0;
     border-radius: 5px;
 }
 
-.displayError{
+.displayError {
     width: 500px;
     margin: auto;
 }
 
-.displayError span{
+.displayError span {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     text-align: center;
 }
 
- ol, ul, dl {
+ol,
+ul,
+dl {
     margin-top: -15px;
     margin-bottom: 0;
 }
 
-.socialLogin img{
+.socialLogin img {
     width: 40px;
     font-size: 14px;
     margin-right: 40px;
 }
 
-.socialLogin li{
+.socialLogin li {
     list-style-type: none;
-    display:inline;
+    display: inline;
     padding-left: 29px;
 }
 
-@media(max-width: 768px){
+@media (max-width: 768px) {
     .images {
         left: 80px;
     }
@@ -113,15 +115,15 @@
 
     .myForm {
         top: 230px;
-        left: 145px
+        left: 145px;
     }
 
-    .loginLeftSide h5{
+    .loginLeftSide h5 {
         padding-left: 90px;
     }
 }
 
-@media(max-width: 425px){
+@media (max-width: 425px) {
     .loginLeftSide {
         top: 15px;
         right: 25px;
@@ -129,7 +131,7 @@
 
     .myForm {
         top: 250px;
-        left: 20px
+        left: 20px;
     }
 
     .images {
@@ -137,18 +139,18 @@
     }
 }
 
-@media(max-width: 320px){
+@media (max-width: 320px) {
     .loginLeftSide {
         top: 30px;
         right: 25px;
     }
 
-    .loginLeftSide h5{
+    .loginLeftSide h5 {
         font-size: 20px;
         padding-left: 100px;
     }
 
-    .loginLeftSide h1{
+    .loginLeftSide h1 {
         font-size: 40px;
     }
 
@@ -158,6 +160,6 @@
 
     .myForm {
         top: 280px;
-        left: 60px
+        left: 60px;
     }
 }

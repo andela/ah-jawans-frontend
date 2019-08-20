@@ -1,7 +1,8 @@
+jest.unmock('axios');
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
-import postDataThunk, { axiosInstance } from '../../../redux/thunks';
+import { postDataThunk, axiosInstance } from '../../../redux/thunks';
 import signupUserAction from '../../../redux/actions/signup.actions';
 import * as types from '../../../redux/actionTypes/actionTypes';
 
@@ -17,13 +18,11 @@ describe('auth actions', () => {
     email: 'patrick@gmail.com',
     password: 'Patrick@123',
   };
-
   const empyFields = {
     username: '',
     email: '',
     password: '',
   };
-
   beforeEach(() => {
     axiosMock = new MockAdapter(axiosInstance);
     const mockStore = configureStore([thunk]);
