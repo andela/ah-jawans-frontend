@@ -54,7 +54,7 @@ class SignupComponent extends Component {
           <p>
             You have an account?
             <span>
-              <a href="#">SIGN IN</a>
+              <a href="/login">SIGN IN</a>
             </span>
           </p>
         </div>
