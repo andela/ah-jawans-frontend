@@ -1,9 +1,5 @@
 import { LOGIN_USER } from '../actions/types';
-
-export const initialState = {
-  userCredentials: {},
-  errors: null,
-};
+import initialState from '../store/initialStates/userInitialState';
 
 export default function (state = initialState, action) {
   switch (action.type) {

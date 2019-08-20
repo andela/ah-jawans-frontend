@@ -1,10 +1,11 @@
+jest.unmock('axios');
 import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
-import postDataThunk, { axiosInstance } from '../../../redux/thunks';
+import { postDataThunk, axiosInstance } from '../../../redux/thunks';
 import loginUserAction from '../../../redux/actions/loginAction';
 import { LOGIN_USER } from '../../../redux/actions/types';
-import stores from '../../../redux/configureStore';
+import stores from '../../../redux/store/index';
 
 describe('auth actions', () => {
   let axiosMock;

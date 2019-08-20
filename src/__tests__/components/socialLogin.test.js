@@ -5,8 +5,6 @@ import SocialLogin from '../../components/socialLogin';
 
 const wrapper = shallow(<SocialLogin />);
 
-// const historyMock = { handleOnclick: jest.fn() };
-
 global.window = Object.create(window);
 Object.defineProperty(window, 'location', {
   value: {
@@ -36,9 +34,9 @@ describe('<Img />', () => {
 
   it('checks social login', () => {
     const loginPage = mount(
-          <MemoryRouter>
-              <SocialLogin/>
-          </MemoryRouter>,
+      <MemoryRouter>
+        <SocialLogin />
+      </MemoryRouter>,
     ).find('img').length;
     expect(loginPage).toEqual(3);
   });
