@@ -12,6 +12,8 @@ const props = {
   userCredentials: { errors: 'error' },
   postDataThunk: jest.fn(),
   history: {},
+  location: {},
+  socialLogin: jest.fn(),
 };
 let wrapper;
 
@@ -35,9 +37,7 @@ describe('Input tests...', () => {
   });
   it('should type in the Email', () => {
     wrapper = mount(<Login {...props}/>);
-    const form = wrapper.find(LoginComponet).find(FormContainer).find(Input);
-    const Email = form.find('input[name="email"]');
-    // expect(Email).toHaveLength(1);
+    const Email = wrapper.find('input').find('input[name="email"]');
     Email.simulate('change', {
       target: { value: 'joseph@gmail.com', name: 'email' },
     });
@@ -48,7 +48,6 @@ describe('Input tests...', () => {
     wrapper = mount(<Login {...props}/>);
     const form = wrapper.find(LoginComponet).find(FormContainer).find(Input);
     const password = form.find('input[name="password"]');
-    expect(password).toHaveLength(1);
     password.simulate('change', {
       target: { value: 'Example@1', name: 'password' },
     });

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import FormContainer from './common/FormContainer';
 import Input from './common/input';
 import '../assets/scss/components/login.scss';
+import SocialLogin from './socialLogin';
 
 class LoginComponet extends Component {
   render() {
@@ -32,11 +33,7 @@ class LoginComponet extends Component {
         <br/>
         <br/>
         <p>Or Login with social media</p>
-        <ul className='myform socialLogin'>
-          <li><img src='/src/assets/images/facebook.svg' /></li>
-          <li><img src='/src/assets/images/twitter.svg' /></li>
-          <li><img src='/src/assets/images/google-logo.png' /></li>
-        </ul>
+        <SocialLogin/>
         <p>Dont have an account<span> <a href= '/signup'>Signup</a> </span></p>
       </FormContainer>
     );
