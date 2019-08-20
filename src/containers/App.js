@@ -2,11 +2,13 @@
 import '@babel/polyfill';
 import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import Home from './Home';
-import Signup from '../containers/signupContainer';
-import Login from '../containers/loginView';
-import PageNotFound from './PageNotFound';
+import Signup from './signupContainer';
+import Login from './loginView';
 import '../assets/scss/main.scss';
+import Home from '../components/Home';
+// import Login from './Login';
+import PageNotFound from '../components/PageNotFound';
+
 
 const App = () => (
   <BrowserRouter>

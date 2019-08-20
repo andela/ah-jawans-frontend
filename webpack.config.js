@@ -1,6 +1,7 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   devServer: {
@@ -35,21 +36,22 @@ module.exports = {
         ],
       },
       {
-        test: /.(jpg|jpeg|png|gif|svg)$/,
+        test: /\.html$/,
         use: [
           {
             loader: 'url-loader',
             options: {
               name: '[path][name]-[hash:8].[ext]',
             },
+            loader: 'html-loader',
           },
         ],
       },
       {
-        test: /\.html$/,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'html-loader',
+            loader: 'file-loader',
           },
         ],
       },
@@ -64,5 +66,6 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
+    new Dotenv(),
   ],
 };

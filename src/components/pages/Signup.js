@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Form from '../common/FormContainer';
 import TextInput from '../common/TextInput';
+import SocialLogin from '../socialLogin';
 
 class SignupComponent extends Component {
   render() {
@@ -42,15 +43,7 @@ class SignupComponent extends Component {
         <br />
         <div className="form-footer">
         <p>Or signup with social media</p>
-          <a href="#">
-            <img src="/src/assets/images/facebook-logo.png" />
-          </a>
-          <a href="#">
-            <img src="/src/assets/images/twitter-logo.png" />
-          </a>
-          <a href="#">
-            <img src="/src/assets/images/google-logo.png" />
-          </a>
+          <SocialLogin/>
           <p>
             You have an account?
             <span>

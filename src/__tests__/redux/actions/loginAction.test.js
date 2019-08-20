@@ -1,5 +1,5 @@
-import LoginAction from '../../redux/actions/loginAction';
-import * as types from '../../redux/actions/types';
+import LoginAction from '../../../redux/actions/loginAction';
+import * as types from '../../../redux/actions/types';
 
 describe('actions', () => {
   it('should create an action to login a user', () => {
