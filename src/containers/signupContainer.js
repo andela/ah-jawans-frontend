@@ -26,7 +26,7 @@ export class Signup extends Component {
     e.preventDefault();
     const { user } = this.state;
     await this.props.postDataThunk('post', '/users', signupUserAction, user);
-    if (!this.props.signupSuccess.errors) this.props.history.push('/');
+    if (!this.props.signupSuccess.errors) this.props.history.push('/login');
   };
 
   render() {
