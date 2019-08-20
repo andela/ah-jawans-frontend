@@ -1,5 +1,5 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -7,6 +7,11 @@ module.exports = {
     historyApiFallback: {
       disableDotRule: true,
     },
+    port: 8080,
+    contentBase: './build',
+  },
+  node: {
+    fs: 'empty',
   },
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
@@ -58,7 +63,7 @@ module.exports = {
   plugins: [
     new HtmlWebPackPlugin({
       filename: 'index.html',
-      template: path.join(__dirname, 'src', 'index.html'),
+      template: path.join(__dirname, 'public', 'index.html'),
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
