@@ -1,0 +1,147 @@
+.images {
+    position: absolute;
+    width: 450px;
+    height: 250px;
+    border-radius: 5px;
+}
+
+.myContainer{
+    position: fixed;
+}
+
+.loginLeftSide {
+    position: fixed;
+    top: 130px;
+    right: 80px;
+}
+
+.loginLeftSide h5 {
+    box-sizing: border-box;
+    font-family: 'Sarina', cursive;
+    font-size: 25px;
+    line-height: 60px;
+    padding-left: 110px;
+    color: #000000;
+}
+
+.loginLeftSide h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 60px;
+    padding-left: 160px;
+    box-sizing: border-box;
+    color: #000000;
+}
+
+.myForm {
+    position: fixed;
+    top: 190px;
+    left: 80px;
+}
+
+.myForm h4{
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 76px;
+    color: #000000;
+}
+
+.myForm p{
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    line-height: 76px;
+    color: #000000;
+}
+.myForm p span{
+    font-weight: bold;
+    color: #12699B;
+    font-size:16px;
+}
+
+.myForm ::placeholder{
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.button{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    width: 120px;
+    height: 35px;
+    background-color: #12699B;
+    color: #F4F0F0;
+    border-radius: 5px;
+}
+
+.displayError{
+    width: 500px;
+    margin: auto;
+}
+
+.displayError span{
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+@media(max-width: 768px){
+    .images {
+        left: 80px;
+    }
+
+    .loginLeftSide {
+        top: 170px;
+    }
+
+    .myForm {
+        top: 230px;
+        left: 145px
+    }
+
+    .loginLeftSide h5{
+        padding-left: 90px;
+    }
+}
+
+@media(max-width: 425px){
+    .loginLeftSide {
+        top: 15px;
+        right: 25px;
+    }
+
+    .myForm {
+        top: 250px;
+        left: 20px
+    }
+
+    .images {
+        border-radius: 0;
+    }
+}
+
+@media(max-width: 320px){
+    .loginLeftSide {
+        top: 30px;
+        right: 25px;
+    }
+
+    .loginLeftSide h5{
+        font-size: 20px;
+        padding-left: 100px;
+    }
+
+    .loginLeftSide h1{
+        font-size: 40px;
+    }
+
+    .images {
+        border-radius: 0;
+    }
+
+    .myForm {
+        top: 280px;
+        left: 60px
+    }
+}

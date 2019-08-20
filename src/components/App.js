@@ -1,7 +1,9 @@
+/* eslint-disable import/no-named-as-default */
+import '@babel/polyfill';
 import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Home from './Home';
-import Login from './Login';
+import Login from '../containers/loginView';
 import PageNotFound from './PageNotFound';
 
 const App = () => (
