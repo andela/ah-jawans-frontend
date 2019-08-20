@@ -6,9 +6,9 @@ build
 dist
 coverage
 *.log*
-.vscode
 cypress/fixtures
 cypress/plugins
 cypress/screenshots
 cypress/support
 cypress/videos
+.vscode/

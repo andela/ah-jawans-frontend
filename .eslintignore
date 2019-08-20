@@ -1,3 +1,10 @@
 build/* 
 webpack*.*
 __test__/*
+/build/**
+/src/serviceWorker.js
+/src/**/*.css
+/src/**/*.scss
+/src/**/*.test.js
+/src/__tests__/*
+/src/__mocks__/*
