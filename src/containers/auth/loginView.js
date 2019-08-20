@@ -46,7 +46,7 @@ export class Login extends Component {
       localStorage.setItem('token', token);
       localStorage.setItem('id', id);
       localStorage.setItem('image', image);
-      this.props.history.push('/profile');
+      this.props.history.push('/');
     }
   };
 

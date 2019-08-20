@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import './Header.scss';
 import siteLogo from '../../assets/images/logo_ah_secondo.png';
 import siteLogoSmall from '../../assets/images/logo_ah_small.png';
@@ -57,6 +57,16 @@ class Header extends Component {
           </div>
 
           <div className="small-screen-3 medium-screen-2 large-screen-2 right-align">
+            { isAuth && window.location.pathname !== '/createArticle' ? (
+              <span className="inline-block header-search-button create-article">
+                <Link to="/createArticle">
+                  <FontAwesomeIcon icon={faPencilAlt} size="lg" />
+                </Link>
+              </span>
+            ) : (
+              ' '
+            )}
+
             {window.location.pathname !== '/search' ? (
               <span className="inline-block header-search-button">
                 <Link to="/search">
@@ -64,7 +74,7 @@ class Header extends Component {
                 </Link>
               </span>
             ) : (
-              ''
+              ' '
             )}
             {isAuth && (<Notification />)}
             <span className="inline-block header-user-button">

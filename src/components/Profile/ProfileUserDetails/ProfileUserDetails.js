@@ -1,12 +1,10 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import isEmpty from 'lodash/isEmpty';
+
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope, faEdit, faTimes,
@@ -17,18 +15,24 @@ import profileImagePlaceHolder from '../../../assets/images/profile_plaholder.pn
 import ProfileEditPicture from '../ProfileEdit/ProfileEditPicture';
 import ProfileEdit from '../ProfileEdit';
 import { htmlHelper } from '../../../helpers';
-import getUserAction from '../../../redux/actions/user/getUser';
+import fetchImage from '../../article/fetchImage';
 import { getDataThunk, getDataThunkPrivate, postDataThunkPrivate } from '../../../redux/thunks';
 import { getFollowerActionNumber, getFollowingActionNumber } from '../../../redux/actions/followerAction';
+import {
+  getUserAction,
+  getAUthorArticlesAction,
+  deleteArticleAction,
+} from '../../../redux/actions/user/getUser';
+import SingleArticle from '../../article/singleArticle';
 import OptInOrOut from '../Notifications/Opt/optInOut';
 import {
   optInAppAction, optOutAppAction, optInEmailAction, optOutEmailAction,
 } from '../../../redux/actions/notificationAction';
 
-
 export class ProfileUserDetails extends Component {
   state = {
     modalStyle: 'none',
+    deleted: false,
     isEmailOpted: true,
     isAppOpted: true,
     userProfile: {},
@@ -44,6 +48,14 @@ export class ProfileUserDetails extends Component {
     await this.props.getDataThunkPrivate('get', 'profiles/following', getFollowingActionNumber);
     await this.props.getDataThunkPrivate('get', 'profiles/followers', getFollowerActionNumber);
     await this.props.getDataThunk('get', `user/${userName}`, getUserAction);
+    const id = localStorage.getItem('id');
+    await this.props.getDataThunk('get', `user/${userName}`, getUserAction);
+    await this.props.postDataThunkPrivate('get', `articles/author/${id}`, getAUthorArticlesAction, null);
+  }
+
+  handleDelete = async (id) => {
+    await this.props.postDataThunkPrivate('delete', `articles/${id}`, deleteArticleAction, null);
+    window.location.reload();
   }
 
   componentWillReceiveProps= async (nextProps) => {
@@ -109,6 +121,7 @@ export class ProfileUserDetails extends Component {
         image.split(':')[0] === 'https' ? image1 = image : image1 = `https://res.cloudinary.com/djxhcwowp/image/upload/v${image}`;
       }
       return (
+        <div>
         <div className="ProfileUserDetails container">
           <ToastContainer position={toast.POSITION.TOP_RIGHT} />
           <div className="small-screen-4 xxlarge-v-margin border b-light-grey radius-2 shadow-1">
@@ -180,6 +193,28 @@ export class ProfileUserDetails extends Component {
             </div>
           </div>
         </div>
+          <div className='album py-5 bg-light'>
+            <div className='container author-article-container'>
+              <div className='row'>
+                {this.props.userProfile.articles
+                && this.props.userProfile.articles.map((article) => <Link
+                key={article.id}
+                to={`/readArticle/${article.id}`}
+                className='col-md-3'>
+                <SingleArticle
+                  title={article.title}
+                  description={article.description}
+                  readTime={article.readtime}
+                  image={fetchImage(article.body)}
+                  id = {article.id}
+                  page='Author'
+                  onClick={() => { this.handleDelete(article.id); }}
+                  />
+                  </Link>)}
+              </div>
+            </div>
+          </div>
+        </div>
       );
     }
     return (
@@ -207,7 +242,6 @@ ProfileUserDetails.propTypes = {
   postDataThunkPrivate: PropTypes.func,
   optInOutAppReducer: PropTypes.object,
   optInOutEmailReducer: PropTypes.object,
-
 };
 
 export const mapStateToProps = (state) => ({

@@ -67,7 +67,8 @@ describe('<following />', () => {
                   username: '',}
                       }
                   ],
-            followMessage: 'test'
+          followMessage: 'test',
+            getDataThunkPrivate: jest.fn(),
         };
         const component = mount(
             <MemoryRouter>
@@ -102,7 +103,8 @@ describe('<following />', () => {
                       following: null
                     }}
                 ],
-            followMessage: 'test'
+          followMessage: 'test',
+            getDataThunkPrivate: jest.fn(),
         };
         const component = mount(
             <MemoryRouter>
@@ -142,7 +144,8 @@ describe('<following />', () => {
                     following: null
                   }}
               ],
-          followMessage: 'test'
+        followMessage: 'test',
+          getDataThunkPrivate: jest.fn(),
       };
       const component = mount(
           <MemoryRouter>

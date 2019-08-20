@@ -14,21 +14,37 @@ const props = {
     }]
   },
   postDataThunkPrivate: jest.fn(),
+  getDataThunk: jest.fn(),
+  getDataThunkPrivate: jest.fn(),
   getUser: {
-    firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg'
+    firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg',  articles: [{article :{
+      "title": "this is the title",
+      "body": "this is the body of teh article",
+      "author": {
+          "username": "Joe",
+      },
+      "id": 2
+  }}],
   },
   userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
 }
 
-describe('<ProfileUserDetails />', () => {
+
+describe('<ProfileUserDetails />', () => { 
   test('should renders without crashing ', () => {
     const component = mount(<Provider
       store={mockStore({
         ...initialState,
-        getUser: { firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg' },
+        getUser: { firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg', articles:[{
+          "title": "this is the title",
+          "body": "this is the body of teh article",
+          "author": {
+              "username": "Joe",
+          },
+          "id": 2
+      }] },
         userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} },
         followerData:{followerNumber:0, followingNumber: 0},
-
       })}
     >
       <MemoryRouter>
@@ -78,6 +94,23 @@ describe('<ProfileUserDetails />', () => {
     const component = shallow(<ProfileUserDetailsComponent {...props} />);
     component.setProps(props);
     component.instance().handleAppChange();
+    component.instance().handledAppChange();
+    component.instance().handleEmailChange();
+    component.instance().handledEmailChange();
+    
+    const buttons = component.find('Button[buttonClass*="button"]');
+    
+    buttons.map(btn => {
+      btn.simulate('click', {});
+    });
+    
+    expect(component).toHaveLength(1);
+  });
+
+    test('should renders without crashing ', () => {
+    const component = shallow(<ProfileUserDetailsComponent {...props} />);
+    component.setProps(props);
+    component.instance().handleDelete();
     component.instance().handledAppChange();
     component.instance().handleEmailChange();
     component.instance().handledEmailChange();

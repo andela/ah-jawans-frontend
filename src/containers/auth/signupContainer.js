@@ -1,4 +1,4 @@
-/* eslint-disable import/no-named-as-default */
+/* eslint-disable consistent-return */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
@@ -30,7 +30,6 @@ export class Signup extends Component {
     this.setState({ user });
   }
 
-  // eslint-disable-next-line consistent-return
   handleSubmit = async (e) => {
     e.preventDefault();
     const { user } = this.state;
@@ -43,7 +42,6 @@ export class Signup extends Component {
   render() {
     return (
       <div className="container h-100 main">
-
         <div className="row">
           <div className="col-md-7 col-sm-7 main-content">
             <div className="main__leftSide">

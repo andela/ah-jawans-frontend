@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -73,7 +74,6 @@ export class AllUserView extends Component {
 
     unfollowEvent = (user) => async () => {
       await this.props.getDataThunkPrivate('delete', `profiles/${user.username}/follow`, unfollowAction);
-      // eslint-disable-next-line no-unused-expressions
       this.props.unfollowMessage
         ? (toast.success(`${this.props.unfollowMessage}!`),
         window.location.reload())
@@ -82,7 +82,6 @@ export class AllUserView extends Component {
 
     followThem = (username) => {
       const dataUsername = [];
-      // eslint-disable-next-line no-unused-expressions
       this.props.following
       && this.props.following.map((user) => dataUsername.push(user.followedUser.username));
       return dataUsername.includes(username);

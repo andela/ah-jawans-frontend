@@ -6,8 +6,9 @@ import App from './containers/App';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/scss/main.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import './assets/scss/main.scss';
+
 import configureStore from './redux/store';
 
 const store = configureStore();
