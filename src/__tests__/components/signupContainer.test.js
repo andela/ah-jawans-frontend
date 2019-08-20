@@ -74,5 +74,15 @@ describe('Input tests...', () => {
       };
       instance.handleSubmit(event);
     });
+
+    it('should make a request to the server', () => {
+      expect(submitButton).toHaveLength(1);
+      wrapper.update();
+      const event = {
+        preventDefault: jest.fn(),
+      };
+      wrapper.setProps({ signupSuccess: { }, history: [] });
+      instance.handleSubmit(event);
+    });
   });
 });
