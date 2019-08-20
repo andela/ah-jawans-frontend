@@ -55,4 +55,5 @@ module.exports = {
   followerNumber: '',
   followingNumber: '',
 
+  articles: [],
 };

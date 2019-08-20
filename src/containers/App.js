@@ -14,7 +14,9 @@ import UpdatePassword from './updatePassword';
 import followerView from './followerViewContainer';
 import FollowingView from './followingViewContainer';
 import AllUserView from './allUserView';
-
+import ReadArticle from '../components/article/readArticle';
+import CreateArticle from '../components/article/ArticleComponent';
+import UpdateArticle from '../components/article/updateArticle';
 
 const App = () => (
   <BrowserRouter>
@@ -29,6 +31,9 @@ const App = () => (
       <Route exact path="/following" component={FollowingView}/>
       <Route exact path="/follower" component={followerView}/>
       <Route exact path="/users" component={AllUserView}/>
+      <Route path="/updateArticle/:articleId" component={UpdateArticle} />
+      <Route path="/readArticle/:id" component={ReadArticle} />
+      <Route path="/createArticle" component={CreateArticle} />
       <Route component={PageNotFound} />
     </Switch>
   </BrowserRouter>

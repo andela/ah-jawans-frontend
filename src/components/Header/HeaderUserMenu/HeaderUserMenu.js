@@ -9,6 +9,7 @@ import {
   faSignOutAlt,
   faCog,
   faUsers,
+  faPencilAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import './HeaderUserMenu.scss';
 
@@ -84,6 +85,17 @@ class HeaderUserMenu extends Component {
               </Link>
             </li>
           )}
+
+                    {isAuth && (
+            <li>
+              <Link to="/createArticle">
+                <label htmlFor="profile">
+                  <FontAwesomeIcon icon={faPencilAlt} size="lg" />
+                </label>
+                <p id="profile" className="menu-links">Create Article</p>
+              </Link>
+            </li>
+                    )}
 
           {isAuth && (
             <li>

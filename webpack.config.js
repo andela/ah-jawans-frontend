@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
@@ -72,5 +73,12 @@ module.exports = {
       chunkFilename: '[id].css',
     }),
     new Dotenv(),
+    new CleanWebpackPlugin(), 
   ],
+  node: {
+    dns: 'mock',
+    fs: 'empty',
+    path: true,
+    url: false,
+  },
 };

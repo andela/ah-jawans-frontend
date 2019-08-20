@@ -213,7 +213,8 @@ describe('<AllUserView />', () => {
                   following: null
                 }}
             ],
-            followMessage: 'test'
+          followMessage: 'test',
+            getDataThunkPrivate: jest.fn(), 
         };
         const component = mount(
             <MemoryRouter>
@@ -241,7 +242,8 @@ describe('<AllUserView />', () => {
                 image: '',
                     }
                 ],
-          unfollowMessage: 'wegjfnen',
+        unfollowMessage: 'wegjfnen',
+          getDataThunkPrivate: jest.fn(), 
       };
       const component = mount(
           <MemoryRouter>

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import Input from './Input/Input';
 import Button from './Button/Button';
 import Form from './Form/Form';

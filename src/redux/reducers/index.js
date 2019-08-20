@@ -10,6 +10,8 @@ import notificationReducer from './user/notificationReducer';
 import followerReducer from './followerReducer';
 import optInOutEmailReducer from './optInOutEmailReducer';
 import optInOutAppReducer from './optInOutAppReducer';
+import getArticlesReducer from './getArticlesReducer';
+import articleReducer from './articleReducer/articleReducer';
 
 const rootReducers = combineReducers({
   userCredentials: loginReducer,
@@ -24,6 +26,9 @@ const rootReducers = combineReducers({
   followerData: followerReducer,
   optInOutEmailReducer,
   optInOutAppReducer,
+
+  articles: getArticlesReducer,
+  article: articleReducer,
 });
 
 export default rootReducers;

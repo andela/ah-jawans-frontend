@@ -37,9 +37,11 @@ describe('Signup reducer', () => {
             follow: { loading: false, message: '', errors: {}, data: {} },
             unfollow: { loading: false, message: '', errors: {}, data: {} },
             followerNumber: '',
-            followingNumber: ''
-        }
-    })
+            followingNumber: '',
+            articles: [],
+        }       
+    });
+
     it('Should return the initial state', () => {
         expect(reducer(undefined, {})).toEqual(initialState);
     });

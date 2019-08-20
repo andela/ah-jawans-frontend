@@ -54,4 +54,14 @@ describe('<ProfileEdit />', () => {
         }));
         form.simulate('submit', { preventDefault: jest.fn() });
     });
+
+    test('profile should not be updated if no input provided', () => {
+        inputs.map(input => input.simulate('change', {
+            target: {
+                name: input.instance().name,
+                value: ''
+            }
+        }));
+        form.simulate('submit', { preventDefault: jest.fn() });
+    });
 });

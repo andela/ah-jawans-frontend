@@ -9,7 +9,6 @@ describe('<Form />', () => {
     }
     const component = mount(<Form {...props}/>);
     const form = component.find('form');
-
     form.simulate('submit', {});
     expect(component).toHaveLength(1);
   });
