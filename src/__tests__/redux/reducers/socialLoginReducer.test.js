@@ -1,6 +1,6 @@
 import socialLoginReducer from '../../../redux/reducers/socialLoginReducer';
 import * as types from '../../../redux/actions/actionTypes';
-import configureStore from '../../../redux/configureStore';
+import configureStore from '../../../redux/store/index';
 
 const initialState = {
   token: localStorage.token || null,

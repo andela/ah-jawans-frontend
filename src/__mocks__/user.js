@@ -1,4 +1,4 @@
-export default (Object.user = {
+export default (Object.userCredentials = {
   firstName: 'shaluV',
   lastName: 'chandwani',
   username: 'shalu-Chandwani-vaswani',
@@ -8,17 +8,18 @@ export default (Object.user = {
 
 export const userToRegister = {
   ...Object.user,
-  password: 'Pankaj@1993',
-  confirmPassword: 'Pankaj@1993',
+  firstName: 'shaluV',
+  lastName: 'chandwani',
+  username: 'shalu-Chandwani-vaswani',
+  email: 'shaluVachandwani@rocketmail.com',
+  image: 'image.jpg',
 };
 
-export const mismatchedUserPassword = {
+export const invalidUser = {
   ...Object.user,
-  password: 'Pankaj@1993',
-  confirmPassword: '1234abcd',
-};
-
-export const wrongUserPassword = {
-  ...Object.user,
-  password: 'Abcd1234',
+  firstName: 'shaluV75765',
+  lastName: 'chandwani',
+  username: 'shalu-Chandwani-vaswani98',
+  email: 'shaluVachandwani@com',
+  image: 'image.jpg',
 };

@@ -5,9 +5,10 @@ import queryString from 'query-string';
 import PropTypes from 'prop-types';
 import Error from '../components/common/errors';
 import signupUserAction from '../redux/actions/signup.actions';
-import postDataThunk from '../redux/thunks/index';
+import { postDataThunk } from '../redux/thunks/index';
 import SignupComponent from '../components/pages/Signup';
 import socialLoginAction from '../redux/actions/sosialLoginAction';
+import computerHand from '../assets/images/computerHand.jpg';
 
 export class Signup extends Component {
   componentDidMount() {
@@ -39,8 +40,8 @@ export class Signup extends Component {
   render() {
     return (
       <div className="container">
-          {this.props.signupSuccess.errors && <Error
-        errors = {this.props.signupSuccess.errors}
+        {this.props.signupSuccess.errors && <Error
+          errors={this.props.signupSuccess.errors}
         />}
         <div className="row">
           <div className="col-7 container__leftSide">
@@ -48,19 +49,19 @@ export class Signup extends Component {
             <h5>Authors Haven</h5>
             <img
               className="container__images"
-              src="/src/assets/images/pexels-photo.jpeg"
+              src={computerHand}
             />
           </div>
           <div className="col-5 container__rightSide">
             <h4> Sign Up </h4>
             <SignupComponent
-            onChange={this.handleInputChange}
-            onSubmit={this.handleSubmit}
-            user= {this.state.user}
+              onChange={this.handleInputChange}
+              onSubmit={this.handleSubmit}
+              user={this.state.user}
             />
-            </div>
           </div>
         </div>
+      </div>
     );
   }
 }

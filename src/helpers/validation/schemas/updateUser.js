@@ -1,9 +1,8 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-escape */
+/* eslint-disable no-unused-vars */
 import Joi from 'joi-browser';
 
 export default Joi.object().keys({
-
   firstName: Joi.string()
     .min(2)
     .max(45)

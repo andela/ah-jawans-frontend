@@ -4,22 +4,24 @@ import { MemoryRouter } from 'react-router-dom';
 import { mount } from '../../../../config/enzymeConfig';
 import HeaderUserMenu from '../../../components/Header/HeaderUserMenu/HeaderUserMenu';
 import { mockStore, initialState } from '../../../__mocks__/store';
-import user from '../../../__mocks__/user';
-import mockWindow from '../../../__mocks__/window';
+
+const props = {
+    isAuth: true
+}
 
 describe('<HeaderUserMenu />', () => {
-  test('renders without crashing', () => {
-    const store = mockStore({
-      ...initialState,
-      user: { profile: { ...user }, isAuth: true, errors: '' }
-    });
-    const component = mount(<Provider store={store}>
-        <MemoryRouter>
-          <HeaderUserMenu />
-        </MemoryRouter>
-      </Provider>);
+    test('renders without crashing', () => {
+        const store = mockStore({
+            ...initialState,
+            userCredentials: { profile: {}, isAuth: true, errors: '' }
+        });
+        const component = mount(<Provider store={store}>
+            <MemoryRouter>
+                <HeaderUserMenu />
+            </MemoryRouter>
+        </Provider>);
 
-    component.findWhere(n => n.hasClass('logout') && n.simulate('click', {}));
-    expect(component).toHaveLength(1);
-  });
+        component.find(n => n.hasClass('logout') && n.simulate('click', {}));
+        expect(component).toEqual({});
+    });
 });

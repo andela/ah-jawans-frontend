@@ -95,7 +95,7 @@ HeaderUserMenu.propTypes = {
 
 HeaderUserMenu.defaultProps = { className: 'HeaderUserMenu' };
 const mapStateToProps = ({
-  user: {
+  userCredentials: {
     isAuth,
     profile: { username, firstName, lastName },
   },

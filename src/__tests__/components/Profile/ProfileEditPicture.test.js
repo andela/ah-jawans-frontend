@@ -4,20 +4,28 @@ import { MemoryRouter } from 'react-router-dom';
 import { mount, shallow } from '../../../../config/enzymeConfig';
 import ProfileEditPicture, { ProfileEditPicture as ProfileEditPictureComponent } from '../../../components/Profile/ProfileEdit/ProfileEditPicture/ProfileEditPicture';
 import { mockStore, initialState } from '../../../__mocks__/store';
-import user from '../../../__mocks__/user';
+
+const props = {
+  editProfile: jest.fn(),
+  uploadProfile: {},
+  uploadImage: {},
+  file: 'image.jpg',
+  loading: false,
+}
+let loading;
 
 describe('<ProfileEditPicture />', () => {
   test('should renders without crashing ', () => {
     const component = mount(<Provider
-        store={mockStore({
-          ...initialState,
-          user: { ...initialState.user, profile: { ...user } }
-        })}
-      >
-        <MemoryRouter>
-          <ProfileEditPicture />
-        </MemoryRouter>
-      </Provider>);
+      store={mockStore({
+        ...initialState,
+        userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
+      })}
+    >
+      <MemoryRouter>
+        <ProfileEditPicture />
+      </MemoryRouter>
+    </Provider>);
 
     const file = new File([new Blob()], 'image.jpg', { type: 'image/jpg' });
     const form = component.find('.ProfileEditPicture form');

@@ -5,7 +5,6 @@ import queryString from 'query-string';
 import Layout from '../Layout';
 import ProfileUserDetails from './ProfileUserDetails';
 import { Alert } from '../common';
-import { updateProfile } from '../../actions/user';
 import './Profile.scss';
 
 export class Profile extends Component {
@@ -64,13 +63,12 @@ Profile.propTypes = {
   push: PropTypes.func,
 };
 
-const mapStateToProps = ({ user: { profile } }) => ({ profile });
+// const mapStateToProps = ({ userCredentials: { profile } }) => ({ profile });
 
-const mapDispatchToProps = (dispatch) => ({
-  updateProfile: () => dispatch(updateProfile()),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   updateProfile: () => dispatch(updateProfile()),
+// });
 
 export default connect(
-  mapStateToProps, mapDispatchToProps,
   // { updateProfile },
 )(Profile);

@@ -6,8 +6,8 @@ import {
   Form, Input, Button, Img, Alert,
 } from '../../../common';
 import './ProfileEditPicture.scss';
-import { uploadImage } from '../../../../actions/user/uploadImage';
-import { editProfile } from '../../../../actions/user/editProfile';
+import uploadUserProfile from '../../../../redux/actions/user/editProfile';
+import { postDataThunkPrivate } from '../../../../redux/thunks';
 
 export class ProfileEditPicture extends Component {
   state = {
@@ -34,14 +34,14 @@ export class ProfileEditPicture extends Component {
 
   showSelectedImage = ({ target: { result } }) => this.setState({ image: result });
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const { file } = this.state;
-    const { uploadImage } = this.props;
     const formData = new FormData();
     formData.append('image', file);
 
-    return (file && uploadImage(formData)) || false;
+    await this.props.postDataThunkPrivate('patch', 'users', uploadUserProfile, formData);
+    window.location.reload();
   };
 
   componentWillReceiveProps = (nextProps) => {
@@ -106,10 +106,11 @@ ProfileEditPicture.propTypes = {
   errors: PropTypes.object,
   uploadImage: PropTypes.func,
   editProfile: PropTypes.func,
+  postDataThunkPrivate: PropTypes.func,
 };
 
 const mapStateToProps = ({
-  user: {
+  userCredentials: {
     uploadImage: {
       loading, image, message, errors,
     },
@@ -123,12 +124,10 @@ const mapStateToProps = ({
   errors,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  editProfile: (formData) => dispatch(editProfile(formData)),
-  uploadImage: (formData) => dispatch(uploadImage(formData)),
-});
+const actionCreator = {
+  postDataThunkPrivate,
+};
 
 export default connect(
-  mapStateToProps, mapDispatchToProps,
-  // { uploadImage, editProfile },
+  mapStateToProps, actionCreator,
 )(ProfileEditPicture);

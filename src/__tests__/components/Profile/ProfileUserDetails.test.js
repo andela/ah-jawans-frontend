@@ -9,15 +9,15 @@ import user from '../../../__mocks__/user';
 describe('<ProfileUserDetails />', () => {
   test('should renders without crashing ', () => {
     const component = mount(<Provider
-        store={mockStore({
-          ...initialState,
-          user: { ...initialState.user, profile: { ...user } }
-        })}
-      >
-        <MemoryRouter>
-          <ProfileUserDetails />
-        </MemoryRouter>
-      </Provider>);
+      store={mockStore({
+        ...initialState,
+        user: { ...initialState.user, profile: { ...user }, userProfile: { ...user } }
+      })}
+    >
+      <MemoryRouter>
+        <ProfileUserDetails />
+      </MemoryRouter>
+    </Provider>);
     const buttons = component.find('.ProfileUserDetails button');
 
     buttons.map(btn => btn.simulate('click', {}));

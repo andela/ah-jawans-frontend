@@ -66,6 +66,6 @@ class Header extends Component {
 
 Header.propTypes = { isAuth: PropTypes.bool };
 
-const mapStateToProps = ({ user: { isAuth } }) => ({ isAuth });
+const mapStateToProps = ({ signupSuccess: { isAuth } }) => ({ isAuth });
 
 export default connect(mapStateToProps)(Header);

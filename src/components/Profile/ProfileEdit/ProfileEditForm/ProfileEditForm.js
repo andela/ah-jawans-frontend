@@ -5,8 +5,9 @@ import {
   Button, Form, Input, Alert, TextArea,
 } from '../../../common';
 import './ProfileEditForm.scss';
-import { editProfile } from '../../../../actions/user/editProfile';
-import validateUser from '../../../../helpers/validation';
+import patchUserAction from '../../../../redux/actions/user/editProfile';
+import { validateUser } from '../../../../helpers/validation';
+import { postDataThunkPrivate } from '../../../../redux/thunks';
 
 export class ProfileEditForm extends Component {
   state = {
@@ -21,6 +22,7 @@ export class ProfileEditForm extends Component {
     editedForm: {},
     errors: {},
     message: '',
+    data: {},
   };
 
   componentWillReceiveProps(props) {
@@ -34,7 +36,8 @@ export class ProfileEditForm extends Component {
       },
     });
     const { errors } = this.state;
-    this.setState({ message: props.message, errors: { ...errors, ...props.errors[0] } });
+    // this.setState({ message: props.message, errors: { ...errors, ...props.errors[0] } });
+    this.setState({ message: props.message, errors: { ...errors } });
   }
 
   componentDidMount = async () => {
@@ -67,8 +70,6 @@ export class ProfileEditForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    // eslint-disable-next-line no-shadow
-    const { editProfile } = this.props;
     const { errors, editedForm } = this.state;
     const { confirmPassword, ...formData } = editedForm;
 
@@ -78,8 +79,10 @@ export class ProfileEditForm extends Component {
 
     this.setState({ errors: { ...errors, ...formErrors } });
 
-    if (!Object.keys(formErrors).length && Object.keys(editedForm).length) {
-      editProfile(formData);
+    // eslint-disable-next-line max-len
+    if (!formErrors.firstName && !formErrors.lastName && !formErrors.username && !formErrors.email && !formErrors.bio) {
+      await this.props.postDataThunkPrivate('patch', 'users', patchUserAction, formData);
+      window.location.reload();
     }
   };
 
@@ -161,7 +164,8 @@ export class ProfileEditForm extends Component {
             />
           </div>
           <div className="small-screen-4">
-            <Button type="submit" loading={loading}>
+            {/* <Button type="submit" loading={loading} onClick={this.handleOnClick}> */}
+            <Button type="submit" loading={loading} >
               SAVE
             </Button>
           </div>
@@ -183,22 +187,24 @@ ProfileEditForm.propTypes = {
   errors: PropTypes.object,
   editProfile: PropTypes.func,
   user: PropTypes.object,
+  postDataThunkPrivate: PropTypes.func,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = ({
-  user: {
-    profile,
+  userCredentials: {
     editProfile: { loading, message, errors },
   },
 }) => ({
-  profile, loading, message, errors,
+  loading, message, errors,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  editProfile: (formData) => dispatch(editProfile(formData)),
-});
+
+const actionCreator = {
+  postDataThunkPrivate,
+};
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  actionCreator,
 )(ProfileEditForm);

@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -11,14 +12,16 @@ import ProfileEditForm from './ProfileEditForm';
 export class ProfileEdit extends Component {
   state = { modalStyle: 'none' };
 
-  // eslint-disable-next-line react/prop-types
-  componentWillReceiveProps({ user }) {
+  componentDidMount() {
+    const { user } = this.props;
     this.setState({ user });
   }
 
   hideModal = () => this.setState({ modalStyle: 'none' });
 
-  showModal = () => this.setState({ modalStyle: 'block' });
+  showModal = () => {
+    this.setState({ modalStyle: 'block' });
+  }
 
   render() {
     const { modalStyle, user } = this.state;
@@ -27,7 +30,7 @@ export class ProfileEdit extends Component {
         <Button type="button" onClick={this.showModal}>
           Edit Profile <FontAwesomeIcon icon={faEdit} />
         </Button>
-        <div className={`modal ${modalStyle}`}>
+        <div className={`modals ${modalStyle}`} >
           <div className="modal-content">
             <div className="modal-header left-align">
               <Button
@@ -48,7 +51,10 @@ export class ProfileEdit extends Component {
     );
   }
 }
+ProfileEdit.propTypes = {
+  user: PropTypes.object,
+};
 
-export const mapStateToProps = (state) => ({ user: state.user.profile });
+export const mapStateToProps = (state) => ({ user: state.getUser });
 
 export default connect(mapStateToProps, {})(ProfileEdit);

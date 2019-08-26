@@ -19,7 +19,7 @@ let wrapper;
 
 describe('<Login />', () => {
   beforeAll(() => {
-    wrapper = shallow(<Login {...props}/>);
+    wrapper = shallow(<Login {...props} />);
   });
   it('Should render <LoginComponet />  component', () => {
     expect(wrapper.find(LoginComponet)).toHaveLength(1);
@@ -33,10 +33,10 @@ describe('<Login />', () => {
 
 describe('Input tests...', () => {
   beforeAll(() => {
-    wrapper = shallow(<Login {...props}/>);
+    wrapper = shallow(<Login {...props} />);
   });
   it('should type in the Email', () => {
-    wrapper = mount(<Login {...props}/>);
+    wrapper = mount(<Login {...props} />);
     const Email = wrapper.find('input').find('input[name="email"]');
     Email.simulate('change', {
       target: { value: 'joseph@gmail.com', name: 'email' },
@@ -45,9 +45,8 @@ describe('Input tests...', () => {
   });
 
   it('should type in the Paaword', () => {
-    wrapper = mount(<Login {...props}/>);
-    const form = wrapper.find(LoginComponet).find(FormContainer).find(Input);
-    const password = form.find('input[name="password"]');
+    wrapper = mount(<Login {...props} />);
+    const password = wrapper.find(LoginComponet).find('input[name="password"]');
     password.simulate('change', {
       target: { value: 'Example@1', name: 'password' },
     });
