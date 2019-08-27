@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
-import Error from '../components/common/errors';
-import signupUserAction from '../redux/actions/signup.actions';
-import postDataThunk from '../redux/thunks/index';
-import SignupComponent from '../components/pages/Signup';
-import socialLoginAction from '../redux/actions/sosialLoginAction';
+import Error from '../../components/common/errors';
+import signupUserAction from '../../redux/actions/auth/signup.actions';
+import postDataThunk from '../../redux/thunks/index';
+import SignupComponent from '../../components/auth/Signup';
+import socialLoginAction from '../../redux/actions/auth/sosialLoginAction';
 
 export class Signup extends Component {
   componentDidMount() {
@@ -29,30 +29,32 @@ export class Signup extends Component {
     this.setState({ user });
   };
 
+  // eslint-disable-next-line consistent-return
   handleSubmit = async (e) => {
     e.preventDefault();
     const { user } = this.state;
     await this.props.postDataThunk('post', '/users', signupUserAction, user);
-    if (!this.props.signupSuccess.errors) this.props.history.push('/login');
+    if (!this.props.signupSuccess.errors) return this.props.history.push('/login');
   };
 
   render() {
     return (
-      <div className="container">
+      <div className="container h-100 main">
           {this.props.signupSuccess.errors && <Error
         errors = {this.props.signupSuccess.errors}
         />}
         <div className="row">
-          <div className="col-7 container__leftSide">
+          <div className="col-md-7 col-sm-7 main-content">
+            <div className="main__leftSide">
             <h1>Join us</h1>
             <h5>Authors Haven</h5>
             <img
-              className="container__images"
+              className="img-fluid main__images"
               src="/src/assets/images/pexels-photo.jpeg"
             />
+            </div>
           </div>
-          <div className="col-5 container__rightSide">
-            <h4> Sign Up </h4>
+          <div className="col-md-5 col-sm-5">
             <SignupComponent
             onChange={this.handleInputChange}
             onSubmit={this.handleSubmit}

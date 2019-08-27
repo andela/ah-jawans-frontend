@@ -2,8 +2,8 @@ import thunk from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import configureStore from 'redux-mock-store';
 import postDataThunk, { axiosInstance } from '../../../redux/thunks';
-import loginUserAction from '../../../redux/actions/loginAction';
-import { LOGIN_USER } from '../../../redux/actions/types';
+import loginUserAction from '../../../redux/actions/auth/loginAction';
+import { LOGIN_USER } from '../../../redux/actions/actionTypes';
 import stores from '../../../redux/configureStore';
 
 describe('auth actions', () => {

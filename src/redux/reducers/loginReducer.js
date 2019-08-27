@@ -1,4 +1,4 @@
-import { LOGIN_USER } from '../actions/types';
+import { LOGIN_USER } from '../actions/actionTypes';
 
 export const initialState = {
   userCredentials: {},

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FormContainer from './common/FormContainer';
-import Input from './common/input';
-import '../assets/scss/components/login.scss';
+import FormContainer from '../common/formContainer';
+import Input from '../common/input';
+import '../../assets/scss/components/login.scss';
 import SocialLogin from './socialLogin';
 
 class LoginComponet extends Component {

@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
-import LoginComponet from '../components/Login';
-import '../assets/scss/components/login.scss';
-import loginUserAction from '../redux/actions/loginAction';
-import Error from '../components/common/errors';
-import postDataThunk from '../redux/thunks';
-import socialLoginAction from '../redux/actions/sosialLoginAction';
+import LoginComponet from '../../components/auth/Login';
+import '../../assets/scss/components/login.scss';
+import loginUserAction from '../../redux/actions/auth/loginAction';
+import Error from '../../components/common/errors';
+import postDataThunk from '../../redux/thunks';
+import socialLoginAction from '../../redux/actions/auth/sosialLoginAction';
 
 export class Login extends Component {
   state = {

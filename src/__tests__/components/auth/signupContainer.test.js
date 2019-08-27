@@ -1,8 +1,8 @@
 import React from 'react';
-import { shallow, mount } from '../../../config/enzymeConfig';
-import SignupComponent from '../../components/pages/Signup';
-import { Signup } from '../../containers/signupContainer';
-import Error from '../../components/common/errors';
+import { shallow, mount } from '../../../../config/enzymeConfig';
+import SignupComponent from '../../../components/auth/Signup';
+import { Signup } from '../../../containers/auth/signupContainer';
+import Error from '../../../components/common/errors';
 
 const props = {
   errors: 'Errors here',

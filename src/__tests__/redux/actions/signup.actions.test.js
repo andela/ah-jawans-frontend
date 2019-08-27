@@ -1,5 +1,5 @@
-import signupUserAction from '../../../redux/actions/signup.actions';
-import * as types from '../../../redux/actionTypes/actionTypes';
+import signupUserAction from '../../../redux/actions/auth/signup.actions';
+import * as types from '../../../redux/actions/actionTypes';
 
 describe('actions', () => {
   it('should create an action to add a user', () => {
