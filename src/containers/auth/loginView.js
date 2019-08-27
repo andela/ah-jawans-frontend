@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
-import LoginComponet from '../components/Login';
-import '../assets/scss/components/login.scss';
-import loginUserAction from '../redux/actions/loginAction';
-import Error from '../components/common/errors';
-import socialLoginAction from '../redux/actions/sosialLoginAction';
-import { postDataThunk } from '../redux/thunks';
-import computerHand from '../assets/images/computerHand.jpg';
+import computerHand from '../../assets/images/computerHand.jpg';
+import LoginComponet from '../../components/auth/Login';
+import '../../assets/scss/components/login.scss';
+import loginUserAction from '../../redux/actions/auth/loginAction';
+import Error from '../../components/common/errors';
+import { postDataThunk } from '../../redux/thunks';
+import socialLoginAction from '../../redux/actions/auth/sosialLoginAction';
 
 export class Login extends Component {
   state = {
@@ -29,6 +29,7 @@ export class Login extends Component {
     this.setState({ user });
   };
 
+  // eslint-disable-next-line consistent-return
   handleSubmit = async (e) => {
     e.preventDefault();
     const { user } = this.state;
@@ -37,16 +38,13 @@ export class Login extends Component {
       const { userCredentials: { data: { username, token } } } = this.props;
       localStorage.setItem('username', username);
       localStorage.setItem('token', token);
-      this.props.history.push('/profile');
+      return this.props.history.push('/profile');
     }
   };
 
   render() {
     return (
       <div className="container">
-        {(this.props.userCredentials.errors) && <Error
-          errors={this.props.userCredentials.errors}
-        />}
         <div className="row">
           <div className="col loginLeftSide">
             <h1>Login</h1>
@@ -54,6 +52,9 @@ export class Login extends Component {
             <img className='images' src={computerHand}/>
           </div>
           <div className="col-md-6 myForm">
+             {(this.props.userCredentials.errors) && <Error
+          errors={this.props.userCredentials.errors}
+        />}
             <h4> Signin </h4>
             <LoginComponet
               onChange={this.handleChange}

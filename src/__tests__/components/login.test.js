@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from '../../../config/enzymeConfig';
 
-import LoginComponet from '../../components/Login';
+import LoginComponet from '../../components/auth/Login';
 import FormContainer from '../../components/common/formContainer';
 import Input from '../../components/common/input';
 import Error from '../../components/common/errors';

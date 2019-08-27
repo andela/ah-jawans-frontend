@@ -1,5 +1,5 @@
 import { requestPasswordRequest, changePassword } from '../../../redux/actions/passwordReset';
-import * as types from '../../../redux/actions/types';
+import * as types from '../../../redux/actions/actionTypes';
 
 describe('actions', () => {
   it('should create an action to login a user', () => {
