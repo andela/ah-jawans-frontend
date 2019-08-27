@@ -1,5 +1,5 @@
 import reducer from '../../../redux/reducers/signup.reducer';
-import * as actionTypes from '../../../redux/actionTypes/actionTypes';
+import * as actionTypes from '../../../redux/actions/actionTypes';
 import configureStore from '../../../redux/configureStore';
 
 let initialState;

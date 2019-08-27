@@ -1,6 +1,6 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import socialLoginAction from '../../../redux/actions/sosialLoginAction';
+import socialLoginAction from '../../../redux/actions/auth/sosialLoginAction';
 import * as types from '../../../redux/actions/actionTypes';
 
 const middleware = [thunk];

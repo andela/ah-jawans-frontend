@@ -1,4 +1,4 @@
-import { LOGIN_USER } from './types';
+import { LOGIN_USER } from '../actionTypes';
 
 const loginUserAction = (payload) => ({
   type: LOGIN_USER,

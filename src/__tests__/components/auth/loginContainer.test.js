@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow, mount } from '../../../config/enzymeConfig';
+import { shallow, mount } from '../../../../config/enzymeConfig';
 
-import LoginComponet from '../../components/Login';
-import { Login } from '../../containers/loginView';
-import Error from '../../components/common/errors';
-import FormContainer from '../../components/common/FormContainer';
-import Input from '../../components/common/input';
+import LoginComponet from '../../../components/auth/Login';
+import { Login } from '../../../containers/auth/loginView';
+import Error from '../../../components/common/errors';
+import FormContainer from '../../../components/common/formContainer';
+import Input from '../../../components/common/input';
 
 const props = {
   errors: 'Errors here',

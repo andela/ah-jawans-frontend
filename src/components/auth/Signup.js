@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import Form from '../common/FormContainer';
-import TextInput from '../common/TextInput';
-import SocialLogin from '../socialLogin';
+import Form from '../common/formContainer';
+import TextInput from '../common/input';
+import SocialLogin from './socialLogin';
 
 class SignupComponent extends Component {
   render() {
     return (
       <div className="signup-form">
+        <h4> Signup </h4>
       <Form onSubmit={this.props.onSubmit}>
         <div className="form-group">
         <TextInput
@@ -46,9 +47,7 @@ class SignupComponent extends Component {
           <SocialLogin/>
           <p>
             You have an account?
-            <span>
-              <a href="/login">SIGN IN</a>
-            </span>
+              <a href="/login"><span> Signin</span></a>
           </p>
         </div>
       </Form>

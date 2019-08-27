@@ -2,11 +2,10 @@
 import '@babel/polyfill';
 import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
-import Signup from './signupContainer';
-import Login from './loginView';
+import Signup from './auth/signupContainer';
+import Login from './auth/loginView';
 import '../assets/scss/main.scss';
 import Home from '../components/Home';
-// import Login from './Login';
 import PageNotFound from '../components/PageNotFound';
 
 

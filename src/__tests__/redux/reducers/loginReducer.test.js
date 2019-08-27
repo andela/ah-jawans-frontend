@@ -1,5 +1,5 @@
 import reducer from '../../../redux/reducers/loginReducer';
-import * as actionTypes from '../../../redux/actions/types';
+import * as actionTypes from '../../../redux/actions/actionTypes';
 
 let initialState;
 let userCredentials;

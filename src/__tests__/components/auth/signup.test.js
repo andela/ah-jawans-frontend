@@ -1,11 +1,11 @@
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
 import { expect } from 'chai';
-import { shallow } from '../../../config/enzymeConfig';
-import SignupComponet from '../../components/pages/Signup';
-import FormContainer from '../../components/common/FormContainer';
-import TextInput from '../../components/common/TextInput';
-import Error from '../../components/common/errors';
+import { shallow } from '../../../../config/enzymeConfig';
+import SignupComponet from '../../../components/auth/Signup';
+import FormContainer from '../../../components/common/formContainer';
+import TextInput from '../../../components/common/input';
+import Error from '../../../components/common/errors';
 
 let errors;
 describe('<SignupComponet />', () => {
