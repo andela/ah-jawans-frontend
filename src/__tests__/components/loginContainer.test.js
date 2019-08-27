@@ -1,17 +1,14 @@
 import React from 'react';
 import { shallow, mount } from '../../../config/enzymeConfig';
-
 import LoginComponet from '../../components/Login';
 import { Login } from '../../containers/loginView';
 import Error from '../../components/common/errors';
-import FormContainer from '../../components/common/FormContainer';
+import FormContainer from '../../components/common/formContainer';
 import Input from '../../components/common/input';
-
 const props = {
   postDataThunk: jest.fn(),
   history: {},
   location: {},
-
   userCredentials: {},
   errors: null,
   signupSuccess: {},
@@ -33,7 +30,6 @@ const props = {
   },
 };
 let wrapper;
-
 describe('<Login />', () => {
   beforeAll(() => {
     wrapper = shallow(<Login {...props} />);
@@ -42,12 +38,10 @@ describe('<Login />', () => {
     expect(wrapper.find(LoginComponet)).toHaveLength(1);
     expect(wrapper.find(Error)).toHaveLength(0);
   });
-
   it('Should give initial state', () => {
     expect(wrapper.state()).toBeDefined();
   });
 });
-
 describe('Input tests...', () => {
   beforeAll(() => {
     wrapper = shallow(<Login {...props} />);
@@ -58,18 +52,24 @@ describe('Input tests...', () => {
     Email.simulate('change', {
       target: { value: 'joseph@gmail.com', name: 'email' },
     });
-    expect(wrapper.state()).toEqual({ user: { email: 'joseph@gmail.com', password: '' } });
+    expect(wrapper.state()).toEqual({
+      user: { email: 'joseph@gmail.com', password: '' },
+    });
   });
-
-  it('should type in the Paaword', () => {
+  it('should type in the Password', () => {
     wrapper = mount(<Login {...props} />);
-    const password = wrapper.find(LoginComponet).find('input[name="password"]');
+    const form = wrapper
+      .find(LoginComponet)
+      .find(FormContainer)
+      .find(Input);
+    const password = form.find('input[name="password"]');
     password.simulate('change', {
       target: { value: 'Example@1', name: 'password' },
     });
-    expect(wrapper.state()).toEqual({ user: { email: '', password: 'Example@1' } });
+    expect(wrapper.state()).toEqual({
+      user: { email: '', password: 'Example@1' },
+    });
   });
-
   describe('submit button test...', () => {
     let instance;
     let submitButton;
@@ -86,16 +86,13 @@ describe('Input tests...', () => {
       };
       instance.handleSubmit(event);
     });
-
-    it('should make a request to the server', () => {
-      wrapper = mount(<Login {...props} />);
-      submitButton = wrapper.find('button[type="submit"]');
-      submitButton.simulate('click');
+    it('should redirect', () => {
       expect(submitButton).toHaveLength(1);
       wrapper.update();
       const event = {
         preventDefault: jest.fn(),
       };
+      wrapper.setProps({ userCredentials: { data: { username: 'Joe', token:'token' } } , history: {} });
       instance.handleSubmit(event);
     });
   });
