@@ -1,5 +1,5 @@
 import React from 'react';
-import facebook from '../assets/images/facebook.png';
+import facebookIcon from '../assets/images/facebookIcon.png';
 import gmail from '../assets/images/gmail.png';
 import twitter from '../assets/images/twitter.png';
 
@@ -14,7 +14,7 @@ class SocialLogin extends React.Component {
       <>
         <div className="socialLogin">
           <a href="#">
-            <img className="socialLogin__img facebook" id="facebook" src={facebook} alt="facebook" onClick={this.handleOnclick('facebook')}/>
+            <img className="socialLogin__img facebook" id="facebook" src={facebookIcon} alt="facebook" onClick={this.handleOnclick('facebook')}/>
           </a>
           <a href="#">
             <img className="socialLogin__img" id="twitter" src={twitter} alt="twitter" onClick={this.handleOnclick('twitter')}/>

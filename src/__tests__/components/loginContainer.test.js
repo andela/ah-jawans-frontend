@@ -92,7 +92,7 @@ describe('Input tests...', () => {
       const event = {
         preventDefault: jest.fn(),
       };
-      wrapper.setProps({ userCredentials: { data: { username: 'sdhjg', token:'jhd' } } , history: {} });
+      wrapper.setProps({ userCredentials: { data: { username: 'Joe', token:'token' } } , history: {} });
       instance.handleSubmit(event);
     });
   });
