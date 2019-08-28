@@ -10,7 +10,7 @@ import SingleArticle from './article/singleArticle';
 import getArticlesAction from '../redux/actions/getArticlesAction';
 import { getDataThunk } from '../redux/thunks/index';
 
-class Home extends Component {
+export class Home extends Component {
     componentDidMount = async () => {
       await this.props.getDataThunk('get', 'articles', getArticlesAction);
     }

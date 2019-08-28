@@ -11,27 +11,28 @@ const SingleArticle = ({
   author,
   readTime,
   page,
+  onClick,
 }) => (
-    <div className='card mb-4 shadow-sm'>
+    <div className='mb-4 shadow-sm article-card'>
     <img className='img-card' src={ (image && `https://res.cloudinary.com/djxhcwowp/image/upload/v${image}`) || onComputer }/>
     <div className='card-body'>
         <p className='card-text article-title'>{title}</p>
         <small className='author'>{author}</small>
         <small className='read-time'>{readTime}</small>
         {page === 'Author' && <small className='edit-icon'><small className='edit-icon'><Link to='/'><img src={edit}/></Link></small>
-        <small className='remove-icon'><Link to='/'><img src={remove}/></Link></small></small>}
+        <small className='remove-icon' onClick = {onClick}><Link to='/profile'><img src={remove}/></Link></small></small>}
     </div>
     </div>
 );
 
 SingleArticle.propTypes = {
   title: PropTypes.string,
-  description: PropTypes.string,
   readTime: PropTypes.string,
   image: PropTypes.string,
   author: PropTypes.string,
   id: PropTypes.integer,
   page: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default SingleArticle;

@@ -10,4 +10,9 @@ const getAUthorArticlesAction = (payload) => ({
   payload,
 });
 
-export { getUserAction, getAUthorArticlesAction };
+const deleteArticleAction = (payload) => ({
+  type: userActionsTypes.DELETE_ARTICLE,
+  payload,
+});
+
+export { getUserAction, getAUthorArticlesAction, deleteArticleAction };

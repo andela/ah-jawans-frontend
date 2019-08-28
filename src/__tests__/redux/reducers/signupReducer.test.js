@@ -30,6 +30,7 @@ describe('Signup reducer', () => {
                 message: {},
                 errors: {},
             },
+            articles: [],
         };
     });
     it('Should return the initial state', () => {
