@@ -1,35 +1,41 @@
 import articleReducer from '../../../redux/reducers/articleReducer/articleReducer';
-import * as types from '../../../redux/actions/actionTypes';
-import user from '../../../__mocks__/user';
+import { UPDATE_ARTICLE_SUCCESS } from '../../../redux/actionTypes/actionTypes';
 
-const initialState = {
+  const articles =  {
+    "title": "this is the title",
+    "body": "this is the body of teh article",
+    "tags":'sports, tech',
+    "author": {
+        "username": "patrickngabo",
+    }
+  }
+
+  const initialState = {
   article: {},
   token: localStorage.token || null,
   error: null,
 };
 
-describe('User reducers', () => {
-  test('GET_USER_SUCCESS', () => {
-    const reducer = articleReducer(initialState, {
-    type: types.CREATE_ARTICLE_SUCCESS,
-    payload: {user},
-    });
-    expect(user).toHaveProperty('firstName');
-    expect(user).toHaveProperty('lastName');
-    expect(user).toHaveProperty('username');
-    expect(user).toHaveProperty('email');
-  });
+describe('Reducers', () => {
+  test('UPDATE ARTICLE', () => {
+    const expectedState = {
+      ...initialState,
+      article: {
+         title: 'Ese ni muebue',
+        body: 'ese nimbwe',
+        tags:'js,react'
+       }
+    };
 
-    test('UPDATE_ARTICLE_SUCCESS', () => {
-    const reducer = articleReducer(initialState, {
-    type: types.UPDATE_ARTICLE_SUCCESS,
-    payload: {user},
+    const state = articleReducer(initialState, {
+      type: UPDATE_ARTICLE_SUCCESS,
+      payload: {
+        title: 'Ese ni muebue',
+        body: 'ese nimbwe',
+        tags:'js,react'
+      
+      }
     });
-    expect(user).toHaveProperty('firstName');
-    expect(user).toHaveProperty('lastName');
-    expect(user).toHaveProperty('username');
-    expect(user).toHaveProperty('email');
-  });
+    expect(state).toEqual(expectedState);
+  })
 });
-
-

@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import CreateArticle, { CreateArticle as View } from '../../../components/article/ArticleComponent';
+import UpdateArticle, { UpdateArticle as View } from '../../../components/article/updateArticle';
 
 jest.mock('../../../components/Layout/Layout', () => () => (
   <div id="mockFileLayout">mockFileLayout</div>
@@ -12,8 +12,7 @@ jest.mock('../../../components/Layout/Layout', () => () => (
 const mockStore = configureMockStore([thunk]);
 const store = mockStore({
   article: { article: {} },
-  userCredentials: { userCredentials: {} },
-  
+  userCredentials: { userCredentials: {} }, 
 });
 
 const props = {
@@ -27,7 +26,7 @@ global.MutationObserver = class {
   observe() {}
 };
 
-describe('<CreateArticle />', () => {
+describe('<UpdateArticle />', () => {
   beforeEach(() => { });
 
   afterEach(() => {
@@ -35,7 +34,7 @@ describe('<CreateArticle />', () => {
   });
   const component = shallow(
     <Provider store={store}>
-      <CreateArticle {...props} />
+      <UpdateArticle {...props} />
     </Provider>,
   );
 
@@ -47,11 +46,11 @@ describe('<CreateArticle />', () => {
     const wrapper = mount(
       <Provider store={store}>
         <Router>
-          <CreateArticle />
+          <UpdateArticle />
         </Router>
       </Provider>,
     );
-    expect(wrapper.find('CreateArticle')).toBeDefined();
+    expect(wrapper.find('UpdateArticle')).toBeDefined();
   });
 test('should test create article', () => {
       const props = {
@@ -59,12 +58,6 @@ test('should test create article', () => {
         body:'Onboarding onto a large codebase',
         tags:'javascipt, react'
       };
-      // const component = shallow(
-      //   <View { ...props } />);
-      //   console.log('=========', component.debug());
-      //   const editor = component.find('#article-button');
-      //   editor.simulate('click');
-
       let instance
         let submitButton
         beforeAll(() => {

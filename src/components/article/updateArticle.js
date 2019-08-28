@@ -39,7 +39,7 @@ export class UpdateArticle extends Component {
       toast.success('article updated successfully');
     } else {
       toast.error(this.props.articles.articles.title);
-      toast.error(this.props.articles.errors.body);
+      toast.error(this.props.articles.articles.errors.body);
     }
   }
 
@@ -118,7 +118,7 @@ const actionCreator = {
 
 const mapStateToProps = (state) => ({
   articles: state.articles,
-  errors: state.articles.errors,
+  errors: state.article.article.errors,
 });
 
 export default connect(

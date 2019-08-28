@@ -20,7 +20,7 @@ export class CreateArticle extends Component {
     const token = localStorage.getItem('token');
     if (
       !token
-      || this.props.article.errors === 'There is no token'
+      || this.props.article.article.errors === 'There is no token'
     ) {
       localStorage.clear();
       window.location = '/login';
@@ -32,7 +32,7 @@ export class CreateArticle extends Component {
     await this.props.postDataThunkPrivate('post', '/articles', articleAction, this.state);
     if (!this.props.article.article.errors) {
       this.props.history.push('/');
-      toast.success('article created successfully ');
+      toast.success('Article created successfully ');
     } else {
       toast.error(this.props.article.article.errors.title);
       toast.error(this.props.article.article.errors.body);
@@ -46,7 +46,8 @@ export class CreateArticle extends Component {
         <Fragment>
           <div className="container-fluid">
             <div className="editor-wrapper">
-          <input
+              <input
+                name="title"
               className="form-control article-title"
               value={title}
               placeholder="Title..."
@@ -69,7 +70,8 @@ export class CreateArticle extends Component {
             </div>
             <div className="row">
               <div className="col-md-9">
-                <input
+                  <input
+                    name="tags"
                    className="form-control"
                     value={tags}
                     placeholder="Tags..."
@@ -79,9 +81,9 @@ export class CreateArticle extends Component {
                 />
               </div>
             <div className="col-md-3">
-              <button
+              <button id="article-button"
               className="btn btn-primary art-btn"
-              type="button"
+              type="submit"
                 onClick={this.handleSubmit}>
                 Publish
               </button>

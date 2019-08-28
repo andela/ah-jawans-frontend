@@ -10,7 +10,7 @@ const articles = {
     "author": {
         "username": "patrickngabo",
     }
-  }
+}
 
   const deleteArticle = {
     message: 'article deleted'

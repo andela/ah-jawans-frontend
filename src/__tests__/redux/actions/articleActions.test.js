@@ -7,7 +7,8 @@ describe('actions', () => {
       const payload = {
         articles: [{
           "title": "this is the title",
-          "body": "this is the body of teh article",
+        "body": "this is the body of teh article",
+          "tags": "javascript, reactjs",
           "author": {
             "username": "Joe",
           }
@@ -20,12 +21,16 @@ describe('actions', () => {
       expect(articleAction(payload));
     });
       it('should UPDATE_ARTICLE_SUCCESS', () => {
-        const payload = {articles :[{
-   "title": "this is the title",
-   "body": "this is the body of teh article",
-   "author": {
-       "username": "Joe",
-   }  }]};
+        const payload = {
+          articles: [{
+          "title": "this is the title",
+          "body": "this is the body of teh article",
+          "tags": "javascript, reactjs",
+          "author": {
+              "username": "Joe",
+          }
+        }]
+        };
         const expectedAction = {
           type: types.UPDATE_ARTICLE_SUCCESS,
           payload,
