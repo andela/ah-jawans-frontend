@@ -43,7 +43,6 @@ export class Signup extends Component {
   render() {
     return (
       <div className="container h-100 main">
-
         <div className="row">
           <div className="col-md-7 col-sm-7 main-content">
             <div className="main__leftSide">

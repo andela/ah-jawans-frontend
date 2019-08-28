@@ -5,41 +5,37 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import editorConfigs from '../../helpers/ckeditorConfig';
-import { updateArticleAction } from '../../redux/actions/articleActions/articleActions';
-import getArticlesAction from '../../redux/actions/getArticlesAction';
+import { articleAction } from '../../redux/actions/articleActions/articleActions';
 import { postDataThunkPrivate } from '../../redux/thunks';
 import Layout from '../Layout';
 
-export class UpdateArticle extends Component {
-    state = {
-      title: '',
-      body: '',
-      tags: '',
-    }
+export class CreateArticle extends Component {
+  state = {
+    title: '',
+    body: '',
+    tags: '',
+  }
 
-    componentDidMount = async () => {
-      const { articleId } = this.props.match.params;
-      this.setState({ articleId });
-      await this.props.postDataThunkPrivate('get', `articles/${articleId}`, getArticlesAction, null);
-      const { articles } = this.props.articles;
-      this.setState({
-        title: articles.title,
-        body: articles.body,
-        tags: articles.tags,
-      });
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    if (
+      !token
+      || this.props.article.errors === 'There is no token'
+    ) {
+      localStorage.clear();
+      window.location = '/login';
     }
+  }
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { articleId } = this.props.match.params;
-    await this.props.postDataThunkPrivate('patch', `/articles/${articleId}`, updateArticleAction, this.state);
-
-    if (!this.props.articles.articles.errors) {
-      this.props.history.push(`/readArticle/${articleId}`);
-      toast.success('article updated successfully');
+    await this.props.postDataThunkPrivate('post', '/articles', articleAction, this.state);
+    if (!this.props.article.article.errors) {
+      this.props.history.push('/');
+      toast.success('article created successfully ');
     } else {
-      toast.error(this.props.articles.articles.title);
-      toast.error(this.props.articles.errors.body);
+      toast.error(this.props.article.article.errors.title);
+      toast.error(this.props.article.article.errors.body);
     }
   }
 
@@ -99,17 +95,11 @@ export class UpdateArticle extends Component {
   }
 }
 
-UpdateArticle.propTypes = {
-  articles: PropTypes.object,
-  getDataThunk: PropTypes.func,
+CreateArticle.propTypes = {
+  article: PropTypes.object.isRequired,
   postDataThunkPrivate: PropTypes.func,
   history: PropTypes.object,
   errors: PropTypes.object,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      articleId: PropTypes.string.isRequired,
-    }),
-  }),
 };
 
 const actionCreator = {
@@ -117,11 +107,11 @@ const actionCreator = {
 };
 
 const mapStateToProps = (state) => ({
-  articles: state.articles,
-  errors: state.articles.errors,
+  article: state.article,
+  errors: state.article.article.errors,
 });
 
 export default connect(
   mapStateToProps,
   actionCreator,
-)(UpdateArticle);
+)(CreateArticle);

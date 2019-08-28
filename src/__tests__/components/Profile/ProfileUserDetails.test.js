@@ -13,7 +13,8 @@ const props = {
       "body": "this is the body of teh article",
       "author": {
           "username": "Joe",
-      }
+      },
+      "id": 2
   }],
   },
   userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
@@ -30,7 +31,8 @@ describe('<ProfileUserDetails />', () => {
           "body": "this is the body of teh article",
           "author": {
               "username": "Joe",
-          }
+          },
+          "id": 2
       }] },
         userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
       })}

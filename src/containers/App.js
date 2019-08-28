@@ -12,7 +12,8 @@ import PageNotFound from '../components/PageNotFound';
 import ReadArticle from '../components/article/readArticle';
 import PasswordReset from './passwordReset';
 import UpdatePassword from './updatePassword';
-
+import CreateArticle from '../components/article/ArticleComponent';
+import UpdateArticle from '../components/article/updateArticle';
 
 const App = () => (
   <BrowserRouter>
@@ -21,7 +22,9 @@ const App = () => (
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
       <Route exact path="/profile" component={Profile} />
+      <Route path="/updateArticle/:articleId" component={UpdateArticle} />
       <Route path="/readArticle/:id" component={ReadArticle} />
+      <Route path="/createArticle" component={CreateArticle} />
       <Route path="/passwordReset" component={PasswordReset} />
       <Route path="/updatePassword" component={UpdatePassword} />
       <Route component={PageNotFound} />

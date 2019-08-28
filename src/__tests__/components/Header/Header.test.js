@@ -6,10 +6,9 @@ import Header from '../../../components/Header';
 import { mockStore, initialState } from '../../../__mocks__/store';
 import mockWindow from '../../../__mocks__/window';
 
-localStorage.setItem('image', 'null');
-
 describe('<Header />', () => {
   test('renders without crashing', () => {
+    localStorage.setItem('image', 'null');
     const component = mount(<Provider store={mockStore({
       ...initialState,
       userCredentials: { userCredentials: {} },
@@ -34,10 +33,41 @@ describe('<Header />', () => {
     expect(component).toHaveLength(1);
   });
   test('renders without crashing', () => {
+    localStorage.setItem('token', 'gt5ycnukju86ik6');
     const component = mount(<Provider store={mockStore({
       ...initialState,
       userCredentials: { userCredentials: {} },
-      notification: [{ id: 111, message: '', status: 'false' }]
+      notification: [{ id: 111, message: '', status: 'false'}]
+    })}>
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    </Provider>);
+
+    component.find('button[id="toggleUserMenuButton"]').simulate('click');
+    expect(component).toHaveLength(1);
+  });
+  test('renders without crashing passing image in localstorage', () => {
+    localStorage.setItem('image', 'https://image.jpg');
+    const component = mount(<Provider store={mockStore({
+      ...initialState,
+      userCredentials: { userCredentials: {} },
+      notification: [{ id: 111, message: '', status: 'false'}]
+    })}>
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    </Provider>);
+
+    component.find('button[id="toggleUserMenuButton"]').simulate('click');
+    expect(component).toHaveLength(1);
+  });
+  test('renders without crashing passing image in localstorage', () => {
+    localStorage.setItem('image', 'image.jpg');
+    const component = mount(<Provider store={mockStore({
+      ...initialState,
+      userCredentials: { userCredentials: {} },
+      notification: [{ id: 111, message: '', status: 'false'}]
     })}>
       <MemoryRouter>
         <Header />
