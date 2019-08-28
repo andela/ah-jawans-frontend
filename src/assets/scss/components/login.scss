@@ -5,10 +5,6 @@
     border-radius: 5px;
 }
 
-.myContainer {
-    position: fixed;
-}
-
 .loginLeftSide {
     position: fixed;
     top: 130px;
@@ -35,7 +31,6 @@
 }
 
 .myForm {
-    position: fixed;
     top: 190px;
     left: 80px;
 }
@@ -85,14 +80,7 @@
     text-align: center;
 }
 
-ol,
-ul,
-dl {
-    margin-top: -15px;
-    margin-bottom: 0;
-}
-
-.socialLogin img {
+.socialLogin img{
     width: 40px;
     font-size: 14px;
     margin-right: 40px;

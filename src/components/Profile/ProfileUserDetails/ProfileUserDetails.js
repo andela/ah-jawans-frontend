@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope, faEdit, faTimes,
@@ -12,8 +13,9 @@ import profileImagePlaceHolder from '../../../assets/images/profile_plaholder.pn
 import ProfileEditPicture from '../ProfileEdit/ProfileEditPicture';
 import ProfileEdit from '../ProfileEdit';
 import { htmlHelper } from '../../../helpers';
-import getUserAction from '../../../redux/actions/user/getUser';
-import { getDataThunk } from '../../../redux/thunks';
+import { getUserAction, getAUthorArticlesAction } from '../../../redux/actions/user/getUser';
+import { getDataThunk, postDataThunkPrivate } from '../../../redux/thunks';
+import SingleArticle from '../../article/singleArticle';
 
 export class ProfileUserDetails extends Component {
   state = { modalStyle: 'none' };
@@ -24,7 +26,10 @@ export class ProfileUserDetails extends Component {
 
   componentDidMount = async () => {
     const userName = localStorage.getItem('username');
+    const id = localStorage.getItem('id');
     await this.props.getDataThunk('get', `user/${userName}`, getUserAction);
+    // eslint-disable-next-line react/prop-types
+    await this.props.postDataThunkPrivate('get', `articles/author/${id}`, getAUthorArticlesAction, null);
   }
 
   render() {
@@ -36,6 +41,7 @@ export class ProfileUserDetails extends Component {
         },
       } = this.props;
       return (
+        <div>
         <div className="ProfileUserDetails container">
           <div className="small-screen-4 xxlarge-v-margin border b-light-grey radius-2 shadow-1">
             <div className="profile-picture center-align medium-padding small-screen-4 medium-screen-4 large-screen-1">
@@ -93,6 +99,26 @@ export class ProfileUserDetails extends Component {
             </div>
           </div>
         </div>
+          <div className='album py-5 bg-light'>
+            <div className='container author-articles-container'>
+              <div className='row'>
+        {this.props.userProfile.articles && this.props.userProfile.articles.map((article) => <Link
+                key={article.id}
+                to={`/readArticle/${article.id}`}
+                className='col-md-3'>
+                <SingleArticle
+                  title={article.title}
+                  description={article.description}
+                  readTime={article.readtime}
+                  image={article.image}
+                  id = {article.id}
+                  page='Author'
+                  />
+                  </Link>)}
+        </div>
+        </div>
+        </div>
+        </div>
       );
     }
     return (
@@ -121,7 +147,7 @@ export const mapStateToProps = (state) => ({
 });
 
 const actionCreator = {
-  getDataThunk,
+  getDataThunk, postDataThunkPrivate,
 };
 
 export default connect(mapStateToProps, actionCreator)(ProfileUserDetails);

@@ -5,7 +5,10 @@ export const axiosInstance = axios.create({
   baseURL: 'https://ah-jawans-backend.herokuapp.com/api/',
 });
 
-const postDataThunk = (method, endpoint, actionCreator, data) => (dispatch) => axiosInstance[method](endpoint, data)
+const postDataThunk = (method,
+  endpoint,
+  actionCreator,
+  data) => (dispatch) => axiosInstance[method](endpoint, data)
   .then((response) => {
     dispatch(actionCreator(response.data));
   })
@@ -13,9 +16,11 @@ const postDataThunk = (method, endpoint, actionCreator, data) => (dispatch) => a
     dispatch(actionCreator({ errors: error.response.data.error || error.response.data.errors[0] }));
   });
 
-const getDataThunk = (method, endpoint, actionCreator) => (dispatch) => axiosInstance[method](endpoint)
+const getDataThunk = (method,
+  endpoint,
+  actionCreator) => (dispatch) => axiosInstance[method](endpoint)
   .then((response) => {
-    dispatch(actionCreator(response.data.profile));
+    dispatch(actionCreator(response.data));
   })
   .catch((error) => {
     dispatch(actionCreator({ errors: error.response.data.error || error.response.data.errors[0] }));
@@ -26,6 +31,7 @@ const postDataThunkPrivate = (method, endpoint, actionCreator, data) => (dispatc
   axiosInstance.defaults.headers.common.token = token;
   return axiosInstance[method](endpoint, data).then((response) => {
     dispatch(actionCreator(response.data));
+    console.log('articles here--------', response.data);
   }).catch((error) => {
     dispatch(actionCreator({ errors: error.response.data.error || error.response.data.errors[0] }));
   });

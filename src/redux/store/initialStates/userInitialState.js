@@ -20,4 +20,5 @@ module.exports = {
     image: {},
     errors: {},
   },
+  articles: [],
 };

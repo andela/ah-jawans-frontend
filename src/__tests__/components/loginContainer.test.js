@@ -4,7 +4,7 @@ import { shallow, mount } from '../../../config/enzymeConfig';
 import LoginComponet from '../../components/Login';
 import { Login } from '../../containers/loginView';
 import Error from '../../components/common/errors';
-import FormContainer from '../../components/common/FormContainer';
+import FormContainer from '../../components/common/formContainer';
 import Input from '../../components/common/input';
 
 const props = {
@@ -96,6 +96,16 @@ describe('Input tests...', () => {
       const event = {
         preventDefault: jest.fn(),
       };
+      instance.handleSubmit(event);
+    });
+
+    it('should redirect', () => {
+      expect(submitButton).toHaveLength(1);
+      wrapper.update();
+      const event = {
+        preventDefault: jest.fn(),
+      };
+      wrapper.setProps({ userCredentials: { data: { username: 'Joe', token:'token' } } , history: {} });
       instance.handleSubmit(event);
     });
   });

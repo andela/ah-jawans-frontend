@@ -5,4 +5,9 @@ const getUserAction = (payload) => ({
   payload,
 });
 
-export default getUserAction;
+const getAUthorArticlesAction = (payload) => ({
+  type: userActionsTypes.GET_AUTHOR_ARTICLES,
+  payload,
+});
+
+export { getUserAction, getAUthorArticlesAction };
