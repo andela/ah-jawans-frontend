@@ -7,6 +7,7 @@ import editProfileReducer from './user/editProfileReducer';
 import uploadImageReducer from './user/uploadImageReducer';
 import passwordReset from './passwordReset';
 import notificationReducer from './user/notificationReducer';
+import getArticlesReducer from './getArticlesReducer';
 
 const rootReducers = combineReducers({
   userCredentials: loginReducer,
@@ -18,6 +19,7 @@ const rootReducers = combineReducers({
   socialSignin,
   resetPassword: passwordReset,
   notification: notificationReducer,
+  articles: getArticlesReducer,
 });
 
 export default rootReducers;

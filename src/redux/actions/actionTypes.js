@@ -4,3 +4,4 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_STARTED = 'SIGNUP_STARTED';
 export const SIGNUP_FAILED = 'SIGNUP_FAILED';
+export const GET_ARTICLES = 'GET_ARTICLES';

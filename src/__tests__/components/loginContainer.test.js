@@ -95,5 +95,15 @@ describe('Input tests...', () => {
       wrapper.setProps({ userCredentials: { data: { username: 'Joe', token:'token' } } , history: {} });
       instance.handleSubmit(event);
     });
+
+    it('should redirect', () => {
+      expect(submitButton).toHaveLength(1);
+      wrapper.update();
+      const event = {
+        preventDefault: jest.fn(),
+      };
+      wrapper.setProps({ userCredentials: { data: { username: 'Joe', token:'token' } } , history: {} });
+      instance.handleSubmit(event);
+    });
   });
 });

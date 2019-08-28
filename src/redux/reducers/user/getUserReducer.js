@@ -9,6 +9,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         isAuth: true,
+        ...payload.profile,
+      };
+    case userActionsTypes.GET_AUTHOR_ARTICLES:
+      return {
+        ...state,
+        isAuth: true,
         ...payload,
       };
     default:

@@ -38,7 +38,7 @@ export class Login extends Component {
       const {
         userCredentials: {
           data: {
-            username, token, id, image,
+            username, image, token, id,
           },
         },
       } = this.props;

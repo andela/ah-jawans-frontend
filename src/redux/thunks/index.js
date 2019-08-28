@@ -21,7 +21,7 @@ const getDataThunk = (method,
   endpoint,
   actionCreator) => (dispatch) => axiosInstance[method](endpoint)
   .then((response) => {
-    dispatch(actionCreator(response.data.profile));
+    dispatch(actionCreator(response.data));
   })
   .catch((error) => {
     dispatch(actionCreator({ errors: error.response.data.error || error.response.data.errors[0] }));
