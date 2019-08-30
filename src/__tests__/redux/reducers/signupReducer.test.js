@@ -1,6 +1,6 @@
 import reducer from '../../../redux/reducers/signup.reducer';
 import * as actionTypes from '../../../redux/actionTypes/actionTypes';
-import configureStore from '../../../redux/configureStore';
+import configureStore from '../../../redux/store/index';
 
 let initialState;
 let signupSuccess;
@@ -8,8 +8,14 @@ let signupSuccess;
 describe('Signup reducer', () => {
   beforeEach(() => {
     initialState = {
-      signupSuccess: {},
+      profile: '{}',
+      isAuth: false,
+      userCredentials: {},
       errors: null,
+      signupSuccess: {},
+      getUser: { loading: false, message: '', errors: {} },
+      editProfile: { loading: false, message: '', errors: {}, data: {} },
+      uploadImage: { loading: false, image: {}, errors: {} }
     };
   });
   it('Should return the initial state', () => {
@@ -18,12 +24,12 @@ describe('Signup reducer', () => {
 
   it('Should return the initial state', () => {
     expect(reducer({
-      signupSuccess: { },
+      signupSuccess: {},
       errors: null,
     }, {
-      type: actionTypes.SIGNUP_SUCCESS,
-      signupSuccess: { user: { username: 'patrick', email: 'patrick@gmail.com', password: 'password@1' } },
-    })).toEqual({ signupSuccess });
+        type: actionTypes.SIGNUP_SUCCESS,
+        signupSuccess: { user: { username: 'patrick', email: 'patrick@gmail.com', password: 'password@1' } },
+      })).toEqual({ signupSuccess });
   });
 
   it('it should return new state', () => {

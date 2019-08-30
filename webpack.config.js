@@ -1,12 +1,18 @@
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   devServer: {
     historyApiFallback: {
       disableDotRule: true,
     },
+    port: 8080,
+    contentBase: './build',
+  },
+  node: {
+    fs: 'empty',
   },
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
@@ -35,21 +41,22 @@ module.exports = {
         ],
       },
       {
-        test: /.(jpg|jpeg|png|gif|svg)$/,
+        test: /\.html$/,
         use: [
           {
             loader: 'url-loader',
             options: {
               name: '[path][name]-[hash:8].[ext]',
             },
+            loader: 'html-loader',
           },
         ],
       },
       {
-        test: /\.html$/,
+        test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'html-loader',
+            loader: 'file-loader',
           },
         ],
       },
@@ -58,11 +65,12 @@ module.exports = {
   plugins: [
     new HtmlWebPackPlugin({
       filename: 'index.html',
-      template: path.join(__dirname, 'src', 'index.html'),
+      template: path.join(__dirname, 'public', 'index.html'),
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
+    new Dotenv(),
   ],
 };

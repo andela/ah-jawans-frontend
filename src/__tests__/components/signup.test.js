@@ -1,18 +1,20 @@
-/* eslint-disable import/no-named-as-default */
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from '../../../config/enzymeConfig';
-import SignupComponet from '../../components/pages/Signup';
-import FormContainer from '../../components/common/FormContainer';
+import SignupComponent from '../../components/pages/Signup';
+import FormContainer from '../../components/common/formContainer';
 import TextInput from '../../components/common/TextInput';
 import Error from '../../components/common/errors';
 
 let errors;
-describe('<SignupComponet />', () => {
+describe('<SignupComponent />', () => {
   it('Should render three <TextInput /> elements', () => {
-    const wrapper = shallow(<SignupComponet />);
+    const wrapper = shallow(<SignupComponent />);
     expect(
-      wrapper.find(FormContainer).shallow().find(TextInput),
+      wrapper
+        .find(FormContainer)
+        .shallow()
+        .find(TextInput),
     ).to.have.lengthOf(3);
   });
 });

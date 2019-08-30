@@ -3,10 +3,14 @@ import { shallow, mount } from '../../../config/enzymeConfig';
 import SignupComponent from '../../components/pages/Signup';
 import { Signup } from '../../containers/signupContainer';
 import Error from '../../components/common/errors';
-import FormContainer from '../../components/common/FormContainer';
-import TextInput from '../../components/common/TextInput';
 
-const props = { errors: 'Errors here', signupSuccess: { errors: 'error' }, postDataThunk: jest.fn() };
+const props = {
+  errors: 'Errors here',
+  signupSuccess: { errors: 'error' },
+  postDataThunk: jest.fn(),
+  location: {},
+  socialLogin: jest.fn(),
+};
 let wrapper;
 
 describe('<Signup />', () => {
@@ -28,8 +32,7 @@ describe('Input tests...', () => {
   });
   it('should type in the Username', () => {
     wrapper = mount(<Signup {...props}/>);
-    const form = wrapper.find(SignupComponent).find(FormContainer).find(TextInput);
-    const username = form.find('input[name="username"]');
+    const username = wrapper.find(SignupComponent).find('input[name="username"]');
     expect(username).toHaveLength(1);
     username.simulate('change', {
       target: { value: 'patrick', name: 'username' },
@@ -38,8 +41,7 @@ describe('Input tests...', () => {
   });
   it('should type in the Email', () => {
     wrapper = mount(<Signup {...props}/>);
-    const form = wrapper.find(SignupComponent).find(FormContainer).find(TextInput);
-    const email = form.find('input[name="email"]');
+    const email = wrapper.find(SignupComponent).find('input[name="email"]');
     expect(email).toHaveLength(1);
     email.simulate('change', {
       target: { value: 'patrick@gmail.com', name: 'email' },
@@ -49,9 +51,8 @@ describe('Input tests...', () => {
 
   it('should type in the Password', () => {
     wrapper = mount(<Signup {...props}/>);
-    const form = wrapper.find(SignupComponent).find(FormContainer).find(TextInput);
+    const form = wrapper.find(SignupComponent).find('input[name="password"]');
     const password = form.find('input[name="password"]');
-    expect(password).toHaveLength(1);
     password.simulate('change', {
       target: { value: 'Example@1', name: 'password' },
     });
@@ -71,6 +72,16 @@ describe('Input tests...', () => {
       const event = {
         preventDefault: jest.fn(),
       };
+      instance.handleSubmit(event);
+    });
+
+    it('should make a request to the server', () => {
+      expect(submitButton).toHaveLength(1);
+      wrapper.update();
+      const event = {
+        preventDefault: jest.fn(),
+      };
+      wrapper.setProps({ signupSuccess: { }, history: [] });
       instance.handleSubmit(event);
     });
   });
