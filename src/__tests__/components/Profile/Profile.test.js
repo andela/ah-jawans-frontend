@@ -12,8 +12,9 @@ describe('<Profile />', () => {
         const component = mount(<Provider store={mockStore({
             ...initialState,
             userCredentials: { userCredentials: {} },
-            notification: [{ id: 111, message: '', status: 'false' }]
-
+            notification: [{ id: 111, message: '', status: 'false' }],
+            signupSuccess: {},
+            followerData: {},
         })
         }>
             <MemoryRouter>

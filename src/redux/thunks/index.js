@@ -47,7 +47,6 @@ const getDataThunkPrivate = (method, endpoint, actionCreator) => (dispatch) => {
   });
 };
 
-
 export {
   postDataThunk, getDataThunk, postDataThunkPrivate, getDataThunkPrivate,
 };

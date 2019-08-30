@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -13,7 +14,8 @@ import ProfileEditPicture from '../ProfileEdit/ProfileEditPicture';
 import ProfileEdit from '../ProfileEdit';
 import { htmlHelper } from '../../../helpers';
 import getUserAction from '../../../redux/actions/user/getUser';
-import { getDataThunk } from '../../../redux/thunks';
+import { getDataThunk, getDataThunkPrivate } from '../../../redux/thunks';
+import { getFollowerActionNumber, getFollowingActionNumber } from '../../../redux/actions/followerAction';
 
 export class ProfileUserDetails extends Component {
   state = { modalStyle: 'none' };
@@ -24,6 +26,8 @@ export class ProfileUserDetails extends Component {
 
   componentDidMount = async () => {
     const userName = localStorage.getItem('username');
+    await this.props.getDataThunkPrivate('get', 'profiles/following', getFollowingActionNumber);
+    await this.props.getDataThunkPrivate('get', 'profiles/followers', getFollowerActionNumber);
     await this.props.getDataThunk('get', `user/${userName}`, getUserAction);
   }
 
@@ -59,6 +63,7 @@ export class ProfileUserDetails extends Component {
                     <Button
                       buttonClass="button medium-padding yellow radius-5 text-black"
                       onClick={this.hideModal}
+                      buttonId='hidemodels'
                     >
                       <FontAwesomeIcon icon={faTimes} size="1x" />
                     </Button>
@@ -72,7 +77,7 @@ export class ProfileUserDetails extends Component {
             </div>
             <div className="center-align small-screen-4 medium-screen-4 large-screen-2">
               <div className="small-padding large-text capitalize names">
-                {firstName} {lastName}
+                {firstName && firstName} {lastName && lastName}
               </div>
               <div className="small-padding username">
                 {username && '@'}
@@ -84,12 +89,16 @@ export class ProfileUserDetails extends Component {
               <div className="small-padding bio">{bio}</div>
               <div className="divider" />
               <div>
-                <span className="followers">
-                  <span className="number">{0}</span> Followers
-                </span>
-                <span className="following">
-                  <span className="number">{0}</span> Following
-                </span>
+                <Link to={'/follower'}>
+                  <span className="followers" onClick={this.handOnClickFollower }>
+                    <span className="number">{this.props.follower}</span> Followers
+                  </span>
+                </Link>
+                <Link to={'/following'}>
+                  <span className="following">
+                    <span className="number">{this.props.following}</span> Following
+                  </span>
+                </Link>
               </div>
               <div className="divider" />
               <span className="inline-block medium-v-padding">
@@ -119,14 +128,19 @@ ProfileUserDetails.propTypes = {
   fetchUser: PropTypes.func,
   getDataThunk: PropTypes.func,
   history: PropTypes.object,
+  getDataThunkPrivate: PropTypes.func,
+  follower: PropTypes.number,
+  following: PropTypes.number,
 };
 
 export const mapStateToProps = (state) => ({
   userProfile: state.getUser,
+  follower: state.followerData.followerNumber,
+  following: state.followerData.followingNumber,
 });
 
 const actionCreator = {
-  getDataThunk,
+  getDataThunk, getDataThunkPrivate,
 };
 
 export default connect(mapStateToProps, actionCreator)(ProfileUserDetails);

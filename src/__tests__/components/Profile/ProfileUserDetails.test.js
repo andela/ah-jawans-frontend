@@ -18,7 +18,9 @@ describe('<ProfileUserDetails />', () => {
       store={mockStore({
         ...initialState,
         getUser: { firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg' },
-        userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
+        userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} },
+        followerData:{followerNumber:0, followingNumber: 0},
+
       })}
     >
       <MemoryRouter>
@@ -34,7 +36,8 @@ describe('<ProfileUserDetails />', () => {
       store={mockStore({
         ...initialState,
         getUser: { firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'image.jpg' },
-        userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
+        userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} },
+        followerData:{followerNumber: 0, followingNumber: 0},
       })}
     >
       <MemoryRouter>
@@ -50,7 +53,8 @@ describe('<ProfileUserDetails />', () => {
       store={mockStore({
         ...initialState,
         getUser: { firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: '' },
-        userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
+        userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} },
+        followerData:{followerNumber: 0, followingNumber: 0},
       })}
     >
       <MemoryRouter>
@@ -61,4 +65,5 @@ describe('<ProfileUserDetails />', () => {
     buttons.map(btn => btn.simulate('click', {}));
     expect(component).toHaveLength(1);
   });
+
 });

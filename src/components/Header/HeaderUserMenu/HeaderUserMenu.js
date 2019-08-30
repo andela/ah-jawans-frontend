@@ -8,6 +8,7 @@ import {
   faUserCircle,
   faSignOutAlt,
   faCog,
+  faUsers,
 } from '@fortawesome/free-solid-svg-icons';
 import './HeaderUserMenu.scss';
 
@@ -59,6 +60,14 @@ class HeaderUserMenu extends Component {
           )
           }
 
+          {(
+              <li>
+                <Link to="/users">
+                  <FontAwesomeIcon icon={faUsers}/> Users
+                </Link>
+              </li>
+          )}
+
           {isAuth && (
             <li>
               <Link to="/profile">
@@ -72,6 +81,14 @@ class HeaderUserMenu extends Component {
             <li>
               <Link to="/passwordReset">
                 <FontAwesomeIcon icon={faCog} /> Change password</Link>
+            </li>
+          )}
+
+          {isAuth && (
+            <li>
+              <Link to="/follower">
+                <FontAwesomeIcon icon={faUserCircle} /> Followers
+              </Link>
             </li>
           )}
 

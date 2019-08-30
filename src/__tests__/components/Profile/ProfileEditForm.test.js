@@ -8,6 +8,8 @@ import { getMaxListeners } from 'cluster';
 const props = {
   editProfile: jest.fn(),
   user: {},
+  profile: {firstName: '', lastName: '', username:'', email: '', bio:''},
+  formData: {username: 'fekw'}
 }
 describe('<ProfileEditForm />', () => {
   test('renders without crashing', () => {
