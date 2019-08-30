@@ -5,3 +5,10 @@ build
 .DS_Store
 dist
 coverage
+*.log*
+.vscode
+cypress/fixtures
+cypress/plugins
+cypress/screenshots
+cypress/support
+cypress/videos

@@ -38,7 +38,7 @@ module.exports = {
         test: /.(jpg|jpeg|png|gif|svg)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
               name: '[path][name]-[hash:8].[ext]',
             },
@@ -57,8 +57,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: 'src/index.html',
       filename: 'index.html',
+      template: path.join(__dirname, 'src', 'index.html'),
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
