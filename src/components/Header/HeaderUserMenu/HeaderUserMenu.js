@@ -14,6 +14,7 @@ import './HeaderUserMenu.scss';
 
 class HeaderUserMenu extends Component {
   render() {
+    console.log(this.props, 'console from ');
     const {
       isAuth, className, username, firstName, lastName,
     } = this.props;

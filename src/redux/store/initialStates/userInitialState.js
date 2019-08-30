@@ -5,9 +5,9 @@ module.exports = {
   errors: null,
   signupSuccess: {},
   getUser: {
-    loading: false,
-    message: '',
-    errors: {},
+    // loading: false,
+    // message: '',
+    // errors: {},
   },
   editProfile: {
     loading: false,

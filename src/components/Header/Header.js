@@ -1,9 +1,10 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faBell, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './Header.scss';
 import siteLogo from '../../assets/images/logo_ah_secondo.png';
 import siteLogoSmall from '../../assets/images/logo_ah_small.png';
@@ -15,7 +16,7 @@ import Notification from './Notifications/getNotifications';
 class Header extends Component {
   state = { showUserMenu: false };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     window.document.addEventListener('click', (e) => {
       const { parentNode, classList } = e.srcElement;
       return (
@@ -36,47 +37,52 @@ class Header extends Component {
     const { showUserMenu } = this.state;
     return (
       <header className="Header">
-        <div className="small-screen-1 medium-screen-2 large-screen-2">
-          <div className="logo hide-on-small">
-            <Link to="/">
-              <Img imgSrc={siteLogo} alt="Authors Haven" />
-            </Link>
+        <div className="container">
+          <div className="small-screen-1 medium-screen-2 large-screen-2">
+            <div className="logo hide-on-small">
+              <Link to="/">
+                <Img imgSrc={siteLogo} alt="Authors Haven" />
+              </Link>
+            </div>
+            <div className="logo-small hide-on-medium hide-on-large">
+              <Link to="/">
+                <Img imgSrc={siteLogoSmall} alt="Authors Haven" width="60px" />
+              </Link>
+            </div>
           </div>
-          <div className="logo hide-on-medium hide-on-large">
-            <Link to="/">
-              <Img imgSrc={siteLogoSmall} alt="Authors Haven" width="60px" />
-            </Link>
+
+          <div className="small-screen-3 medium-screen-2 large-screen-2 right-align">
+            {window.location.pathname !== '/search' ? (
+              <span className="inline-block header-search-button">
+                <Link to="/search">
+                  <FontAwesomeIcon icon={faSearch} size="lg" />
+                </Link>
+              </span>
+            ) : (
+                ''
+              )}
+            <Notification />
+            <span className="inline-block header-user-button">
+              <Button
+                buttonClass="button white"
+                id="toggleUserMenuButton"
+                onClick={this.toggleUserMenu}
+              >
+                <HeaderUserImage />
+              </Button>
+
+              {showUserMenu ? <HeaderUserMenu /> : ''}
+            </span>
           </div>
-        </div>
-        <div className="small-screen-3 medium-screen-2 large-screen-2">
-          <Button buttonClass="button header-user-button right white" onClick={this.toggleUserMenu}>
-            <HeaderUserImage />
-          </Button>
-          {/* <Button buttonClass="button header-notification-button right white">
-            <FontAwesomeIcon icon={faBell} size="lg" /> <span className="number">{0}</span>
-          </Button> */}
-          {/* <Notification />
-          <Button buttonClass="button header-search-button right white">
-            <FontAwesomeIcon icon={faSearch} size="lg" />
-          </Button> */}
-          <Notification />
-          <span className="inline-block header-user-button">
-            <Button
-              buttonClass="button white"
-              id="toggleUserMenuButton"
-              onClick={this.toggleUserMenu}
-            >
-              <HeaderUserImage />
-            </Button>
-            {showUserMenu ? <HeaderUserMenu /> : ''}
-          </span>
         </div>
       </header>
     );
   }
 }
 
-Header.propTypes = { isAuth: PropTypes.bool };
+Header.propTypes = {
+  isAuth: PropTypes.bool,
+};
 
 const mapStateToProps = ({ userCredentials: { userCredentials: { isAuth } } }) => ({ isAuth });
 

@@ -2,68 +2,69 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckDouble, faCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
-import './Modal.scss';
+import { faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+rt './Modal.scss';
 // import getNotificationsAction from '../../../redux/actions/user/notifications';
 
-class Modal extends Component {
-  // updateStatus = (val) => {
-  //   const { updateUnseenNotification, getNotification } = this.props;
-  //   updateUnseenNotification(val);
-  //   if (val.status !== 'seen') {
-  //     setTimeout(() => {
-  //       getNotification();
+ass Modal extends Component {
+   updateStatus = (val) => {
+     const { updateUnseenNotification, getNotification } = this.props;
+     updateUnseenNotification(val);
+      f (val.status !== 'seen') {
+        etTimeout(() => {
+          etNotification();
   //     }, 100);
-  //   }
-  // };
-
-  // deleteNotification = (val) => {
+        
+          
+        
+        eNotification = (val) => {
   //   const { deleteNotification } = this.props;
-  //   deleteNotification(val);
-
-  //   setTimeout(() => {
-  //     getNotification();
-  //   }, 100);
-  // };
-
-  markAsSeen = () => {
-    const { markAllAsSeen } = this.props;
-    markAllAsSeen();
-  };
-
-  render() {
-    const { notifications, showModal, closeModal } = this.props;
-    return (
+        eteNotification(val);
+          
+            out(() => {
+            tification();
+          0);
+        
+            
+              ) => {
+                lAsSeen } = this.props;
+                  
+                    
+                      
+                        
+                          howModal, closeModal } = this.props;
+                            console.log(this.props, 'props from modal');
+                        
       <div id="modal" className={showModal ? '' : 'hide'}>
-        <div className="modal-content">
-          <span className="close" onClick={closeModal}>
-            &times;
-          </span>
-          <div className="text-black center-align">
+                          ntent">
+                          " onClick={closeModal}>
+                          
+                        
+                        text-black center-align">
             <h2>Notification</h2>
-          </div>
-          <br />
-
-          {notifications.length === 0 ? (
+                      
+                        
+                          
+          {notifications === 0 ? (
             <div>
-              <h3 className="center-align">No new notifications</h3>
-              <div className="divider" />
+                        e="center-align">No new notifications</h3>
+                      Name="divider" />
             </div>
-          ) : (
-              <div>
-                <div>
-                  <span>Mark all notification as seen:</span>
-                  <span>
+                      
+                        
+                      
+                    n>Mark all notification as seen:</span>
+                    n>
                     <button
-                      className="border b-light medium-margin radius-2"
-                      onClick={this.markAsSeen}
-                    >
-                      <FontAwesomeIcon icon={faCheckDouble} size="2x" className="text-success" />
-                    </button>
+                    className="border b-light medium-margin radius-2"
+                    onClick={this.markAsSeen}
+                  >
+                    <FontAwesomeIcon icon={faCheckDouble} size="2x" className="text-success" />
+                  </button>
                   </span>
-                </div>
-                <div>
-                  {notifications.map((val, key) => (
+              </div>
+              <div>
+      {/* {notifications((val, key) => (
                     <div key={key} className={val.status === 'unseen' ? 'row light-red' : 'row'}>
                       <div role="button" onClick={() => this.updateStatus(val)}>
                         <div key={key} className="wrap-notification">
@@ -84,16 +85,16 @@ class Modal extends Component {
                             <FontAwesomeIcon
                               icon={faTrash}
                               size="1x"
-                              id={`deleteNotification${key}`}
-                              className="left small-padding text-danger cursor-pointer"
-                              onClick={() => this.deleteNotification(val)}
-                            />
+                                  id={`deleteNotification${key}`}
+                                  className="left small-padding text-danger cursor-pointer"
+                                  onClick={() => this.deleteNotification(val)}
+                                />
                           </div>
-                          <div className="left medium-text notification-message ">
-                            <div className="small-v-padding">
-                              {val.message.length > 120
-                                ? `${val.message.substring(0, 120)}...`
-                                : `${val.message}`}
+                                <div className="left medium-text notification-message ">
+                                <div className="small-v-padding">
+                                  {val.message.length > 120
+                                  ? `${val.message.substring(0, 120)}...`
+                                  : `${val.message}`}
                             </div>
                             <a className="text-info medium-v-padding" href={val.url}>
                               Click here to read
@@ -110,7 +111,7 @@ class Modal extends Component {
 
                       <div className="divider light-grey" />
                     </div>
-                  ))}
+                  ))} */}
                 </div>
               </div>
           )}
@@ -129,27 +130,16 @@ Modal.propTypes = {
   showModal: PropTypes.bool,
   closeModal: PropTypes.func,
   markAllAsSeen: PropTypes.func,
-  notifications: PropTypes.array,
+  notifications: PropTypes.func,
   deleteNotification: PropTypes.func,
-  getNotification: PropTypes.func.isRequired,
-  getUnseenNotification: PropTypes.func.isRequired,
-  updateUnseenNotification: PropTypes.func.isRequired,
 };
-const mapStateToProps = ({
-  notification: {
-    notifications,
-    unseenNotifications,
-    getNotification: { errors, message, loading },
-    showNotificationModal,
-  },
-}) => ({
-  notifications,
-  unseenNotifications,
-  showNotificationModal,
-  errors,
-  message,
-  loading,
-});
+
+export const mapStateToProps = (state) => {
+  console.log(state, 'from modal');
+  return {
+    notifications: state.notifications,
+  };
+};
 
 export default connect(
   mapStateToProps,

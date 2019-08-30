@@ -5,6 +5,7 @@ import uploadImageReducer from './uploadImageReducer';
 import notificationReducer from './notificationReducer';
 
 export default (state = initialState, action) => {
+  console.log(state, 'state passing to reducer');
   const getUser = getUserReducer(state, action);
   const editProfile = editProfileReducer(state, action);
   const uploadImage = uploadImageReducer(state, action);
