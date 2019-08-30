@@ -1,4 +1,3 @@
-    
 import reducer from '../../redux/reducers/loginReducer';
 import * as actionTypes from '../../redux/actions/types';
 import initialState from '../../redux/store/initialStates/userInitialState';

@@ -86,13 +86,13 @@ describe('Input tests...', () => {
       };
       instance.handleSubmit(event);
     });
-    it('should redirect', () => {
+    it( 'should redirect', () => {
       expect(submitButton).toHaveLength(1);
       wrapper.update();
       const event = {
         preventDefault: jest.fn(),
       };
-      wrapper.setProps({ userCredentials: { data: { username: 'sdhjg', token:'jhd' } } , history: {} });
+      wrapper.setProps({ userCredentials: { data: { username: 'Joe', token:'token' } } , history: {} });
       instance.handleSubmit(event);
     });
   });
