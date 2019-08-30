@@ -20,4 +20,9 @@ module.exports = {
     image: {},
     errors: {},
   },
+  notification: {
+    loading: false,
+    image: {},
+    errors: {},
+  },
 };

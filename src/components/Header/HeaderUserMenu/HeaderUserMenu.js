@@ -7,6 +7,8 @@ import {
   faSignInAlt,
   faUserCircle,
   faSignOutAlt,
+  faBell,
+  faCog,
 } from '@fortawesome/free-solid-svg-icons';
 import './HeaderUserMenu.scss';
 
@@ -47,6 +49,21 @@ class HeaderUserMenu extends Component {
 
           {isAuth && (
             <li>
+              <Link to="/profile/notifications">
+                <FontAwesomeIcon icon={faBell} size="lg" /> Notifications
+              </Link>
+            </li>
+          )}
+
+          {isAuth && (
+            <li>
+              <Link to="/forgot-password">
+                <FontAwesomeIcon icon={faCog} /> Change password</Link>
+            </li>
+          )}
+
+          {isAuth && (
+            <li>
               <Link className="logout" to="/" onClick={this.logout}>
                 <FontAwesomeIcon icon={faSignOutAlt} /> Log out
               </Link>
@@ -66,17 +83,18 @@ HeaderUserMenu.propTypes = {
   lastName: PropTypes.string,
 };
 
-HeaderUserMenu.defaultProps = { className: 'HeaderUserMenu' };
+HeaderUserMenu.defaultProps = { className: 'HeaderUserMenu', isAuth: false };
+
 const mapStateToProps = ({
   userCredentials: {
     isAuth,
-    profile: { username, firstName, lastName },
+    userCredentials: { token, username, id },
   },
 }) => ({
   isAuth,
+  token,
   username,
-  firstName,
-  lastName,
+  id,
 });
 
 export default connect(mapStateToProps)(HeaderUserMenu);
