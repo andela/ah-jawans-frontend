@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -23,7 +24,7 @@ HeaderUserImage.propTypes = {
 
 HeaderUserImage.defaultProps = { className: 'HeaderUserImage' };
 
-const mapStateToProps = ({ userCredentials: { profile: { image } } }) => ({ image });
+const mapStateToProps = ({ userCredentials: { userCredentials: { data: { image } } } }) => ({ image });
 
 
 export default connect(mapStateToProps)(HeaderUserImage);
