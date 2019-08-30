@@ -50,7 +50,7 @@ export class Login extends Component {
         <div className="row">
           <div className="col loginLeftSide">
             <h1>Login</h1>
-            <h5>Authors Haven</h5>
+            <h2>Authors Haven</h2>
             <img className='images' src={computerHand}/>
           </div>
           <div className="col-md-6 myForm">

@@ -86,7 +86,7 @@ describe('Input tests...', () => {
       };
       instance.handleSubmit(event);
     });
-    it('should redirect', () => {
+    it( 'should redirect', () => {
       expect(submitButton).toHaveLength(1);
       wrapper.update();
       const event = {

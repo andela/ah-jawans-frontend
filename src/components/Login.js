@@ -30,9 +30,8 @@ class LoginComponet extends Component {
         />
 
         <br/>
-        <button type="submit" className="button">Signin</button>
-        <br/><br/>
-        <p><a href="/passwordReset">Forgot Password ?</a> </p><br/>
+        <button type="submit" className="button1">Signin</button>
+        <p><a href="/passwordReset">Forgot Password ?</a> </p>
         <p>Or Login with social media</p>
         <SocialLogin/>
         <p>Dont have an account<span> <a href= '/signup'>Signup</a> </span></p>
