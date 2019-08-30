@@ -5,6 +5,7 @@ import socialSignin from './socialLoginReducer';
 import getUserReducer from './user/getUserReducer';
 import editProfileReducer from './user/editProfileReducer';
 import uploadImageReducer from './user/uploadImageReducer';
+import notificationReducer from './user/notificationReducer';
 
 const rootReducers = combineReducers({
   userCredentials: loginReducer,
@@ -14,6 +15,7 @@ const rootReducers = combineReducers({
   uploadImage: uploadImageReducer,
   errors: loginReducer,
   socialSignin,
+  notification: notificationReducer,
 });
 
 export default rootReducers;

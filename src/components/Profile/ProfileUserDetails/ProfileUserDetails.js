@@ -13,7 +13,8 @@ import ProfileEditPicture from '../ProfileEdit/ProfileEditPicture';
 import ProfileEdit from '../ProfileEdit';
 import { htmlHelper } from '../../../helpers';
 import getUserAction from '../../../redux/actions/user/getUser';
-import { getDataThunk } from '../../../redux/thunks';
+import getNotificationsAction from '../../../redux/actions/user/notifications';
+import { getDataThunk, getDataThunkPrivate } from '../../../redux/thunks';
 
 export class ProfileUserDetails extends Component {
   state = { modalStyle: 'none' };
@@ -25,6 +26,8 @@ export class ProfileUserDetails extends Component {
   componentDidMount = async () => {
     const userName = localStorage.getItem('username');
     await this.props.getDataThunk('get', `user/${userName}`, getUserAction);
+    const id = localStorage.getItem('id');
+    await this.props.getDataThunkPrivate('get', `viewNotifications/${id}/unseen`, getNotificationsAction);
   }
 
   render() {
@@ -113,6 +116,7 @@ ProfileUserDetails.propTypes = {
   editUserProfile: PropTypes.func,
   fetchUser: PropTypes.func,
   getDataThunk: PropTypes.func,
+  getDataThunkPrivate: PropTypes.func,
   history: PropTypes.object,
 };
 
@@ -122,6 +126,7 @@ export const mapStateToProps = (state) => ({
 
 const actionCreator = {
   getDataThunk,
+  getDataThunkPrivate,
 };
 
 export default connect(mapStateToProps, actionCreator)(ProfileUserDetails);

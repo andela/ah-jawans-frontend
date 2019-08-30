@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faSearch } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faBell, faSearch } from '@fortawesome/free-solid-svg-icons';
 import './Header.scss';
 import siteLogo from '../../assets/images/logo_ah_secondo.png';
 import siteLogoSmall from '../../assets/images/logo_ah_small.png';
 import { Img, Button } from '../common';
 import HeaderUserMenu from './HeaderUserMenu/HeaderUserMenu';
 import HeaderUserImage from './HeaderUserImage/HeaderUserImage';
+import Notification from './Notifications/getNotifications';
 
 class Header extends Component {
   state = { showUserMenu: false };
@@ -51,13 +52,24 @@ class Header extends Component {
           <Button buttonClass="button header-user-button right white" onClick={this.toggleUserMenu}>
             <HeaderUserImage />
           </Button>
-          <Button buttonClass="button header-notification-button right white">
-            <FontAwesomeIcon icon={faBell} size="lg" /> <span className="number">{10}</span>
-          </Button>
+          {/* <Button buttonClass="button header-notification-button right white">
+            <FontAwesomeIcon icon={faBell} size="lg" /> <span className="number">{0}</span>
+          </Button> */}
+          {/* <Notification />
           <Button buttonClass="button header-search-button right white">
             <FontAwesomeIcon icon={faSearch} size="lg" />
-          </Button>
-          {showUserMenu ? <HeaderUserMenu /> : ''}
+          </Button> */}
+          <Notification />
+          <span className="inline-block header-user-button">
+            <Button
+              buttonClass="button white"
+              id="toggleUserMenuButton"
+              onClick={this.toggleUserMenu}
+            >
+              <HeaderUserImage />
+            </Button>
+            {showUserMenu ? <HeaderUserMenu /> : ''}
+          </span>
         </div>
       </header>
     );
@@ -66,6 +78,6 @@ class Header extends Component {
 
 Header.propTypes = { isAuth: PropTypes.bool };
 
-const mapStateToProps = ({ signupSuccess: { isAuth } }) => ({ isAuth });
+const mapStateToProps = ({ userCredentials: { userCredentials: { isAuth } } }) => ({ isAuth });
 
 export default connect(mapStateToProps)(Header);
