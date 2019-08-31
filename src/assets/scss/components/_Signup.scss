@@ -1,107 +1,106 @@
 .container {
-  width: 100%;
-  margin: 100px auto;
-  &__images {
-    border-radius: 13px;
-    width: 650px;
-    height: 400px;
-  }
-  &__logos {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-  }
-  .form-control {
-    width: 350px;
-  }
-  .form-control:focus {
-    border-width: 2px !important;
-    border-color: #12699b !important;
-    box-shadow: 0 0px 0px rgba(10, 10, 10, 0.075) inset,
-      0 0 0px #12699b !important;
-    outline: 0 none !important;
-  }
-  &__leftSide h1 {
-    font-family: 'Poppins', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 40px;
-    align-items: center;
-    text-align: center;
-    color: #000000;
-    mix-blend-mode: normal;
-  }
-  &__leftSide h5 {
-    font-family: 'Sarina', cursive;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 40px;
-    align-items: center;
-    text-align: center;
-    color: #000000;
-    mix-blend-mode: normal;
-  }
-  &__rightSide {
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    font-size: 18px;
-    color: #000000;
-  }
-  &__rightSide h4 {
-    margin: 70px;
-  }
-  &__rightSide p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    color: #000000;
-  }
-  &__rightSide p span {
-    font-weight: bold;
-    color: #12699b;
-    font-size: 16px;
-  }
-  &__rightSide::placeholder {
-    font-size: 12px;
-    font-family: 'Poppins', sans-serif;
-  }
-  &__logos {
-    width: 30px;
-    height: 30px;
-    margin: 0 auto;
-    padding: 5px;
-    display: inline-block;
-  }
-  .sumbit-btn {
-    position: absolute;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    width: 120px;
-    height: 35px;
-    background-color: #12699b;
-    color: #f4f0f0;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .form-footer {
-    margin: 20px;
-    margin-left: 0;
-  }
-  .form-footer img {
-    width: 40px;
-    font-size: 14px;
-    margin-right: 40px;
-  }
-  .displayError {
-    width: 500px;
-    margin: auto;
-  }
+    width: 100%;
+    margin: 100px auto;
+    &__images {
+        border-radius: 13px;
+        width: 650px;
+        height: 400px;
+    }
+    &__logos {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+    }
+    .form-control {
+        width: 350px;
+    }
+    .form-control:focus {
+        border-width: 2px !important;
+        border-color: #12699b !important;
+        box-shadow: 0 0px 0px rgba(10, 10, 10, 0.075) inset, 0 0 0px #12699b !important;
+        outline: 0 none !important;
+    }
+    &__leftSide h1 {
+        font-family: 'Poppins', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        align-items: center;
+        text-align: center;
+        color: #000000;
+        mix-blend-mode: normal;
+    }
+    &__leftSide h5 {
+        font-family: 'Sarina', cursive;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 40px;
+        align-items: center;
+        text-align: center;
+        color: #000000;
+        mix-blend-mode: normal;
+    }
+    &__rightSide {
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+        font-size: 18px;
+        color: #000000;
+    }
+    &__rightSide h4 {
+        margin: 70px;
+    }
+    &__rightSide p {
+        font-family: 'Poppins', sans-serif;
+        font-size: 12px;
+        color: #000000;
+    }
+    &__rightSide p span {
+        font-weight: bold;
+        color: #12699b;
+        font-size: 16px;
+    }
+    &__rightSide::placeholder {
+        font-size: 12px;
+        font-family: 'Poppins', sans-serif;
+    }
+    &__logos {
+        width: 30px;
+        height: 30px;
+        margin: 0 auto;
+        padding: 5px;
+        display: inline-block;
+    }
+    .sumbit-btn {
+        position: absolute;
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        width: 120px;
+        height: 35px;
+        background-color: #12699b;
+        color: #f4f0f0;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .form-footer {
+        margin: 20px;
+        margin-left: 0;
+    }
+    .form-footer img {
+        width: 40px;
+        font-size: 14px;
+        margin-right: 40px;
+    }
+    .displayError {
+        width: 500px;
+        margin: auto;
+    }
 
-  .displayError span {
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    text-align: center;
-  }
-  .signup-form {
-    margin: 70px;
-  }
+    .displayError span {
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        text-align: center;
+    }
+    .signup-form {
+        margin: 70px;
+    }
 }

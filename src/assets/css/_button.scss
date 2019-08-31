@@ -1,19 +1,18 @@
 @import './_pixels.scss';
 /* button */
 .button {
-  padding: $small $large;
-
-  padding: $small $xlarge;
-  margin-right: ($xsmall / 3);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-size: $medium;
+    padding: $small $large;
+    padding: $small $xlarge;
+    margin-right: ($xsmall / 3);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: $medium;
 }
 .button:disabled {
-  background: $light;
+    background: $light;
 }
 .button-disabled {
-  opacity: 0.6;
-  cursor: default;
+    opacity: 0.6;
+    cursor: default;
 }

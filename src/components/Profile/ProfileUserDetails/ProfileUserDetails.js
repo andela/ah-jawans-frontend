@@ -46,7 +46,7 @@ export class ProfileUserDetails extends Component {
                 minWidth="150px"
               />
               <Button onClick={this.showModal}>
-                <FontAwesomeIcon icon={faEdit} />
+                <FontAwesomeIcon icon={faEdit} style={{ color: '#000000' }} />
               </Button>
               <div className={`modals ${modalStyle}`}>
                 <div className="modal-content">

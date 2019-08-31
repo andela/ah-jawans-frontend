@@ -5,10 +5,10 @@ $full-width: 100%;
     margin-left: 0rem;
     margin-right: 0rem;
 }
-/* container */
-.container {
+/* container1 */
+.container1 {
     margin: 0 auto;
-    max-width: 1100px;
+    max-width: inherit;
     width: ($full-width - 2);
 }
 

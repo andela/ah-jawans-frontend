@@ -9,8 +9,8 @@ describe('<Profile />', () => {
     test('renders without crashing', () => {
         const component = mount(<Provider store={mockStore({
             ...initialState,
-            userCredentials: { profile: {} },
-            signupSuccess: {}
+            userCredentials: { userCredentials: {} },
+            notification: [{ id: 111, message: '', status: 'false' }]
         })}>
             <MemoryRouter>
                 <Profile />
