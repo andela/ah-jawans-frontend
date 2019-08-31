@@ -8,10 +8,18 @@ import './HeaderUserImage.scss';
 
 class HeaderUserImage extends Component {
   render() {
-    const { image, className } = this.props;
+    const { className } = this.props;
+    const image = localStorage.getItem('image');
+    if (image !== null) {
+      return (
+        <div className={className}>
+          <Img imgSrc={(image && `https://res.cloudinary.com/djxhcwowp/image/upload/v${image}`) || profileImagePlaceHolder} width="45px" imgClass="radius-5" />
+        </div>
+      );
+    }
     return (
       <div className={className}>
-        <Img imgSrc={(image && `https://res.cloudinary.com/djxhcwowp/image/upload/v${image}`) || profileImagePlaceHolder} width="45px" imgClass="radius-5" />
+        <Img imgSrc={profileImagePlaceHolder} width="45px" imgClass="radius-5" />
       </div>
     );
   }
@@ -24,7 +32,4 @@ HeaderUserImage.propTypes = {
 
 HeaderUserImage.defaultProps = { className: 'HeaderUserImage' };
 
-const mapStateToProps = ({ userCredentials: { userCredentials: { data: { image } } } }) => ({ image });
-
-
-export default connect(mapStateToProps)(HeaderUserImage);
+export default connect()(HeaderUserImage);

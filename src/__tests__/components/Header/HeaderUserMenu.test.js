@@ -13,7 +13,7 @@ describe('<HeaderUserMenu />', () => {
     test('renders without crashing', () => {
         const store = mockStore({
             ...initialState,
-            userCredentials: { profile: {}, isAuth: true, errors: '' }
+            userCredentials: { userCredentials: {} }
         });
         const component = mount(<Provider store={store}>
             <MemoryRouter>

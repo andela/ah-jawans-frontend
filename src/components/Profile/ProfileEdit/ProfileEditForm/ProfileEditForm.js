@@ -39,6 +39,23 @@ export class ProfileEditForm extends Component {
     this.setState({ message: props.message, errors: { ...errors } });
   }
 
+  componentDidMount = async () => {
+    const {
+      profile: {
+        firstName, lastName, username, email, bio,
+      },
+    } = this.props;
+    this.setState({
+      form: {
+        firstName: firstName || '',
+        lastName: lastName || '',
+        username: username || '',
+        email: email || '',
+        bio: bio || '',
+      },
+    });
+  };
+
   handleChange = (e) => {
     const { form, editedForm, errors } = this.state;
     this.setState({

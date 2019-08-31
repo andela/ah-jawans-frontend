@@ -7,22 +7,28 @@ import {
   faSignInAlt,
   faUserCircle,
   faSignOutAlt,
-  faBell,
   faCog,
 } from '@fortawesome/free-solid-svg-icons';
 import './HeaderUserMenu.scss';
 
 class HeaderUserMenu extends Component {
+  logout = () => {
+    window.localStorage.clear();
+  };
+
   render() {
-    console.log(this.props, 'console from ');
+    const selector = document.querySelector('.HeaderUserImage');
     const {
-      isAuth, className, username, firstName, lastName,
+      isAuth, username, firstName, lastName,
     } = this.props;
     return (
-      <div className={className}>
-        <p className="username">
-          {username || (firstName && lastName && `${firstName} ${lastName}`) || ''}
-        </p>
+      <div
+        className="HeaderUserMenu"
+        style={{ left: (selector && selector.offsetLeft - 140) || 0 }}
+      >
+        <div className="username">
+          {username || (firstName && lastName && `${firstName} ${lastName}`) || 'Welcome'}
+        </div>
         <ul>
           {!isAuth && (
             <li>
@@ -50,15 +56,7 @@ class HeaderUserMenu extends Component {
 
           {isAuth && (
             <li>
-              <Link to="/profile/notifications">
-                <FontAwesomeIcon icon={faBell} size="lg" /> Notifications
-              </Link>
-            </li>
-          )}
-
-          {isAuth && (
-            <li>
-              <Link to="/forgot-password">
+              <Link to="/passwordReset">
                 <FontAwesomeIcon icon={faCog} /> Change password</Link>
             </li>
           )}

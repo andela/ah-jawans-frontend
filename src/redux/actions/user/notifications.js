@@ -5,4 +5,9 @@ const getNotificationsAction = (payload) => ({
   payload,
 });
 
-export default getNotificationsAction;
+const ReadNotificationsAction = (payload) => ({
+  type: userActionsTypes.UPDATE_NOTIFICATION_STATUS,
+  payload,
+});
+
+export { getNotificationsAction, ReadNotificationsAction };

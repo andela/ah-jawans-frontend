@@ -34,10 +34,17 @@ export class Login extends Component {
     const { user } = this.state;
     await this.props.postDataThunk('post', 'users/login', loginUserAction, user);
     if (!this.props.userCredentials.errors) {
-      const { userCredentials: { data: { username, token, id } } } = this.props;
+      const {
+        userCredentials: {
+          data: {
+            username, token, id, image,
+          },
+        },
+      } = this.props;
       localStorage.setItem('username', username);
       localStorage.setItem('token', token);
       localStorage.setItem('id', id);
+      localStorage.setItem('image', image);
       this.props.history.push('/profile');
     }
   };
@@ -52,7 +59,7 @@ export class Login extends Component {
           <div className="col loginLeftSide">
             <h1>Login</h1>
             <h2>Authors Haven</h2>
-            <img className='images' src={computerHand}/>
+            <img className='images' src={computerHand} />
           </div>
           <div className="col-md-6 myForm">
             <h4> Signin </h4>

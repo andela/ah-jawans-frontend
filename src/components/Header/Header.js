@@ -37,7 +37,7 @@ class Header extends Component {
     const { showUserMenu } = this.state;
     return (
       <header className="Header">
-        <div className="container">
+        <div className="container1">
           <div className="small-screen-1 medium-screen-2 large-screen-2">
             <div className="logo hide-on-small">
               <Link to="/">

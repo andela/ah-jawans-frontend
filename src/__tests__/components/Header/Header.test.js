@@ -10,13 +10,13 @@ describe('<Header />', () => {
   test('renders without crashing', () => {
     const component = mount(<Provider store={mockStore({
       ...initialState,
-      userCredentials: { profile: {} },
-      signupSuccess: {}
+      userCredentials: { userCredentials: {} },
+      notification: [{ id: 111, message: '', status: 'false' }]
     })}>
       <MemoryRouter>
         <Header />
       </MemoryRouter>
-    </Provider >);
+    </Provider>);
 
     const headerUserButton = component.find('Header .header-user-button');
 
