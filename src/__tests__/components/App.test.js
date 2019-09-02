@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from '../../../config/enzymeConfig';
-import App from '../../containers/App';
+import App from '../../components/App';
 
 describe('<App />', () => {
   test('renders without crashing', () => {

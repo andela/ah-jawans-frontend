@@ -1,7 +1,7 @@
 import React from 'react';
-import facebookIcon from '../assets/images/facebookIcon.png';
-import gmail from '../assets/images/gmail.png';
-import twitter from '../assets/images/twitter.png';
+import facebookIcon from '../../assets/images/facebookIcon.png';
+import gmail from '../../assets/images/gmail.png';
+import twitter from '../../assets/images/twitter.png';
 
 
 class SocialLogin extends React.Component {

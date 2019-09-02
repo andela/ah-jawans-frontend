@@ -1,7 +1,7 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { shallow, mount } from '../../../config/enzymeConfig';
-import SocialLogin from '../../components/socialLogin';
+import SocialLogin from '../../components/auth/socialLogin';
 
 const wrapper = shallow(<SocialLogin />);
 

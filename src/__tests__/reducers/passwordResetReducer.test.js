@@ -26,11 +26,6 @@ describe('Login reducer', () => {
   });
 
   it('Should return the state of RESET_PASSWORD', () => {
-    console.log('.....?>>>', reducer(initialState, {
-      type: actionTypes.RESET_PASSWORD,
-      payload: { email: 'dgf@ajhdf.com' },
-    }));
-
     expect(reducer(initialState, {
       type: actionTypes.RESET_PASSWORD,
       payload: { email: 'dgf@ajhdf.com' },
@@ -43,11 +38,6 @@ describe('Login reducer', () => {
   });
 
   it('Should return the state of UPDATE_PASSWORD', () => {
-    console.log('.....?>>>', reducer(initialState, {
-      type: actionTypes.UPDATE_PASSWORD,
-      payload: { password: 'dgf@ajhdf.com' },
-    }));
-
     expect(reducer(initialState, {
       type: actionTypes.UPDATE_PASSWORD,
       payload: { email: 'dgf@ajhdf.com' },

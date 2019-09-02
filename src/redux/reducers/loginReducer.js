@@ -1,4 +1,4 @@
-import { LOGIN_USER } from '../actions/types';
+import { LOGIN_USER } from '../actions/actionTypes';
 import initialState from '../store/initialStates/userInitialState';
 
 export default function (state = initialState, action) {

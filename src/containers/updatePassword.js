@@ -93,13 +93,13 @@ export class UpdatePassword extends Component {
 }
 
 UpdatePassword.propTypes = {
-  match: PropTypes.instanceOf(Object).isRequired,
+  match: PropTypes.instanceOf(Object),
   changePassword: PropTypes.func,
-  history: PropTypes.instanceOf(Object).isRequired,
-  location: PropTypes.instanceOf(Object).isRequired,
-  resetPassword: PropTypes.func.isRequired,
-  passwordUpdate: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired,
+  history: PropTypes.instanceOf(Object),
+  location: PropTypes.instanceOf(Object),
+  resetPassword: PropTypes.func,
+  passwordUpdate: PropTypes.func,
+  setAlert: PropTypes.func,
   postDataThunk: PropTypes.func,
 };
 
