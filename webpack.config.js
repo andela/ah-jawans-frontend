@@ -71,6 +71,12 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
-    new Dotenv(),
+    new Dotenv({
+     path: './.env',
+     safe: true,
+     systemvars: true,
+     silent: true,
+     defaults: false 
+   }),
   ],
 };
