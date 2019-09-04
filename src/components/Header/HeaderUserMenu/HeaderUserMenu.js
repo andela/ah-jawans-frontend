@@ -74,7 +74,6 @@ class HeaderUserMenu extends Component {
                 <FontAwesomeIcon icon={faCog} /> Change password</Link>
             </li>
           )}
-
           {isAuth && (
             <li>
               <Link className="logout" to="/" onClick={this.logout}>

@@ -1,7 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import isEmpty from 'lodash/isEmpty';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope, faEdit, faTimes,
@@ -13,10 +17,21 @@ import ProfileEditPicture from '../ProfileEdit/ProfileEditPicture';
 import ProfileEdit from '../ProfileEdit';
 import { htmlHelper } from '../../../helpers';
 import getUserAction from '../../../redux/actions/user/getUser';
-import { getDataThunk } from '../../../redux/thunks';
+import { getDataThunk, postDataThunkPrivate } from '../../../redux/thunks';
+import OptInOrOut from '../Notifications/Opt/optInOut';
+import {
+  optInAppAction, optOutAppAction, optInEmailAction, optOutEmailAction,
+} from '../../../redux/actions/notificationAction';
+
 
 export class ProfileUserDetails extends Component {
-  state = { modalStyle: 'none' };
+  state = {
+    modalStyle: 'none',
+    isEmailOpted: true,
+    isAppOpted: true,
+    userProfile: {},
+    opts: {},
+  };
 
   hideModal = () => this.setState({ modalStyle: 'none' });
 
@@ -27,14 +42,63 @@ export class ProfileUserDetails extends Component {
     await this.props.getDataThunk('get', `user/${userName}`, getUserAction);
   }
 
+  componentWillReceiveProps= async (nextProps) => {
+    const { userProfile } = nextProps;
+    if (userProfile) {
+      userProfile.Opts.forEach((opt) => {
+        this.setState((prevState) => ({
+          ...prevState,
+          opts: {
+            ...prevState.opts,
+            [opt.type]: true,
+          },
+        }));
+      });
+    }
+    this.setState((prevState) => ({
+      ...prevState,
+      userProfile: userProfile || prevState.userProfile,
+    }));
+  }
+
+  handleAppChange = async () => {
+    this.handleOptsChange('inapp');
+    await this.props.postDataThunkPrivate('post', '/optinapp', optInAppAction, null);
+    toast.success('You are now opted-in to in-app notifications');
+  }
+
+  handledAppChange = async () => {
+    this.handleOptsChange('inapp');
+    await this.props.postDataThunkPrivate('delete', '/optinapp', optOutAppAction, null);
+    toast.success('You have opted-out of in-app notifications');
+  }
+
+  handleEmailChange = async () => {
+    this.handleOptsChange('email');
+    await this.props.postDataThunkPrivate('post', '/optinemail', optInEmailAction, null);
+    toast.success('You are now opted-in to email notifications');
+  }
+
+  handledEmailChange = async () => {
+    this.handleOptsChange('email');
+    await this.props.postDataThunkPrivate('delete', '/optinemail', optOutEmailAction, null);
+    toast.success('You have opted-out of email notifications');
+  }
+
+  handleOptsChange = (type) => this.setState((prevState) => ({
+    ...prevState,
+    opts: {
+      ...prevState.opts,
+      [type]: !prevState.opts[type],
+    },
+  }))
+
   render() {
-    const { modalStyle } = this.state;
-    if (this.props.userProfile) {
+    const { modalStyle, userProfile, opts } = this.state;
+    if (userProfile && Object.keys(userProfile).length) {
       const {
-        userProfile: {
-          firstName, lastName, username, email, bio, image,
-        },
-      } = this.props;
+        firstName, lastName, username, email, bio, image,
+      } = userProfile;
       let image1;
       if (image) {
         // eslint-disable-next-line no-unused-expressions
@@ -42,6 +106,7 @@ export class ProfileUserDetails extends Component {
       }
       return (
         <div className="ProfileUserDetails container">
+          <ToastContainer position={toast.POSITION.TOP_RIGHT} />
           <div className="small-screen-4 xxlarge-v-margin border b-light-grey radius-2 shadow-1">
             <div className="profile-picture center-align medium-padding small-screen-4 medium-screen-4 large-screen-1">
               <Img
@@ -53,6 +118,13 @@ export class ProfileUserDetails extends Component {
               <Button onClick={this.showModal}>
                 <FontAwesomeIcon icon={faEdit} style={{ color: '#000000' }} />
               </Button>
+              <OptInOrOut
+                opts={opts}
+                handleAppChange={this.handleAppChange}
+                handledAppChange={this.handledAppChange}
+                handleEmailChange={this.handleEmailChange}
+                handledEmailChange={this.handledEmailChange}
+                />
               <div className={`modals ${modalStyle}`}>
                 <div className="modal-content">
                   <div className="modal-header left-align">
@@ -92,6 +164,7 @@ export class ProfileUserDetails extends Component {
                 </span>
               </div>
               <div className="divider" />
+
               <span className="inline-block medium-v-padding">
                 <ProfileEdit />
               </span>{' '}
@@ -119,6 +192,10 @@ ProfileUserDetails.propTypes = {
   fetchUser: PropTypes.func,
   getDataThunk: PropTypes.func,
   history: PropTypes.object,
+  postDataThunkPrivate: PropTypes.func,
+  optInOutAppReducer: PropTypes.object,
+  optInOutEmailReducer: PropTypes.object,
+
 };
 
 export const mapStateToProps = (state) => ({
@@ -126,7 +203,7 @@ export const mapStateToProps = (state) => ({
 });
 
 const actionCreator = {
-  getDataThunk,
+  getDataThunk, postDataThunkPrivate,
 };
 
 export default connect(mapStateToProps, actionCreator)(ProfileUserDetails);
