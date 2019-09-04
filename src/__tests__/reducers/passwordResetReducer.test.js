@@ -13,7 +13,7 @@ describe('Login reducer', () => {
     };
   });
 
-  it('Should return the state of EQUEST_PASSWORD_RESET', () => {
+  it('Should return the state of REQUEST_PASSWORD_RESET', () => {
     expect(reducer(initialState, {
       type: actionTypes.REQUEST_PASSWORD_RESET,
       payload: { email: 'dgf@ajhdf.com' },

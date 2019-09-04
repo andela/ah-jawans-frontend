@@ -25,9 +25,10 @@ describe('Signup reducer', () => {
                 image: {},
                 errors: {},
             },
-            notification: {
+            notifications: {
+                data:{},
                 loading: false,
-                message: {},
+                message: "",
                 errors: {},
             },
             getAllfollower: { loading: false, message: '', errors: {}, data: {} },

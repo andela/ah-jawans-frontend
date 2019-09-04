@@ -8,6 +8,8 @@ import uploadImageReducer from './user/uploadImageReducer';
 import passwordReset from './passwordReset';
 import notificationReducer from './user/notificationReducer';
 import followerReducer from './followerReducer';
+import optInOutEmailReducer from './optInOutEmailReducer';
+import optInOutAppReducer from './optInOutAppReducer';
 
 const rootReducers = combineReducers({
   userCredentials: loginReducer,
@@ -20,7 +22,8 @@ const rootReducers = combineReducers({
   resetPassword: passwordReset,
   notification: notificationReducer,
   followerData: followerReducer,
-
+  optInOutEmailReducer,
+  optInOutAppReducer,
 });
 
 export default rootReducers;
