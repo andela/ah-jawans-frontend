@@ -1,4 +1,4 @@
-import userReducer from '../../../redux/reducers/user';
+import userReducer from '../../../redux/reducers/user/editProfileReducer';
 import initialState from '../../../redux/store/initialStates/userInitialState';
 import { userActionsTypes } from '../../../redux/actionTypes';
 import user from '../../../__mocks__/user';

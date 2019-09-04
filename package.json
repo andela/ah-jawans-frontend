@@ -4,7 +4,7 @@
     "description": "a community of like minded authors to foster inspiration and innovation by leveraging the modern web.",
     "main": "index.js",
     "scripts": {
-        "dev": "webpack-dev-server --mode development --open",
+        "dev": "npm run lint-fix && webpack-dev-server --mode development --open",
         "start": "serve -s ./build",
         "build": "webpack --mode production",
         "test": "jest -w 1 \"-- --coverage\"",

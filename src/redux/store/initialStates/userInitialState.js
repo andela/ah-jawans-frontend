@@ -4,11 +4,7 @@ module.exports = {
   userCredentials: {},
   errors: null,
   signupSuccess: {},
-  getUser: {
-    loading: false,
-    message: '',
-    errors: {},
-  },
+  getUser: {},
   editProfile: {
     loading: false,
     message: '',
@@ -18,6 +14,11 @@ module.exports = {
   uploadImage: {
     loading: false,
     image: {},
+    errors: {},
+  },
+  notification: {
+    loading: false,
+    message: {},
     errors: {},
   },
 };

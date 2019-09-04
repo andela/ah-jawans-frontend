@@ -5,17 +5,21 @@ import { mount } from '../../../../config/enzymeConfig';
 import Profile from '../../../components/Profile';
 import { mockStore, initialState } from '../../../__mocks__/store';
 
+localStorage.setItem('image', 'null');
+
 describe('<Profile />', () => {
     test('renders without crashing', () => {
         const component = mount(<Provider store={mockStore({
             ...initialState,
-            userCredentials: { profile: {} },
-            signupSuccess: {}
-        })}>
+            userCredentials: { userCredentials: {} },
+            notification: [{ id: 111, message: '', status: 'false' }]
+
+        })
+        }>
             <MemoryRouter>
                 <Profile />
             </MemoryRouter>
-        </Provider>);
+        </Provider >);
 
         expect(component).toHaveLength(1);
     });
