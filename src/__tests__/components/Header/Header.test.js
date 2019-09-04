@@ -10,13 +10,13 @@ describe('<Header />', () => {
   test('renders without crashing', () => {
     const component = mount(<Provider store={mockStore({
       ...initialState,
-      userCredentials: { profile: {} },
-      signupSuccess: {}
+      userCredentials: { userCredentials: {} },
+      notification: [{ id: 111, message: '', status: 'false' }]
     })}>
       <MemoryRouter>
         <Header />
       </MemoryRouter>
-    </Provider >);
+    </Provider>);
 
     const headerUserButton = component.find('Header .header-user-button');
 
@@ -29,6 +29,20 @@ describe('<Header />', () => {
       }
     });
 
+    expect(component).toHaveLength(1);
+  });
+  test('renders without crashing', () => {
+    const component = mount(<Provider store={mockStore({
+      ...initialState,
+      userCredentials: { userCredentials: {} },
+      notification: [{ id: 111, message: '', status: 'false' }]
+    })}>
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    </Provider>);
+
+    component.find('button[id="toggleUserMenuButton"]').simulate('click');
     expect(component).toHaveLength(1);
   });
 });

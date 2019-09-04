@@ -86,7 +86,7 @@ export class ProfileEditPicture extends Component {
               onChange={this.handleChange}
               isRequired={true}
             />
-            <Button type="submit" loading={loading}>
+            <Button type="submit" class="button1" loading={loading}>
               Upload
             </Button>
           </Form>

@@ -1,4 +1,4 @@
-import userReducer from '../../../redux/reducers/user';
+import userReducer from '../../../redux/reducers/user/uploadImageReducer';
 import initialState from '../../../redux/store/initialStates/userInitialState';
 import { userActionsTypes } from '../../../redux/actionTypes';
 

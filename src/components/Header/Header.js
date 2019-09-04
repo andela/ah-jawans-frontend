@@ -37,30 +37,30 @@ class Header extends Component {
     const { showUserMenu } = this.state;
     return (
       <header className="Header">
-        <div className="container">
+        <div className="container1">
           <div className="small-screen-1 medium-screen-2 large-screen-2">
             <div className="logo hide-on-small">
-              <Link to="/">
-                <Img imgSrc={siteLogo} alt="Authors Haven" />
+        <Link to="/">
+          <Img imgSrc={siteLogo} alt="Authors Haven" />
               </Link>
             </div>
             <div className="logo-small hide-on-medium hide-on-large">
-              <Link to="/">
+              < Link to="/">
                 <Img imgSrc={siteLogoSmall} alt="Authors Haven" width="60px" />
-              </Link>
-            </div>
+          </Link>
+        </div>
           </div>
 
-          <div className="small-screen-3 medium-screen-2 large-screen-2 right-align">
+            <div className="small-screen-3 medium-screen-2 large-screen-2 right-align">
             {window.location.pathname !== '/search' ? (
               <span className="inline-block header-search-button">
-                <Link to="/search">
-                  <FontAwesomeIcon icon={faSearch} size="lg" />
-                </Link>
+              <Link to="/search">
+                <FontAwesomeIcon icon={faSearch} size="lg" />
+              </Link>
               </span>
             ) : (
-                ''
-              )}
+              ''
+            )}
             <Notification />
             <span className="inline-block header-user-button">
               <Button

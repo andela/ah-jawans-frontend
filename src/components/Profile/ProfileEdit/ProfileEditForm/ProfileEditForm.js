@@ -151,8 +151,7 @@ export class ProfileEditForm extends Component {
             />
           </div>
           <div className="small-screen-4">
-            {/* <Button type="submit" loading={loading} onClick={this.handleOnClick}> */}
-            <Button type="submit" loading={loading} >
+            <Button type="submit" class="button1" loading={loading} >
               SAVE
             </Button>
           </div>

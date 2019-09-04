@@ -7,58 +7,69 @@ import {
   faSignInAlt,
   faUserCircle,
   faSignOutAlt,
-  faBell,
   faCog,
 } from '@fortawesome/free-solid-svg-icons';
 import './HeaderUserMenu.scss';
 
 class HeaderUserMenu extends Component {
+  logout = () => {
+    window.localStorage.clear();
+  };
+
   render() {
-    console.log(this.props, 'console from ');
-    const {
-      isAuth, className, username, firstName, lastName,
-    } = this.props;
+    const selector = document.querySelector('.HeaderUserImage');
+    let username; let isAuth;
+    if (localStorage.getItem('username') !== null) {
+      username = localStorage.getItem('username');
+      isAuth = true;
+    } else {
+      username = '';
+      isAuth = false;
+    }
     return (
-      <div className={className}>
-        <p className="username">
-          {username || (firstName && lastName && `${firstName} ${lastName}`) || ''}
-        </p>
+      <div
+        className="HeaderUserMenu"
+        style={{ left: (selector && selector.offsetLeft - 140) || 0 }}
+      >
+
+        <div className="username" style={{ color: '#ffffff' }}>
+          {
+            username || 'Welcome'}
+        </div >
         <ul>
           {!isAuth && (
             <li>
               <Link to="/signup">
+
                 <FontAwesomeIcon icon={faUserCircle} /> Sign up
               </Link>
+
             </li>
-          )}
+          )
+          }
 
           {!isAuth && (
             <li>
               <Link to="/login">
                 <FontAwesomeIcon icon={faSignInAlt} /> Sign in
               </Link>
+
             </li>
-          )}
+          )
+          }
 
           {isAuth && (
             <li>
               <Link to="/profile">
                 <FontAwesomeIcon icon={faUserCircle} /> Profile
-              </Link>
+
+     </Link>
             </li>
           )}
 
           {isAuth && (
             <li>
-              <Link to="/profile/notifications">
-                <FontAwesomeIcon icon={faBell} size="lg" /> Notifications
-              </Link>
-            </li>
-          )}
-
-          {isAuth && (
-            <li>
-              <Link to="/forgot-password">
+              <Link to="/passwordReset">
                 <FontAwesomeIcon icon={faCog} /> Change password</Link>
             </li>
           )}
@@ -67,7 +78,7 @@ class HeaderUserMenu extends Component {
             <li>
               <Link className="logout" to="/" onClick={this.logout}>
                 <FontAwesomeIcon icon={faSignOutAlt} /> Log out
-              </Link>
+                </Link>
             </li>
           )}
         </ul>

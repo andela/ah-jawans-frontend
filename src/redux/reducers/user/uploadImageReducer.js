@@ -1,6 +1,8 @@
 import { userActionsTypes } from '../../actionTypes';
+import initialState from '../../store/initialState';
 
-export default (state, { type, payload }) => {
+
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case userActionsTypes.UPLOAD_PROFILE_PICTURE_SUCCESS:
       return {
@@ -8,6 +10,6 @@ export default (state, { type, payload }) => {
         uploadImage: { loading: false, image: payload.image, errors: {} },
       };
     default:
-      return null;
+      return state;
   }
 };

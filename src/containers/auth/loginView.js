@@ -35,23 +35,32 @@ export class Login extends Component {
     const { user } = this.state;
     await this.props.postDataThunk('post', 'users/login', loginUserAction, user);
     if (!this.props.userCredentials.errors) {
-      const { userCredentials: { data: { username, token, id } } } = this.props;
+      const {
+        userCredentials: {
+          data: {
+            username, token, id, image,
+          },
+        },
+      } = this.props;
       localStorage.setItem('username', username);
       localStorage.setItem('token', token);
       localStorage.setItem('id', id);
-      return this.props.history.push('/profile');
+      localStorage.setItem('image', image);
+      this.props.history.push('/profile');
     }
   };
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
+          < div className ="container">
+
+
+< div className="row">
           <div className="col loginLeftSide">
-            <h1>Login</h1>
-            <h2>Authors Haven</h2>
-            <img className='images' src={computerHand}/>
-          </div>
+            < h1>Login</h1>
+             <h2>Authors Haven</h2>
+            <img className='images' src={computerHand} />
+              </div>
           <div className="col-md-6 myForm">
              {(this.props.userCredentials.errors) && <Error
           errors={this.props.userCredentials.errors}

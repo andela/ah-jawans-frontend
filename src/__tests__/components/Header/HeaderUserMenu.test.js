@@ -6,22 +6,24 @@ import HeaderUserMenu from '../../../components/Header/HeaderUserMenu/HeaderUser
 import { mockStore, initialState } from '../../../__mocks__/store';
 
 const props = {
-    isAuth: true
+    username: 'ShaluC'
 }
+
+localStorage.setItem('username', 'shaluC');
 
 describe('<HeaderUserMenu />', () => {
     test('renders without crashing', () => {
         const store = mockStore({
             ...initialState,
-            userCredentials: { profile: {}, isAuth: true, errors: '' }
+            userCredentials: { userCredentials: {} }
         });
         const component = mount(<Provider store={store}>
             <MemoryRouter>
-                <HeaderUserMenu />
+                <HeaderUserMenu {...props} />
             </MemoryRouter>
         </Provider>);
 
-        component.find(n => n.hasClass('logout') && n.simulate('click', {}));
+        component.findWhere(n => n.hasClass('logout') && n.simulate('click', {}));
         expect(component).toEqual({});
     });
 });

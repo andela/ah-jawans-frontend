@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from '../../../../config/enzymeConfig';
 import { ProfileEditForm } from '../../../components/Profile/ProfileEdit/ProfileEditForm/ProfileEditForm';
 import user from '../../../__mocks__/user';
-import { getMaxListeners } from 'cluster';
 
 
 const props = {
