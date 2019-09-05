@@ -9,7 +9,6 @@ export default function (state = initialState, action) {
         userCredentials: action.payload,
         errors: action.errors,
       };
-
     default:
       return state;
   }

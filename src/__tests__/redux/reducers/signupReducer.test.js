@@ -8,19 +8,33 @@ let signupSuccess
 describe('Signup reducer', () => {
     beforeEach(() => {
         initialState = {
-            profile: '{}',
-            isAuth: false,
+            profile: localStorage.user || '{}',
+            isAuth: !!localStorage.token,
             userCredentials: {},
             errors: null,
             signupSuccess: {},
-            getUser: { loading: false, message: '', errors: {} },
-            editProfile: { loading: false, message: '', errors: {}, data: {} },
-            uploadImage: { loading: false, image: {}, errors: {} },
-        }
-    })
+            getUser: {},
+            editProfile: {
+                loading: false,
+                message: '',
+                errors: {},
+                data: {},
+            },
+            uploadImage: {
+                loading: false,
+                image: {},
+                errors: {},
+            },
+            notification: {
+                loading: false,
+                message: {},
+                errors: {},
+            },
+        };
+    });
     it('Should return the initial state', () => {
-        expect(reducer(undefined, {})).toEqual(initialState)
-    })
+        expect(reducer(undefined, {})).toEqual(initialState);
+    });
 
     it('Should return the initial state', () => {
         expect(

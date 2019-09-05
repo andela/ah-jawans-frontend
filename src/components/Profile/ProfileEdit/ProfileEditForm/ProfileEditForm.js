@@ -39,23 +39,6 @@ export class ProfileEditForm extends Component {
     this.setState({ message: props.message, errors: { ...errors } });
   }
 
-  componentDidMount = async () => {
-    const {
-      profile: {
-        firstName, lastName, username, email, bio,
-      },
-    } = this.props;
-    this.setState({
-      form: {
-        firstName: firstName || '',
-        lastName: lastName || '',
-        username: username || '',
-        email: email || '',
-        bio: bio || '',
-      },
-    });
-  };
-
   handleChange = (e) => {
     const { form, editedForm, errors } = this.state;
     this.setState({
@@ -168,8 +151,7 @@ export class ProfileEditForm extends Component {
             />
           </div>
           <div className="small-screen-4">
-            {/* <Button type="submit" loading={loading} onClick={this.handleOnClick}> */}
-            <Button type="submit" loading={loading} >
+            <Button type="submit" className="button1" loading={loading} >
               SAVE
             </Button>
           </div>

@@ -12,8 +12,8 @@ import ProfileEditForm from './ProfileEditForm';
 export class ProfileEdit extends Component {
   state = { modalStyle: 'none' };
 
-  componentDidMount() {
-    const { user } = this.props;
+  componentWillReceiveProps(props) {
+    const { user } = props;
     this.setState({ user });
   }
 
@@ -27,7 +27,7 @@ export class ProfileEdit extends Component {
     const { modalStyle, user } = this.state;
     return (
       <div className="ProfileEdit">
-        <Button type="button" onClick={this.showModal}>
+        <Button type="button" className="button1" onClick={this.showModal}>
           Edit Profile <FontAwesomeIcon icon={faEdit} />
         </Button>
         <div className={`modals ${modalStyle}`} >
@@ -38,7 +38,7 @@ export class ProfileEdit extends Component {
                 type="button"
                 onClick={this.hideModal}
               >
-                <FontAwesomeIcon icon={faTimes} size="2x" />
+                <FontAwesomeIcon icon={faTimes} size="1x" />
               </Button>
             </div>
             <div className="modal-body">

@@ -4,22 +4,60 @@ import { MemoryRouter } from 'react-router-dom';
 import { mount } from '../../../../config/enzymeConfig';
 import ProfileUserDetails from '../../../components/Profile/ProfileUserDetails';
 import { mockStore, initialState } from '../../../__mocks__/store';
-import user from '../../../__mocks__/user';
+
+const props = {
+  getUser: {
+    firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg'
+  },
+  userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
+}
 
 describe('<ProfileUserDetails />', () => {
   test('should renders without crashing ', () => {
     const component = mount(<Provider
       store={mockStore({
         ...initialState,
-        user: { ...initialState.user, profile: { ...user }, userProfile: { ...user } }
+        getUser: { firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg' },
+        userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
       })}
     >
       <MemoryRouter>
-        <ProfileUserDetails />
+        <ProfileUserDetails {...props} />
       </MemoryRouter>
     </Provider>);
     const buttons = component.find('.ProfileUserDetails button');
-
+    buttons.map(btn => btn.simulate('click', {}));
+    expect(component).toHaveLength(1);
+  });
+  test('should renders without crashing ', () => {
+    const component = mount(<Provider
+      store={mockStore({
+        ...initialState,
+        getUser: { firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'image.jpg' },
+        userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
+      })}
+    >
+      <MemoryRouter>
+        <ProfileUserDetails {...props} />
+      </MemoryRouter>
+    </Provider>);
+    const buttons = component.find('.ProfileUserDetails button');
+    buttons.map(btn => btn.simulate('click', {}));
+    expect(component).toHaveLength(1);
+  });
+  test('should renders without crashing ', () => {
+    const component = mount(<Provider
+      store={mockStore({
+        ...initialState,
+        getUser: { firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: '' },
+        userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
+      })}
+    >
+      <MemoryRouter>
+        <ProfileUserDetails {...props} />
+      </MemoryRouter>
+    </Provider>);
+    const buttons = component.find('.ProfileUserDetails button');
     buttons.map(btn => btn.simulate('click', {}));
     expect(component).toHaveLength(1);
   });

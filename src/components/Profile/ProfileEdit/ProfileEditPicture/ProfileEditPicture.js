@@ -39,7 +39,6 @@ export class ProfileEditPicture extends Component {
     const { file } = this.state;
     const formData = new FormData();
     formData.append('image', file);
-
     await this.props.postDataThunkPrivate('patch', 'users', uploadUserProfile, formData);
     window.location.reload();
   };
@@ -86,7 +85,7 @@ export class ProfileEditPicture extends Component {
               onChange={this.handleChange}
               isRequired={true}
             />
-            <Button type="submit" loading={loading}>
+            <Button type="submit" className="button1" loading={loading}>
               Upload
             </Button>
           </Form>

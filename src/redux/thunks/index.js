@@ -37,5 +37,17 @@ const postDataThunkPrivate = (method, endpoint, actionCreator, data) => (dispatc
   });
 };
 
+const getDataThunkPrivate = (method, endpoint, actionCreator) => (dispatch) => {
+  const token = localStorage.getItem('token');
+  axiosInstance.defaults.headers.common.token = token;
+  return axiosInstance[method](endpoint).then((response) => {
+    dispatch(actionCreator(response.data));
+  }).catch((error) => {
+    dispatch(actionCreator({ errors: error.response.data.error || error.response.data.errors[0] }));
+  });
+};
 
-export { postDataThunk, getDataThunk, postDataThunkPrivate };
+
+export {
+  postDataThunk, getDataThunk, postDataThunkPrivate, getDataThunkPrivate,
+};

@@ -35,18 +35,23 @@ export class ProfileUserDetails extends Component {
           firstName, lastName, username, email, bio, image,
         },
       } = this.props;
+      let image1;
+      if (image) {
+        // eslint-disable-next-line no-unused-expressions
+        image.split(':')[0] === 'https' ? image1 = image : image1 = `https://res.cloudinary.com/djxhcwowp/image/upload/v${image}`;
+      }
       return (
         <div className="ProfileUserDetails container">
           <div className="small-screen-4 xxlarge-v-margin border b-light-grey radius-2 shadow-1">
             <div className="profile-picture center-align medium-padding small-screen-4 medium-screen-4 large-screen-1">
               <Img
-                imgSrc={(image && `https://res.cloudinary.com/djxhcwowp/image/upload/v${image}`) || profileImagePlaceHolder}
+                imgSrc={image1 || profileImagePlaceHolder}
                 imgClass="center radius-6"
                 maxWidth="200px"
                 minWidth="150px"
               />
               <Button onClick={this.showModal}>
-                <FontAwesomeIcon icon={faEdit} />
+                <FontAwesomeIcon icon={faEdit} style={{ color: '#000000' }} />
               </Button>
               <div className={`modals ${modalStyle}`}>
                 <div className="modal-content">
@@ -55,7 +60,7 @@ export class ProfileUserDetails extends Component {
                       buttonClass="button medium-padding yellow radius-5 text-black"
                       onClick={this.hideModal}
                     >
-                      <FontAwesomeIcon icon={faTimes} size="2x" />
+                      <FontAwesomeIcon icon={faTimes} size="1x" />
                     </Button>
                   </div>
                   <div className="modal-body">
