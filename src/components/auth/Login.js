@@ -5,7 +5,6 @@ import Input from '../common/input';
 import '../../assets/scss/components/login.scss';
 import SocialLogin from './socialLogin';
 
-
 class LoginComponet extends Component {
   render() {
     return (

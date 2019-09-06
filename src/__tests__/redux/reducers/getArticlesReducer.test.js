@@ -1,21 +1,22 @@
-import initialState from '../../../redux/store/initialStates/userInitialState';
-import { GET_ARTICLES } from '../../../redux/actions/actionTypes';
 import getArticlesReducer from '../../../redux/reducers/getArticlesReducer';
+import { GET_ARTICLES } from '../../../redux/actions/actionTypes';
+import user from '../../../__mocks__/user';
 
-let articles = {
-    "title": "this is the title",
-    "body": "this is the body of teh article",
-    "author": {
-        "username": "patrickngabo",
-    }
-  };
+ const initialState = {
+  articles: [],
+};
 
-describe('Get articles reducer', () => {
-    test('GET_ARTICLES', () => {
-        getArticlesReducer(initialState.articles, {
-        type: GET_ARTICLES,
-        payload: {articles}
-      });
-      expect(articles).toHaveProperty('title');
+describe('User reducers', () => {
+  test('GET_USER_SUCCESS', () => {
+    const reducer = getArticlesReducer(initialState, {
+  type: GET_ARTICLES,
+  payload: {user},
     });
+    expect(user).toHaveProperty('firstName');
+    expect(user).toHaveProperty('lastName');
+    expect(user).toHaveProperty('username');
+    expect(user).toHaveProperty('email');
+  });
 });
+
+

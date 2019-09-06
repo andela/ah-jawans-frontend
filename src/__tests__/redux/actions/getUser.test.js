@@ -2,7 +2,7 @@ import { getUserAction, getAUthorArticlesAction } from '../../../redux/actions/u
 import { userActionsTypes } from '../../../redux/actionTypes';
 
 describe('actions', () => {
-    it('should get login user details', () => {
+    it('should getUserAction', () => {
         const payload = {
             username: 'shaluV',
         };
@@ -24,9 +24,3 @@ describe('actions', () => {
         expect(getAUthorArticlesAction(payload)).toEqual(expected);
     });
 });
-
-
-// const getAUthorArticlesAction = (payload) => ({
-//     type: userActionsTypes.GET_AUTHOR_ARTICLES,
-//     payload,
-//   });

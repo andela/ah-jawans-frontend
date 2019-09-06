@@ -7,7 +7,7 @@ import LoginComponet from '../../components/auth/Login';
 import '../../assets/scss/components/login.scss';
 import loginUserAction from '../../redux/actions/auth/loginAction';
 import Error from '../../components/common/errors';
-import { postDataThunk } from '../../redux/thunks';
+import { postDataThunk } from '../../redux/thunks/index';
 import socialLoginAction from '../../redux/actions/auth/sosialLoginAction';
 
 export class Login extends Component {
