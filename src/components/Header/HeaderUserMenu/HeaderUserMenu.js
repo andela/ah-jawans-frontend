@@ -42,10 +42,11 @@ class HeaderUserMenu extends Component {
           {!isAuth && (
             <li>
               <Link to="/signup">
-
-                <FontAwesomeIcon icon={faUserCircle} /> Sign up
+                <label htmlFor="signup">
+                  <FontAwesomeIcon icon={faUserCircle} size="lg" />
+                </label>
+                <p id="signup" className="menu-links"> Sign up</p>
               </Link>
-
             </li>
           )
           }
@@ -53,49 +54,66 @@ class HeaderUserMenu extends Component {
           {!isAuth && (
             <li>
               <Link to="/login">
-                <FontAwesomeIcon icon={faSignInAlt} /> Sign in
+                <label htmlFor="login">
+                  <FontAwesomeIcon icon={faSignInAlt} size="lg" />
+                </label>
+                <p id="login" className="menu-links">Sign in</p>
               </Link>
-
             </li>
           )
           }
 
           {(
-              <li>
-                <Link to="/users">
-                  <FontAwesomeIcon icon={faUsers}/> Users
-                </Link>
-              </li>
+            <li>
+              <Link to="/users">
+                <label htmlFor="users">
+                  <FontAwesomeIcon icon={faUsers} size="lg" />
+                </label>
+                <p id="users" className="menu-links">Users</p>
+              </Link>
+            </li>
           )}
 
           {isAuth && (
             <li>
               <Link to="/profile">
-                <FontAwesomeIcon icon={faUserCircle} /> Profile
-
-     </Link>
+                <label htmlFor="profile">
+                  <FontAwesomeIcon icon={faUserCircle} size="lg" />
+                </label>
+                <p id="profile" className="menu-links">Profile</p>
+              </Link>
             </li>
           )}
 
           {isAuth && (
             <li>
               <Link to="/passwordReset">
-                <FontAwesomeIcon icon={faCog} /> Change password</Link>
+                <label htmlFor="passwordReset">
+                  <FontAwesomeIcon icon={faCog} />
+                </label>
+                <p id="passwordReset" className="menu-links">Change password</p>
+              </Link>
             </li>
           )}
           {isAuth && (
             <li>
-              <Link to="/follower">
-                <FontAwesomeIcon icon={faUserCircle} /> Followers
+              <Link to="/follower" className="menu-links">
+                <label htmlFor="follower">
+                  <FontAwesomeIcon icon={faUserCircle} size="lg" />
+                </label>
+                <p id="follower" className="menu-links">Followers</p>
               </Link>
             </li>
           )}
 
           {isAuth && (
             <li>
-              <Link className="logout" to="/" onClick={this.logout}>
-                <FontAwesomeIcon icon={faSignOutAlt} /> Log out
-                </Link>
+              <Link className="logout menu-links" to="/" onClick={this.logout}>
+                <label htmlFor="follower">
+                  <FontAwesomeIcon icon={faSignOutAlt} size="lg" />
+                </label>
+                <p id="follower" className="menu-links">Log out</p>
+              </Link>
             </li>
           )}
         </ul>
