@@ -99,5 +99,17 @@ describe('Input tests...', () => {
             })
             instance.handleSubmit(event)
         })
+
+        it('should redirect with errors', () => {
+            expect(submitButton).toHaveLength(1)
+            wrapper.update()
+            const event = {
+                preventDefault: jest.fn(),
+            }
+            wrapper.setProps({
+                userCredentials:{errors: 'kewrbkjfvw'}
+            })
+            wrapper.render();
+        })
     })
 })

@@ -21,4 +21,37 @@ module.exports = {
     message: {},
     errors: {},
   },
+  getAllfollower: {
+    loading: false,
+    message: '',
+    errors: {},
+    data: {},
+  },
+  getAllfollowing: {
+    loading: false,
+    message: '',
+    errors: {},
+    data: {},
+  },
+  getAllUsers: {
+    loading: false,
+    message: '',
+    errors: {},
+    data: {},
+  },
+  follow: {
+    loading: false,
+    message: '',
+    errors: {},
+    data: {},
+  },
+  unfollow: {
+    loading: false,
+    message: '',
+    errors: {},
+    data: {},
+  },
+  followerNumber: '',
+  followingNumber: '',
+
 };

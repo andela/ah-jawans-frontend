@@ -82,6 +82,9 @@ describe('Input tests...', () => {
             const event = {
                 preventDefault: jest.fn(),
             }
+            wrapper.setProps({
+                history: {push: jest.fn()}
+            })
             instance.handleSubmit(event)
         })
     })

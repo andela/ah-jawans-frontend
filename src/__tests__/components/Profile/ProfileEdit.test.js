@@ -12,6 +12,10 @@ const button = '';
 let buttons = '';
 let inputs = '';
 
+const props = {
+    getUser: { user }
+}
+
 describe('<ProfileEdit />', () => {
     beforeEach(() => {
         component = mount(<Provider store={mockStore({
@@ -19,7 +23,7 @@ describe('<ProfileEdit />', () => {
             userCredentials: { ...initialState.user, editProfile: {} }
         })}>
             <MemoryRouter>
-                <ProfileEdit />
+                <ProfileEdit {...props}/>
             </MemoryRouter>
         </Provider>);
 
@@ -46,16 +50,6 @@ describe('<ProfileEdit />', () => {
             target: {
                 name: input.instance().name,
                 value: 'i'
-            }
-        }));
-        form.simulate('submit', { preventDefault: jest.fn() });
-    });
-
-    test('profile should not be updated if no input provided', () => {
-        inputs.map(input => input.simulate('change', {
-            target: {
-                name: input.instance().name,
-                value: ''
             }
         }));
         form.simulate('submit', { preventDefault: jest.fn() });

@@ -25,7 +25,6 @@ class HeaderUserImage extends Component {
 }
 
 HeaderUserImage.propTypes = {
-  // image: PropTypes.string,
   className: PropTypes.string,
 };
 

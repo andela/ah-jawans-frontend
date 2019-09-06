@@ -8,3 +8,4 @@ __test__/*
 /src/**/*.test.js
 /src/__tests__/*
 /src/__mocks__/*
+dist/main.js
