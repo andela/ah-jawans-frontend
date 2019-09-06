@@ -1,0 +1,59 @@
+.header-image {
+    width: auto;
+    margin: auto;
+}
+
+.header-image img{
+    position: absolute;
+    width: 100%;
+    height: 54%;
+    top: 80px;
+}
+
+.home-page-container{
+    width: 80%;
+    margin: auto;
+    margin-top:490px;
+}
+
+.author-articles-container{
+    width: 80%;
+    margin: auto;
+    margin-top:315px;
+    background-color: white;
+}
+
+.img-card{
+    width: 100%;
+    height: 120px;
+}
+
+.read-time{
+    margin-left: 10px;
+    color: #C81010;
+    font-size: 10px;
+}
+
+.author{
+    color: #005EA3;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.card {
+    height: 240px;
+}
+
+.edit-icon img{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 160px; 
+}
+
+.remove-icon img{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 200px;
+}

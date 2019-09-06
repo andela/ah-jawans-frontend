@@ -6,6 +6,6 @@ const component = shallow(<Home/>);
 
 describe('Home page component', () => {
   it('test home page', () => {
-    expect(component.find('div')).toHaveLength(1);
+    expect(component.find('div')).toHaveLength(5);
   });
 });
