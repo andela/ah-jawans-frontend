@@ -1,11 +1,15 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { shallow } from '../../../config/enzymeConfig';
+
 import Home from '../../components/Home';
+import configureStore from '../../redux/store/index';
 
-const component = shallow(<Home/>);
+const store = configureStore();
 
-describe('Home page component', () => {
-  it('test home page', () => {
-    expect(component.find('div')).toHaveLength(5);
+describe('<Home />', () => {
+  it('Should render', () => {
+    const wrapper = shallow(<Provider store={store}><Home /></Provider>);
+    expect(wrapper).toHaveLength(1);
   });
-});
+}); 

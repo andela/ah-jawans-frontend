@@ -5,19 +5,33 @@ import { mount } from '../../../../config/enzymeConfig';
 import ProfileUserDetails from '../../../components/Profile/ProfileUserDetails';
 import { mockStore, initialState } from '../../../__mocks__/store';
 
-const props = {
+
+const props = { 
   getUser: {
-    firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg'
+    firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg',  articles: [{
+      "title": "this is the title",
+      "body": "this is the body of teh article",
+      "author": {
+          "username": "Joe",
+      }
+  }],
   },
   userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
 }
 
-describe('<ProfileUserDetails />', () => {
+
+describe('<ProfileUserDetails />', () => { 
   test('should renders without crashing ', () => {
     const component = mount(<Provider
       store={mockStore({
         ...initialState,
-        getUser: { firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg' },
+        getUser: { firstName: 'shaluC', lastName: 'chandwani', username: 'shaluV', email: 'shaluchandwani@rocketmail.com', bio: 'hey there', image: 'https://image.jpg', articles:[{
+          "title": "this is the title",
+          "body": "this is the body of teh article",
+          "author": {
+              "username": "Joe",
+          }
+      }] },
         userCredentials: { ...initialState.user, uploadImage: {}, editProfile: {} }
       })}
     >

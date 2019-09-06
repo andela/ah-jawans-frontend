@@ -8,9 +8,10 @@ import Profile from '../components/Profile';
 import '../assets/css/style.scss';
 import '../assets/scss/main.scss';
 import Home from '../components/Home';
-import UpdateArticle from '../components/article/updateArticle';
 import PageNotFound from '../components/PageNotFound';
 import ReadArticle from '../components/article/readArticle';
+import PasswordReset from './passwordReset';
+import UpdatePassword from './updatePassword';
 
 
 const App = () => (
@@ -20,8 +21,9 @@ const App = () => (
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
       <Route exact path="/profile" component={Profile} />
-      <Route path="/updateAticle" component={UpdateArticle} />
       <Route path="/readArticle/:id" component={ReadArticle} />
+      <Route path="/passwordReset" component={PasswordReset} />
+      <Route path="/updatePassword" component={UpdatePassword} />
       <Route component={PageNotFound} />
     </Switch>
   </BrowserRouter>

@@ -1,11 +1,17 @@
-jest.unmock('axios')
-import thunk from 'redux-thunk'
-import MockAdapter from 'axios-mock-adapter'
-import configureStore from 'redux-mock-store'
-import { postDataThunk, axiosInstance } from '../../../redux/thunks'
-import loginUserAction from '../../../redux/actions/auth/loginAction'
-import { LOGIN_USER } from '../../../redux/actions/actionTypes'
-import stores from '../../../redux/store/index'
+jest.unmock('axios');
+import thunk from 'redux-thunk';
+import MockAdapter from 'axios-mock-adapter';
+import configureStore from 'redux-mock-store';
+import { postDataThunk,
+  postDataThunkPrivate,
+  axiosInstance,
+  getDataThunk } from '../../../redux/thunks';
+import loginUserAction from '../../../redux/actions/auth/loginAction';
+import {getAUthorArticlesAction} from '../../../redux/actions/user/getUser';
+import { LOGIN_USER, GET_ARTICLES } from '../../../redux/actions/actionTypes';
+import stores from '../../../redux/store/index';
+import userActionsTypes from '../../../redux/actionTypes';
+import getArticlesAction from '../../../redux/actions/getArticlesAction';
 
 describe('auth actions', () => {
     let axiosMock
@@ -64,11 +70,26 @@ describe('auth actions', () => {
             })
     })
 
-    it('it should return new state', () => {
-        const localStore = stores({})
-        expect(localStore).toHaveProperty('dispatch')
-        expect(localStore).toHaveProperty('subscribe')
-        expect(localStore).toHaveProperty('getState')
-        expect(localStore).toHaveProperty('replaceReducer')
-    })
-})
+  it('should get articles', () => {
+    const payload = { status: 200, response: {data:{}} };
+    axiosMock.onGet('articles').reply(payload);
+    store
+        .dispatch(getDataThunk('get', 'articles', getArticlesAction))
+        .then(() => {
+            expect(store.getArticlesAction(payload)).toEqual([
+                {
+                    type: GET_ARTICLES,
+                    payload,
+                },
+            ]);
+        });
+});
+
+  it('it should return new state', () => {
+    const localStore = stores({});
+    expect(localStore).toHaveProperty('dispatch');
+    expect(localStore).toHaveProperty('subscribe');
+    expect(localStore).toHaveProperty('getState');
+    expect(localStore).toHaveProperty('replaceReducer');
+  });
+});

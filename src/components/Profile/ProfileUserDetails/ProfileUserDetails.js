@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -13,12 +12,16 @@ import profileImagePlaceHolder from '../../../assets/images/profile_plaholder.pn
 import ProfileEditPicture from '../ProfileEdit/ProfileEditPicture';
 import ProfileEdit from '../ProfileEdit';
 import { htmlHelper } from '../../../helpers';
-import { getUserAction, getAUthorArticlesAction } from '../../../redux/actions/user/getUser';
+import {
+  getUserAction,
+  getAUthorArticlesAction,
+  deleteArticleAction,
+} from '../../../redux/actions/user/getUser';
 import { getDataThunk, postDataThunkPrivate } from '../../../redux/thunks';
 import SingleArticle from '../../article/singleArticle';
 
 export class ProfileUserDetails extends Component {
-  state = { modalStyle: 'none' };
+  state = { modalStyle: 'none', deleted: false };
 
   hideModal = () => this.setState({ modalStyle: 'none' });
 
@@ -28,8 +31,12 @@ export class ProfileUserDetails extends Component {
     const userName = localStorage.getItem('username');
     const id = localStorage.getItem('id');
     await this.props.getDataThunk('get', `user/${userName}`, getUserAction);
-    // eslint-disable-next-line react/prop-types
     await this.props.postDataThunkPrivate('get', `articles/author/${id}`, getAUthorArticlesAction, null);
+  }
+
+  handleDelete = async (id) => {
+    await this.props.postDataThunkPrivate('delete', `articles/${id}`, deleteArticleAction, null);
+    window.location.reload();
   }
 
   render() {
@@ -105,9 +112,10 @@ export class ProfileUserDetails extends Component {
           </div>
         </div>
           <div className='album py-5 bg-light'>
-            <div className='container author-articles-container'>
+            <div className='container author-article-container'>
               <div className='row'>
-        {this.props.userProfile.articles && this.props.userProfile.articles.map((article) => <Link
+                {this.props.userProfile.articles
+                && this.props.userProfile.articles.map((article) => <Link
                 key={article.id}
                 to={`/readArticle/${article.id}`}
                 className='col-md-3'>
@@ -118,11 +126,12 @@ export class ProfileUserDetails extends Component {
                   image={article.image}
                   id = {article.id}
                   page='Author'
+                  onClick={() => { this.handleDelete(article.id); }}
                   />
                   </Link>)}
-        </div>
-        </div>
-        </div>
+              </div>
+            </div>
+          </div>
         </div>
       );
     }
@@ -145,6 +154,7 @@ ProfileUserDetails.propTypes = {
   fetchUser: PropTypes.func,
   getDataThunk: PropTypes.func,
   history: PropTypes.object,
+  postDataThunkPrivate: PropTypes.func,
 };
 
 export const mapStateToProps = (state) => ({

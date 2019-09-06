@@ -35,17 +35,10 @@ export class Login extends Component {
     const { user } = this.state;
     await this.props.postDataThunk('post', 'users/login', loginUserAction, user);
     if (!this.props.userCredentials.errors) {
-      const {
-        userCredentials: {
-          data: {
-            username, image, token, id,
-          },
-        },
-      } = this.props;
+      const { userCredentials: { data: { username, token, id } } } = this.props;
       localStorage.setItem('username', username);
       localStorage.setItem('token', token);
       localStorage.setItem('id', id);
-      localStorage.setItem('image', image);
       this.props.history.push('/profile');
     }
   };

@@ -17,6 +17,13 @@ export default (state = initialState, { type, payload }) => {
         isAuth: true,
         ...payload,
       };
+
+    case userActionsTypes.DELETE_ARTICLE:
+      return {
+        ...state,
+        isAuth: true,
+        ...payload,
+      };
     default:
       return state;
   }
