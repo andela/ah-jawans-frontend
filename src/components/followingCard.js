@@ -21,17 +21,19 @@ const FollowingCard = ({
                 />
                  </div>
                  <div className="card__inf">
-                   <h4 className="card__inf_name usernamevalue"> {use.followedUser.username}</h4>
-                   <p>{use.followedUser.email}</p>
-                   <button type="button" id={`${index}d`} className="btn btn-info git btnd" onClick={viewProfile(use.followedUser)}>
-                    View Profile
-                   </button>
-
-              {followThem(use.followedUser && use.followedUser.username)
-                && <button type="button" id={`${index}dd`} className="followerbtn  btnd" onClick={unfollow({ username: use.followedUser.username })}>
-              unfollow
-              </button>}
-                    </div>
+                  <div>
+                    <h4 className="card__inf_name usernamevalue"> {use.followedUser.username}</h4>
+                  </div>
+                  <div className="card__inf_myBtn">
+                    <button type="button" id={`${index}d`} className="card__inf_btnPro git btnd card__inf_btn" onClick={viewProfile(use.followedUser)}>
+                      Profile
+                    </button>
+                    {followThem(use.followedUser && use.followedUser.username)
+                      && <button type="button" id={`${index}dd`} className="followerbtn  btnd card__inf_btn" onClick={unfollow({ username: use.followedUser.username })}>
+                    unfollow
+                    </button>}
+                  </div>
+                  </div>
                   </div>
             )))
               }
