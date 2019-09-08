@@ -31,3 +31,81 @@
     }
   }
 }
+
+.notify {
+  margin-top: 2px;
+  display: grid;
+  grid-auto-flow: row;
+  align-items: center;
+  grid-gap: 10px;
+
+  .on-app {
+    display: grid;
+    grid-auto-flow:column;
+    justify-items: start;
+    color: #12699b;
+    grid-gap: 10px;
+  }
+
+
+  .on-app-inputs {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap:10px;
+    align-items: center;
+  }
+
+  .on-app-inputs > input,
+  .on-app-inputs > p  {
+    justify-self: center;
+    align-self: center;
+    padding: 0;
+    margin: 0;
+  }
+  .on-email {
+    display: grid;
+    grid-auto-flow: column;
+    justify-items: start;
+    color: #12699b;
+    grid-gap: 10px;
+  }
+  .on-email-inputs{
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap:10px;
+    align-items: center;
+  }
+  .on-email-inputs > input,
+  .on-email-inputs > p  {
+    justify-self: center;
+    align-self: center;
+    padding: 0;
+    margin: 0;
+  }
+  h4{
+    color: #12699b;
+    margin: 0;
+  }
+  h5 {
+    color:black;
+    align-self: end;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+  }
+ p{
+   align-content:center;
+   color: black;
+ }
+ .styling{
+  justify-self: end;
+  margin: 0;
+  align-self: center;
+  font-size: 22px;
+  width: 8rem;
+  
+ }
+
+}
+
+ 
+

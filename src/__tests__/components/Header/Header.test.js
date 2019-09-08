@@ -6,8 +6,6 @@ import Header from '../../../components/Header';
 import { mockStore, initialState } from '../../../__mocks__/store';
 import mockWindow from '../../../__mocks__/window';
 
-
-
 describe('<Header />', () => {
   test('renders without crashing', () => {
     localStorage.setItem('image', 'null');
@@ -80,3 +78,4 @@ describe('<Header />', () => {
     expect(component).toHaveLength(1);
   });
 });
+

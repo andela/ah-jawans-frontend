@@ -83,7 +83,6 @@ class HeaderUserMenu extends Component {
                 <FontAwesomeIcon icon={faCog} /> Change password</Link>
             </li>
           )}
-
           {isAuth && (
             <li>
               <Link to="/follower">
