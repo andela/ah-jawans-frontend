@@ -20,19 +20,22 @@ const FollowerCard = ({
           />
         </div>
         <div className="card__inf">
-          <h4 className="card__inf_name usernamevalue"> {use.follower.username}</h4>
-          <p>{use.follower.email}</p>
-          <button type="button" id={`${index}g`} className="btn btn-info git btnd" onClick={viewProfile(use.follower)}>
-          View Profile
-          </button>
-          {followThem(use.follower.username)
-            ? <button type="button" id={`${index}unfollowbt` } className="followerbtn  btnd" onClick={unfollow({ username: use.follower.username })}>
-            unfollow
+          <div>
+            <h4 className="card__inf_name usernamevalue"> {use.follower.username}</h4>
+          </div>
+          <div className="card__inf_myBtn">
+            <button type="button" id={`${index}g`} className="card__inf_btnPro git btnd card__inf_btn" onClick={viewProfile(use.follower)}>
+            View Profile
             </button>
-            : <button type="button" id={`${index}followbt` } className="followerbtn  btnd" onClick={follow({ username: use.follower.username })}>
-            follow
-            </button>
-         }
+            {followThem(use.follower.username)
+              ? <button type="button" id={`${index}unfollowbt` } className="followerbtn  btnd card__inf_btn" onClick={unfollow({ username: use.follower.username })}>
+              unfollow
+              </button>
+              : <button type="button" id={`${index}followbt` } className="followerbtn  btnd card__inf_btn" onClick={follow({ username: use.follower.username })}>
+              follow
+              </button>
+            }
+          </div>
         </div>
       </div>
     )))
