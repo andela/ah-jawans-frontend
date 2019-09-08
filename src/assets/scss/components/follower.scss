@@ -1,27 +1,48 @@
 .contents{
     margin-top: 50px;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin: 40px 15% ;
     display: grid;
     grid-gap: 20px;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
+    justify-content: center;
   }
   .cards{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
     grid-gap: 5px;
     display: grid;
     grid-template-columns: 1fr 2fr;
     &__image{
         &_pic{
-            border-radius: 5px;
-            width: 100px;
+          border-radius: 0px;
+          width: 100%;
+          height: 100%;
         }
     }
   }
-.btnd{
-    float: right;
-    margin:  5px;
+.card__inf{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(95%, 1fr));
+  justify-content: center;
+  &_name{
+    padding: 10%;
+    text-align: center;
+  }
+  &_myBtn{
+    text-align: center;
+  }
+  &_btn{
+    padding: 0px;
+    display: inline;
+    margin: 3%;
+    color: white;
+  }
+  &_btnPro{
+    background-color: #17a2b8;
+    border: none;
+    padding: 1% 2%;
+    color: white;
+  }
+
 }
 
 .modal {
@@ -72,10 +93,6 @@
   color: #000;
   text-decoration: none;
   cursor: pointer;
-}
-
-#myBtn{
-  margin-top: 100px;
 }
 
 .profile{
@@ -133,13 +150,80 @@
 }
 
 .followerbtn{
-  padding: 7px 20px;
-  color: white;
-  left: 62.92%;
-  right: 29.27%;
-  top: 50.72%;
-  bottom: 47.48%;
-
+  border: none;
+  padding: 1% 2% !important;
   background: #12699B;
-  border-radius: 5px;
+  border-radius: 0px;
+}
+
+@media only screen and (max-width: 630px) {
+  .contents{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(95%, 1fr));
+    justify-items: center;
+    margin: 60px 15px;
+  }
+  .cards{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-auto-rows: auto;
+    padding: 0px;
+    &__image{
+        &_pic{
+          border-radius: 0px;
+          min-width: 100%;
+          width: 100%;
+          height: 100%;
+        }
+    }
+  }
+  .card__inf{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(95%, 1fr));
+    justify-content: center;
+    &_name{
+      text-align: center;
+    }
+    &_btn{
+      padding: 0px;
+      display: inline;
+      margin: 3%;
+      color: white;
+    }
+    &_btn:hover{
+      opacity: 0.7;
+    }
+    &_btnPro{
+      background-color: #17a2b8;
+      border: none;
+      padding: 1% 2%;
+      color: white;
+    }
+    &_btnPro:hover{
+      opacity: 0.7;
+    }
+
+  }
+  .followerbtn{
+    border: none;
+    padding: 1% 2% !important;
+    background: #12699B;
+    border-radius: 0px;
+  }
+
+  .profile{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    &__imagecontent{
+      min-width: 100%;
+      width: 100%;
+    }
+    &__profilecontent{
+      padding: 10px 50px ;
+      display: grid;
+      grid-gap: 5px;
+      grid-template-columns: 1fr 3fr;
+    }
+  }
 }

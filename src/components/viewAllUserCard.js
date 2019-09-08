@@ -20,19 +20,23 @@ const ViewAllUserCard = ({
                 />
                  </div>
                  <div className="card__inf">
-                   <h5 className="card__inf_name usernamevalue"> {use.username}</h5>
-                   <p>{use.email}</p>
-                   <button type="button" id={`${index}`} className="btn btn-info git btnd" onClick={handelOnlick(use)}>
-                    View Profile
-                   </button>
-                   {
-                     followThem(use.username)
-                       ? <button type="button" id={`${index}unfollow`}className="followerbtn  btnd" onClick={unfollow(use)}>
-                     unfollow
+                   <div>
+                    <h5 className="card__inf_name usernamevalue"> {use.username}</h5>
+                    <p>{use.email}</p>
+                   </div>
+                   <div className="card__inf_myBtn">
+                    <button type="button" id={`${index}`} className="card__inf_btnPro git btnd card__inf_btn" onClick={handelOnlick(use)}>
+                      Profile
                     </button>
-                       : <button type="button" id={`${index}f`}className="followerbtn  btnd" onClick={follow(use)}>
-                    follow
-                   </button>}
+                    {
+                      followThem(use.username)
+                        ? <button type="button" id={`${index}unfollow`}className="followerbtn  btnd card__inf_btn" onClick={unfollow(use)}>
+                      unfollow
+                      </button>
+                        : <button type="button" id={`${index}f`}className="followerbtn  btnd card__inf_btn" onClick={follow(use)}>
+                      follow
+                    </button>}
+                   </div>
                  </div>
                </div>
             )))
