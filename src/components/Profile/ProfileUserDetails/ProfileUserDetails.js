@@ -20,7 +20,6 @@ import { getDataThunk, getDataThunkPrivate, postDataThunkPrivate } from '../../.
 import { getFollowerActionNumber, getFollowingActionNumber } from '../../../redux/actions/followerAction';
 import {
   getUserAction,
-  getAUthorArticlesAction,
   deleteArticleAction,
 } from '../../../redux/actions/user/getUser';
 import SingleArticle from '../../article/singleArticle';
@@ -28,6 +27,7 @@ import OptInOrOut from '../Notifications/Opt/optInOut';
 import {
   optInAppAction, optOutAppAction, optInEmailAction, optOutEmailAction,
 } from '../../../redux/actions/notificationAction';
+import PaginationProfile from '../../article/PaginationProfile';
 
 export class ProfileUserDetails extends Component {
   state = {
@@ -48,9 +48,6 @@ export class ProfileUserDetails extends Component {
     await this.props.getDataThunkPrivate('get', 'profiles/following', getFollowingActionNumber);
     await this.props.getDataThunkPrivate('get', 'profiles/followers', getFollowerActionNumber);
     await this.props.getDataThunk('get', `user/${userName}`, getUserAction);
-    const id = localStorage.getItem('id');
-    await this.props.getDataThunk('get', `user/${userName}`, getUserAction);
-    await this.props.postDataThunkPrivate('get', `articles/author/${id}`, getAUthorArticlesAction, null);
   }
 
   handleDelete = async (id) => {
@@ -58,7 +55,7 @@ export class ProfileUserDetails extends Component {
     window.location.reload();
   }
 
-  componentWillReceiveProps= async (nextProps) => {
+  componentWillReceiveProps = async (nextProps) => {
     const { userProfile } = nextProps;
     if (userProfile) {
       userProfile.Opts.forEach((opt) => {
@@ -122,97 +119,100 @@ export class ProfileUserDetails extends Component {
       }
       return (
         <div>
-        <div className="ProfileUserDetails container">
-          <ToastContainer position={toast.POSITION.TOP_RIGHT} />
-          <div className="small-screen-4 xxlarge-v-margin border b-light-grey radius-2 shadow-1">
-            <div className="profile-picture center-align medium-padding small-screen-4 medium-screen-4 large-screen-1">
-              <Img
-                imgSrc={image1 || profileImagePlaceHolder}
-                imgClass="center radius-6"
-                maxWidth="200px"
-                minWidth="150px"
-              />
-              <Button onClick={this.showModal}>
-                <FontAwesomeIcon icon={faEdit} style={{ color: '#000000' }} />
-              </Button>
-              <div className={`modals ${modalStyle}`}>
-                <div className="modal-content">
-                  <div className="modal-header left-align">
-                    <Button
-                      buttonClass="button medium-padding yellow radius-5 text-black"
-                      onClick={this.hideModal}
-                      buttonId='hidemodels'
-                    >
-                      <FontAwesomeIcon icon={faTimes} size="1x" />
-                    </Button>
-                  </div>
-                  <div className="modal-body">
-                    <ProfileEditPicture />
-                  </div>
-                </div>
-                {htmlHelper.tagGenerator('br', null, 10)}
-              </div>
-            </div>
-            <div className="center-align small-screen-4 medium-screen-4 large-screen-2">
-              <div className="small-padding large-text capitalize names">
-                {firstName && firstName} {lastName && lastName}
-              </div>
-              <div className="small-padding username">
-                {username && '@'}
-                {username}
-              </div>
-              <div className="small-padding email">
-                {email && <FontAwesomeIcon icon={faEnvelope} />} {email}
-              </div>
-              <div className="small-padding bio">{bio}</div>
-              <div className="divider" />
-              <div>
-                <Link to={'/follower'}>
-                  <span className="followers" onClick={this.handOnClickFollower }>
-                    <span className="number">{this.props.follower}</span> Followers
-                  </span>
-                </Link>
-                <Link to={'/following'}>
-                  <span className="following">
-                    <span className="number">{this.props.following}</span> Following
-                  </span>
-                </Link>
-              </div>
-              <div className="divider" />
-
-              <span className="inline-block medium-v-padding">
-                <ProfileEdit />
-              </span>{' '}
-              <OptInOrOut
-                opts={opts}
-                handleAppChange={this.handleAppChange}
-                handledAppChange={this.handledAppChange}
-                handleEmailChange={this.handleEmailChange}
-                handledEmailChange={this.handledEmailChange}
+          <div className="ProfileUserDetails container">
+            <ToastContainer position={toast.POSITION.TOP_RIGHT} />
+            <div className="small-screen-4 xxlarge-v-margin border b-light-grey radius-2 shadow-1">
+              <div className="profile-picture center-align medium-padding small-screen-4 medium-screen-4 large-screen-1">
+                <Img
+                  imgSrc={image1 || profileImagePlaceHolder}
+                  imgClass="center radius-6"
+                  maxWidth="200px"
+                  minWidth="150px"
                 />
+                <Button onClick={this.showModal}>
+                  <FontAwesomeIcon icon={faEdit} style={{ color: '#000000' }} />
+                </Button>
+                <div className={`modals ${modalStyle}`}>
+                  <div className="modal-content">
+                    <div className="modal-header left-align">
+                      <Button
+                        buttonClass="button medium-padding yellow radius-5 text-black"
+                        onClick={this.hideModal}
+                        buttonId='hidemodels'
+                      >
+                        <FontAwesomeIcon icon={faTimes} size="1x" />
+                      </Button>
+                    </div>
+                    <div className="modal-body">
+                      <ProfileEditPicture />
+                    </div>
+                  </div>
+                  {htmlHelper.tagGenerator('br', null, 10)}
+                </div>
+              </div>
+              <div className="center-align small-screen-4 medium-screen-4 large-screen-2">
+                <div className="small-padding large-text capitalize names">
+                  {firstName && firstName} {lastName && lastName}
+                </div>
+                <div className="small-padding username">
+                  {username && '@'}
+                  {username}
+                </div>
+                <div className="small-padding email">
+                  {email && <FontAwesomeIcon icon={faEnvelope} />} {email}
+                </div>
+                <div className="small-padding bio">{bio}</div>
+                <div className="divider" />
+                <div>
+                  <Link to={'/follower'}>
+                    <span className="followers" onClick={this.handOnClickFollower}>
+                      <span className="number">{this.props.follower}</span> Followers
+                  </span>
+                  </Link>
+                  <Link to={'/following'}>
+                    <span className="following">
+                      <span className="number">{this.props.following}</span> Following
+                  </span>
+                  </Link>
+                </div>
+                <div className="divider" />
+
+                <span className="inline-block medium-v-padding">
+                  <ProfileEdit />
+                </span>{' '}
+                <OptInOrOut
+                  opts={opts}
+                  handleAppChange={this.handleAppChange}
+                  handledAppChange={this.handledAppChange}
+                  handleEmailChange={this.handleEmailChange}
+                  handledEmailChange={this.handledEmailChange}
+                />
+              </div>
             </div>
           </div>
-        </div>
           <div className='album py-5 bg-light'>
             <div className='container author-article-container'>
               <div className='row'>
                 {this.props.userProfile.articles
-                && this.props.userProfile.articles.map((article) => <Link
-                key={article.id}
-                to={`/readArticle/${article.id}`}
-                className='col-md-3'>
-                <SingleArticle
-                  title={article.title}
-                  description={article.description}
-                  readTime={article.readtime}
-                  image={fetchImage(article.body)}
-                  id = {article.id}
-                  page='Author'
-                  onClick={() => { this.handleDelete(article.id); }}
-                  />
+                  && this.props.userProfile.articles.map((article) => <Link
+                    key={article.id}
+                    to={`/readArticle/${article.id}`}
+                    className='col-md-3'>
+                    <SingleArticle
+                      title={article.title}
+                      description={article.description}
+                      readTime={article.readtime}
+                      image={fetchImage(article.body)}
+                      id={article.id}
+                      page='Author'
+                      onClick={() => { this.handleDelete(article.id); }}
+                    />
                   </Link>)}
               </div>
             </div>
+          </div>
+          <div className="row pagination center-align">
+            <PaginationProfile />
           </div>
         </div>
       );
