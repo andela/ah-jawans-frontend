@@ -2,27 +2,44 @@ import React from 'react';
 import { mount } from '../../../../config/enzymeConfig';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom'
-import {Home} from '../../../components/Home';
-import configureStore from '../../../redux/store/index';
+import { Home } from '../../../components/Home';
+import { mockStore } from '../../../__mocks__/store';
 
-const store = configureStore();
 
-const props = {articles :[{
+const props = {
+  getDataThunk: jest.fn(),
+  userCredentials: { userCredentials: {} },
+  notification: [{ id: 111, message: '', status: 'false' }],
+  articles: [{
     "title": "this is the title",
     "body": "this is the body of teh article",
     "author": {
-        "username": "Joe",
-    }  }]}
+      "username": "Joe",
+    },
+    length: 1,
+  }],
+}
 
 
 describe('<Home />', () => {
-  it('Should render', () => {
-    const wrapper = mount(
-        <MemoryRouter>
-            <Provider store={store}><Home {...props}/></Provider>
-        </MemoryRouter>
-    );
-    wrapper.setProps({props})
-    expect(wrapper).toHaveLength(1);
+  test('renders without crashing', () => {
+    const component = mount(<Provider store={mockStore({
+      getDataThunk: jest.fn(),
+      userCredentials: { userCredentials: {} },
+      notification: [{ id: 111, message: '', status: 'false' }],
+      articles: [{
+        "title": "this is the title",
+        "body": "this is the body of teh article",
+        "author": {
+          "username": "Joe",
+        },
+        length: 1,
+      }],
+    })}>
+      <MemoryRouter>
+        <Home {...props} />
+      </MemoryRouter>
+    </Provider >);
+    expect(component).toHaveLength(1);
   });
 });

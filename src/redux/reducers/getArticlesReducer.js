@@ -10,6 +10,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         articles: action.payload.article || action.payload.articles,
+        articlesCount: action.payload.articlesCount,
       };
 
     default:
