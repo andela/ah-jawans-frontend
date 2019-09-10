@@ -14,7 +14,7 @@ import configureStore from './redux/store';
 const store = configureStore();
 
 toast.configure({
-  autoClose: false,
+  autoClose: 8000,
   draggable: false,
 });
 ReactDOM.render(

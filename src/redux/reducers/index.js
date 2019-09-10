@@ -12,6 +12,7 @@ import optInOutEmailReducer from './optInOutEmailReducer';
 import optInOutAppReducer from './optInOutAppReducer';
 import getArticlesReducer from './getArticlesReducer';
 import articleReducer from './articleReducer/articleReducer';
+import searchReducer from './searchReducer';
 
 const rootReducers = combineReducers({
   userCredentials: loginReducer,
@@ -29,6 +30,8 @@ const rootReducers = combineReducers({
 
   articles: getArticlesReducer,
   article: articleReducer,
+
+  searchData: searchReducer,
 });
 
 export default rootReducers;
