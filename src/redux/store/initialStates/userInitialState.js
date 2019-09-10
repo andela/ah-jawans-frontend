@@ -56,4 +56,5 @@ module.exports = {
   followingNumber: '',
 
   articles: [],
+  searchData: {},
 };

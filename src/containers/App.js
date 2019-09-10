@@ -17,6 +17,8 @@ import AllUserView from './allUserView';
 import ReadArticle from '../components/article/readArticle';
 import CreateArticle from '../components/article/ArticleComponent';
 import UpdateArticle from '../components/article/updateArticle';
+import SearchPage from './searchPage';
+
 
 const App = () => (
   <BrowserRouter>
@@ -34,6 +36,7 @@ const App = () => (
       <Route path="/updateArticle/:articleId" component={UpdateArticle} />
       <Route path="/readArticle/:id" component={ReadArticle} />
       <Route path="/createArticle" component={CreateArticle} />
+      <Route path="/search" component={SearchPage}/>
       <Route component={PageNotFound} />
     </Switch>
   </BrowserRouter>

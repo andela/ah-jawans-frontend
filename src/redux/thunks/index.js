@@ -24,7 +24,10 @@ const getDataThunk = (method,
     dispatch(actionCreator(response.data));
   })
   .catch((error) => {
-    dispatch(actionCreator({ errors: error.response.data.error || error.response.data.errors[0] }));
+    dispatch(actionCreator({
+      errors: error.response.data.error
+      || error.response.data.errors[0] || 'No data found!',
+    }));
   });
 
 const postDataThunkPrivate = (method, endpoint, actionCreator, data) => (dispatch) => {
