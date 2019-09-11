@@ -54,7 +54,20 @@ module.exports = {
   },
   followerNumber: '',
   followingNumber: '',
-
   articles: [],
   searchData: {},
+  likes: {
+    loading: false,
+    message: '',
+    errors: {},
+    data: {},
+    count: 0,
+  },
+  dislikes: {
+    loading: false,
+    message: '',
+    errors: {},
+    data: {},
+    count: 0,
+  },
 };

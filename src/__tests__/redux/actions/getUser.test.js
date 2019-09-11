@@ -1,4 +1,4 @@
-import { getUserAction, getAUthorArticlesAction } from '../../../redux/actions/user/getUser';
+import { getUserAction, getAUthorArticlesAction, deleteArticleAction } from '../../../redux/actions/user/getUser';
 import { userActionsTypes } from '../../../redux/actionTypes';
 
 describe('actions', () => {
@@ -22,5 +22,15 @@ describe('actions', () => {
             payload,
         };
         expect(getAUthorArticlesAction(payload)).toEqual(expected);
+    });
+    it('should delete an articles', () => {
+        const payload = {
+            id: '3',
+        };
+        const expected= {
+            type: userActionsTypes.DELETE_ARTICLE,
+            payload,
+        };
+        expect(deleteArticleAction(payload)).toEqual(expected);
     });
 });

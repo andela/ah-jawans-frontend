@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import remove from '../../assets/icons/delete.png';
 import edit from '../../assets/icons/edit.png';
 
+
 const SingleArticle = ({
   image,
   title,

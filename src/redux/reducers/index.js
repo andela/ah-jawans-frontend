@@ -13,6 +13,7 @@ import optInOutAppReducer from './optInOutAppReducer';
 import getArticlesReducer from './getArticlesReducer';
 import articleReducer from './articleReducer/articleReducer';
 import searchReducer from './searchReducer';
+import likeDislikeReducer from './likeDislikeReducer';
 
 const rootReducers = combineReducers({
   userCredentials: loginReducer,
@@ -27,7 +28,7 @@ const rootReducers = combineReducers({
   followerData: followerReducer,
   optInOutEmailReducer,
   optInOutAppReducer,
-
+  likeDislikeReducer,
   articles: getArticlesReducer,
   article: articleReducer,
 

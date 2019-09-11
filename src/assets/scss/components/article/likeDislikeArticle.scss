@@ -1,0 +1,18 @@
+.like-button, .dislike-button, .likes-count, .dislikes-count {
+    cursor: pointer;
+    display: inline-block;
+    width: 35px;
+    vertical-align: top;
+}
+.like-button, .dislike-button {
+    cursor: pointer;
+}
+.dislike-button {
+    padding-top: 12px;
+}
+.likes-count, .dislikes-count {
+    height: 35px;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 12px;
+}

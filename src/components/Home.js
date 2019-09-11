@@ -51,7 +51,7 @@ Home.propTypes = {
   articles: PropTypes.array,
 };
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   articles: state.articles.articles,
 });
 
