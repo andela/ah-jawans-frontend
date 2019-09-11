@@ -5,6 +5,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { Home } from '../../../components/Home';
 import { mockStore } from '../../../__mocks__/store';
 
+import { JestEnvironment } from '@jest/environment';
 
 const props = {
   getDataThunk: jest.fn(),

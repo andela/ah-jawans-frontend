@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Sarina&display=swap');
+
 .images {
     position: absolute;
     width: 90%;
@@ -7,17 +9,17 @@
 
 .loginLeftSide {
     position: fixed;
-    top: 50px;
+    top: 150px;
     left: 30px;
 }
 
 .loginLeftSide h2 {
     box-sizing: border-box;
     font-family: 'Sarina', cursive;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     line-height: 60px;
-    padding-left: 110px;
+    padding-left: 90px;
     color: #000000;
 }
 
@@ -32,7 +34,7 @@
 }
 
 .myForm {
-    top: 110px;
+    top: 210px;
     left: 80px;
 }
 

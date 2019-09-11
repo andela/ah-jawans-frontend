@@ -2,23 +2,31 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { mount } from '../../../../config/enzymeConfig';
 import { MemoryRouter } from 'react-router-dom';
-import ReadArticle from '../../../components/article/readArticle';
+import ReadArticle, {ReadArticle as View} from '../../../components/article/readArticle';
+import '../../../components/Header/Header';
 
-import configureStore from '../../../redux/store/index';
-
-const store = configureStore();
+jest.mock('../../../components/Header/Header', () => () => (
+  <div id="mocked">hello</div>
+))
 
 const props = {
-    title : 'title',
-    body : 'This is the body',
+  articles: {},
+  
     getDataThunk: jest.fn(),
+    match: { params: 3 }
+}
+
+const state = {
+  username: 'Joe',
+  title: 'This is title of the article',
+  body: 'This is the body of the article',
 }
 
 describe('<ReadArticle/>', () => {
   it('Should render', () => {
     const wrapper = mount(
     <MemoryRouter>
-      <Provider store={store}><ReadArticle {...props}/></Provider>
+      <View {...props}/>
     </MemoryRouter>
     );
     expect(wrapper.contains(<div></div>));
