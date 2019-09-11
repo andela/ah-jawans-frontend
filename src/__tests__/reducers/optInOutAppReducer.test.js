@@ -5,7 +5,7 @@ let initialState;
 
 describe('opt in App reducer', () => {
     beforeEach(() => {
-        initialState = {
+        initialState = { 
         notifications: { data: 'you have opted in to in-app notifications' },
         data:{},
         };

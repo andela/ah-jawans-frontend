@@ -1,8 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { mount } from '../../../../config/enzymeConfig';
-import ProfileEdit from '../../../components/Profile/ProfileEdit';
+import { mount, shallow } from '../../../../config/enzymeConfig';
+import ProfileEdit, { ProfileEdit as ProfileEditComponent } from '../../../components/Profile/ProfileEdit/ProfileEdit';
 import { mockStore, initialState } from '../../../__mocks__/store';
 import user from '../../../__mocks__/user';
 
@@ -13,7 +13,8 @@ let buttons = '';
 let inputs = '';
 
 const props = {
-    getUser: { user }
+    getUser: { user },
+    user,
 }
 
 describe('<ProfileEdit />', () => {
@@ -63,5 +64,10 @@ describe('<ProfileEdit />', () => {
             }
         }));
         form.simulate('submit', { preventDefault: jest.fn() });
+    });
+    test('profile should not be updated if no input provide', () => {
+        const wrapper = shallow(<ProfileEditComponent />);
+        wrapper.setProps(props)
+
     });
 });
