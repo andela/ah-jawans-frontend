@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 import computerHand from '../../assets/images/computerHand.jpg';
 import LoginComponet from '../../components/auth/Login';
 import '../../assets/scss/components/login.scss';
 import loginUserAction from '../../redux/actions/auth/loginAction';
-import Error from '../../components/common/errors';
 import { postDataThunk } from '../../redux/thunks';
 import socialLoginAction from '../../redux/actions/auth/sosialLoginAction';
 
@@ -47,6 +47,8 @@ export class Login extends Component {
       localStorage.setItem('id', id);
       localStorage.setItem('image', image);
       this.props.history.push('/');
+    } else {
+      toast.error(this.props.userCredentials.errors);
     }
   };
 
@@ -62,9 +64,6 @@ export class Login extends Component {
             <img className='images' src={computerHand} />
           </div>
           <div className="col-md-6 myForm">
-            {(this.props.userCredentials.errors) && <Error
-              errors={this.props.userCredentials.errors}
-            />}
             <h4> Signin </h4>
             <LoginComponet
               onChange={this.handleChange}

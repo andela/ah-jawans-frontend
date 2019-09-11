@@ -1,5 +1,5 @@
 import ReactParserHtml from 'react-html-parser';
-import coverImage from '../../assets/images/cover-image.jpg';
+import coverImage from '../../assets/images/cover.jpg';
 
 const fetchImage = (body) => {
   const image = ReactParserHtml(body);
