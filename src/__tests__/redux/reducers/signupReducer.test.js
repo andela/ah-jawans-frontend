@@ -26,7 +26,7 @@ describe('Signup reducer', () => {
                 errors: {},
             },
             notifications: {
-                data:{},
+                data: {},
                 loading: false,
                 message: "",
                 errors: {},
@@ -54,7 +54,8 @@ describe('Signup reducer', () => {
             followingNumber: '',
             articles: [],
             searchData: {},
-        }       
+            bookmark: {},
+        }
     });
 
     it('Should return the initial state', () => {
