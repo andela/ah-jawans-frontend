@@ -1,11 +1,13 @@
-import reducer from '../../../redux/reducers/searchReducer'
-import * as actionTypes from '../../../redux/actions/actionTypes'
-import initialState from '../../../redux/store/initialStates/userInitialState'
+import searchReducer from '../../../redux/reducers/searchReducer';
+import initialState from '../../../redux/store/initialStates/userInitialState';
+import * as types from '../../../redux/actions/actionTypes';
+import user from '../../../__mocks__/user';
 
-let userCredentials
+describe('User reducers', () => {
 
-describe('Login reducer', () => {
-    it('Should return the initial state', () => {
-        expect(reducer(undefined, {})).toEqual(initialState)
-    })
-})
+    test('EDIT_PROFILE_SUCCESS', () => {
+        const reducer = searchReducer(initialState, {
+            type: types.SEARCH_ARTICLES, payload: { user }
+        });
+    });
+});

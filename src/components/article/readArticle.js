@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -15,13 +16,14 @@ import {
   clearLikesOrDislikes,
 } from '../../redux/actions/likeDislikeAction';
 import getArticlesAction from '../../redux/actions/getArticlesAction';
+import postbookmarkAction from '../../redux/actions/user/BookmarkAction';
 import '../../assets/scss/components/article/readArticle.scss';
 import '../../assets/scss/components/article/sharingArticle.scss';
 import facebookIcon from '../../assets/images/facebookIcon.png';
 import gmail from '../../assets/images/gmail.png';
 import twitter from '../../assets/images/twitter.png';
 import LikeDislike from './likeDislikeArticle';
-
+import Bookmark from '../../assets/images/Bookmark.png';
 
 export class ReadArticle extends Component {
   state = {
@@ -30,92 +32,117 @@ export class ReadArticle extends Component {
     body: '',
     likes: 0,
     dislikes: 0,
+    bookmark: '',
+    errors: '',
   }
 
-componentDidMount = async () => {
-  const { id } = this.props.match.params;
-  await this.props.getDataThunk('get', `articles/${id}`, getArticlesAction);
-  const { title, body } = this.props.articles;
-  const { username } = this.props.articles.author;
-  this.setState({
-    username,
-    title,
-    body,
-  });
-  await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
-  await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
-  this.setState({ username: this.props.articles.author.username });
-}
+
+  handleClick = async () => {
+    let articleId;
+    if (localStorage.getItem('id') !== null) {
+      articleId = localStorage.getItem('articleId');
+      await this.props.postDataThunkPrivate('post', `bookmarks/${articleId}`, postbookmarkAction);
+      this.setState({ errors: this.props.errors, bookmark: this.props.bookmark });
+      const { errors, bookmark } = this.props;
+      if (bookmark) { (toast.success(`${bookmark}!`), setTimeout(() => window.location.reload(), 6000)); } else {
+        (toast.error(`${errors}!`), setTimeout(() => window.location.reload(), 6000));
+      }
+    } else {
+      toast.error('Please Login first to bookmark the article!');
+    }
+  };
+
+  componentDidMount = async () => {
+    const { id } = this.props.match.params;
+    await this.props.getDataThunk('get', `articles/${id}`, getArticlesAction);
+    const { title, body } = this.props.articles;
+    localStorage.setItem('articleId', this.props.articles.id);
+    const { username } = this.props.articles.author;
+    this.setState({
+      username,
+      title,
+      body,
+    });
+    await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
+    await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
+    this.setState({ username: this.props.articles.author.username });
+  }
 
 
-handleLike = async () => {
-  const { id } = this.props.match.params;
-  if (localStorage.getItem('id') === null) {
-    toast.error('Login first to like or dislike this article!');
-  } else { await this.props.postDataThunkPrivate('post', `articles/${id}/like`, likeArticleAction, null); }
-  await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
-  await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
-}
+  handleLike = async () => {
+    const { id } = this.props.match.params;
+    if (localStorage.getItem('id') === null) {
+      toast.error('Login first to like or dislike this article!');
+    } else { await this.props.postDataThunkPrivate('post', `articles/${id}/like`, likeArticleAction, null); }
+    await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
+    await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
+  }
 
-componentWillReceiveProps = (nextProps) => {
-  const { dislikes, likes } = nextProps;
-  this.setState((prevState) => ({
-    ...prevState,
-    likes: likes || prevState.likes,
-    dislikes: dislikes || prevState.dislikes,
-  }));
-}
+  componentWillReceiveProps = (nextProps) => {
+    const { dislikes, likes } = nextProps;
+    this.setState((prevState) => ({
+      ...prevState,
+      likes: likes || prevState.likes,
+      dislikes: dislikes || prevState.dislikes,
+    }));
+  }
 
-handleDislike = async () => {
-  const { id } = this.props.match.params;
-  if (localStorage.getItem('id') === null) {
-    toast.error('Login first to like or dislike this article!');
-  } else { await this.props.postDataThunkPrivate('post', `articles/${id}/dislike`, dislikeArticleAction, null); }
-  await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
-  await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
-}
+  handleDislike = async () => {
+    const { id } = this.props.match.params;
+    if (localStorage.getItem('id') === null) {
+      toast.error('Login first to like or dislike this article!');
+    } else { await this.props.postDataThunkPrivate('post', `articles/${id}/dislike`, dislikeArticleAction, null); }
+    await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
+    await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
+  }
 
-componentWillUnmount = () => {
-  this.props.clearLikesOrDislikes();
-}
+  componentWillUnmount = () => {
+    this.props.clearLikesOrDislikes();
+  }
 
-render() {
-  const { likes, dislikes } = this.props;
-  const { title, body, username } = this.state;
-  const { id } = this.props.match.params;
-  const url = `https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
-  const tweet = `'${this.state.title}' -by ${this.state.username} @ https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
+  render() {
+    const { likes, dislikes } = this.props;
+    const { title, body, username } = this.state;
+    const { id } = this.props.match.params;
+    const url = `https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
+    const tweet = `'${this.state.title}' -by ${this.state.username} @ https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
 
-  return (
-    <Layout>
-    <div className = 'read-article-body'>
-    <ToastContainer position={toast.POSITION.TOP_RIGHT} />
-      <div className='container read-article-container'>
-          <h2 className='article-text title'>{title}</h2>
-          <br/>
-          <p className='article-text'>{ReactHtmlParser(body)}{ body && <div className='vote'><LikeDislike
+    return (
+      <Layout>
+        <div className='read-article-body'>
+          <ToastContainer position={toast.POSITION.TOP_RIGHT} />
+          <div className='container read-article-container'>
+            <h2 className='article-text title'>{title}</h2>
+            <br />
+            <p className='article-text'>{ReactHtmlParser(body)}{body && <div className='vote'><LikeDislike
               handleLike={this.handleLike}
               handleDislike={this.handleDislike}
               likes={likes}
-              dislikes={dislikes}/></div>}</p>
-          <br/>
-          <p className='author-name'>{ username && `By ${username}`}</p>
+              dislikes={dislikes} /></div>}</p>
+            <br />
+            <p className='author-name'>{username && `By ${username}`}</p>
+          </div>
+          {body && <div className='sharing-icons'>
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}>
+              <img className="" src={facebookIcon} alt="facebook" />
+            </a>
+            <a href={`https://twitter.com/intent/tweet?text=${tweet}`}>
+              <img className="" src={twitter} alt="twitter" />
+            </a>
+            <a href={`mailto:?subject=${title}&body="${title}" by ${username} @ ${url}`}>
+              <img className="" src={gmail} alt="gmail" />
+            </a>
+            <a
+              id="bookmarkarticle"
+              onClick={this.handleClick}
+            >
+              <img className="" src={Bookmark} alt="Bookmark" />
+            </a>
+          </div>}
         </div>
-        {body && <div className='sharing-icons'>
-          <a href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}>
-            <img className="" src={facebookIcon} alt="facebook"/>
-          </a>
-          <a href={`https://twitter.com/intent/tweet?text=${tweet}`}>
-            <img className="" src={twitter} alt="twitter"/>
-          </a>
-          <a href={`mailto:?subject=${title}&body="${title}" by ${username} @ ${url}`}>
-            <img className="" src={gmail} alt="gmail"/>
-          </a>
-        </div> }
-    </div>
-    </Layout>
-  );
-}
+      </Layout>
+    );
+  }
 }
 
 ReadArticle.propTypes = {
@@ -127,16 +154,21 @@ ReadArticle.propTypes = {
   likes: PropTypes.number,
   dislikes: PropTypes.number,
   clearLikesOrDislikes: PropTypes.func,
+  bookmark: PropTypes.string,
+  errors: PropTypes.string,
 };
 
 const mapStateToProps = (state) => ({
   articles: state.articles.articles,
   likes: state.likeDislikeReducer.likes.count,
   dislikes: state.likeDislikeReducer.dislikes.count,
+  bookmark: state.bookmark.message,
+  errors: state.bookmark.errors,
 });
 
 const actionCreator = {
   getDataThunk, postDataThunkPrivate, clearLikesOrDislikes,
 };
+
 
 export default connect(mapStateToProps, actionCreator)(ReadArticle);
