@@ -15,7 +15,7 @@ const likeDislike = ({
   <React.Fragment>
     <img
       id='like'
-      className="like-button"
+      className="like-button like-button1"
       src={!likes ? likeImageEmpty : likeImageFilled}
       onClick={handleLike}
     />

@@ -15,6 +15,7 @@ import articleReducer from './articleReducer/articleReducer';
 import searchReducer from './searchReducer';
 import likeDislikeReducer from './likeDislikeReducer';
 import BookmarkReducer from './user/BookmarkReducer';
+import commentReducers from './commentReducer/commentReducer';
 
 const rootReducers = combineReducers({
   userCredentials: loginReducer,
@@ -34,6 +35,7 @@ const rootReducers = combineReducers({
   article: articleReducer,
   searchData: searchReducer,
   bookmark: BookmarkReducer,
+  comments: commentReducers,
 });
 
 export default rootReducers;

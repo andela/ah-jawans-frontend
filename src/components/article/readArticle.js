@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactHtmlParser from 'react-html-parser';
+import moment from 'moment';
+import ReactImageFallback from 'react-image-fallback';
 import Layout from '../Layout/Layout';
 import { getDataThunk, postDataThunkPrivate } from '../../redux/thunks/index';
 import {
@@ -15,6 +17,9 @@ import {
   getArticleDislikesAction,
   clearLikesOrDislikes,
 } from '../../redux/actions/likeDislikeAction';
+import {
+  createCommentAction, getAllCommentsAction, deleteCommentAction, updateCommentAction,
+} from '../../redux/actions/commentsActions/commentsActions';
 import getArticlesAction from '../../redux/actions/getArticlesAction';
 import postbookmarkAction from '../../redux/actions/user/BookmarkAction';
 import '../../assets/scss/components/article/readArticle.scss';
@@ -24,6 +29,11 @@ import gmail from '../../assets/images/gmail.png';
 import twitter from '../../assets/images/twitter.png';
 import LikeDislike from './likeDislikeArticle';
 import Bookmark from '../../assets/images/Bookmark.png';
+import { CommentComponent } from '../comments/CommentComponent';
+import remove from '../../assets/icons/delete.png';
+import edit from '../../assets/icons/edit.png';
+import profileImagePlaceHolder from '../../assets/images/profile_plaholder.png';
+import LoadingGif from '../../assets/images/loadingGif.gif';
 
 export class ReadArticle extends Component {
   state = {
@@ -34,6 +44,10 @@ export class ReadArticle extends Component {
     dislikes: 0,
     bookmark: '',
     errors: '',
+    modal: 'none',
+    comment: {
+      body: '',
+    },
   }
 
 
@@ -42,10 +56,10 @@ export class ReadArticle extends Component {
     if (localStorage.getItem('id') !== null) {
       articleId = localStorage.getItem('articleId');
       await this.props.postDataThunkPrivate('post', `bookmarks/${articleId}`, postbookmarkAction);
-      this.setState({ errors: this.props.errors, bookmark: this.props.bookmark });
-      const { errors, bookmark } = this.props;
+      this.setState({ errorsbookmark: this.props.errors, bookmark: this.props.bookmark });
+      const { errorsbookmark, bookmark } = this.props;
       if (bookmark) { (toast.success(`${bookmark}!`), setTimeout(() => window.location.reload(), 6000)); } else {
-        (toast.error(`${errors}!`), setTimeout(() => window.location.reload(), 6000));
+        (toast.error(`${errorsbookmark}!`), setTimeout(() => window.location.reload(), 6000));
       }
     } else {
       toast.error('Please Login first to bookmark the article!');
@@ -59,6 +73,7 @@ export class ReadArticle extends Component {
     localStorage.setItem('articleId', this.props.articles.id);
     const { username } = this.props.articles.author;
     this.setState({
+      ...this.state,
       username,
       title,
       body,
@@ -66,8 +81,59 @@ export class ReadArticle extends Component {
     await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
     await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
     this.setState({ username: this.props.articles.author.username });
+    await this.props.postDataThunkPrivate('get', `articles/${id}/comments`, getAllCommentsAction, null);
+    await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
+    await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
+    this.setState({
+      username: this.props.articles.author.username,
+    });
   }
 
+  componentWillUnmount = () => {
+    this.props.clearLikesOrDislikes();
+  }
+
+  onChange = (event) => {
+    const comment = { ...this.state.comment };
+    comment[event.target.name] = event.target.value;
+    this.setState({ comment });
+  }
+
+  handleDelete = (commentId) => async () => {
+    const { id } = this.props.match.params;
+    await this.props.postDataThunkPrivate('delete', `articles/${id}/comments/${commentId}`, deleteCommentAction, null);
+    window.location.reload();
+  }
+
+  onComment = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  }
+
+  handleUpdate = (commentId) => async () => {
+    const { id } = this.props.match.params;
+    const { body } = this.state;
+    await this.props.postDataThunkPrivate('patch', `articles/${id}/comments/${commentId}`, updateCommentAction, { body });
+    this.props.comments.errors ? (
+      toast.error(this.props.comments.errors.body))
+      : (window.location.replace(`/readArticle/${id}`),
+      toast.success('comment updated.'));
+  }
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    const { id } = this.props.match.params;
+    const { comment } = this.state;
+    await this.props.postDataThunkPrivate('post', `articles/${id}/comments`, createCommentAction, comment);
+    this.props.comments.errors ? (
+      toast.error(this.props.comments.errors.body))
+      : (setTimeout(() => window.location.reload(), 6000),
+      (toast.success('comment created.'), setTimeout(() => window.location.reload(), 6000)));
+  }
+
+  hideModal = () => {
+    this.setState({ modal: 'none' });
+  }
 
   handleLike = async () => {
     const { id } = this.props.match.params;
@@ -78,47 +144,48 @@ export class ReadArticle extends Component {
     await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    const { dislikes, likes } = nextProps;
-    this.setState((prevState) => ({
-      ...prevState,
-      likes: likes || prevState.likes,
-      dislikes: dislikes || prevState.dislikes,
-    }));
-  }
+componentWillReceiveProps = (nextProps) => {
+  const { dislikes, likes } = nextProps;
+  this.setState((prevState) => ({
+    ...prevState,
+    likes: likes || prevState.likes,
+    dislikes: dislikes || prevState.dislikes,
+  }));
+}
 
-  handleDislike = async () => {
-    const { id } = this.props.match.params;
-    if (localStorage.getItem('id') === null) {
-      toast.error('Login first to like or dislike this article!');
-    } else { await this.props.postDataThunkPrivate('post', `articles/${id}/dislike`, dislikeArticleAction, null); }
-    await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
-    await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
-  }
+handleDislike = async () => {
+  const { id } = this.props.match.params;
+  if (localStorage.getItem('id') === null) {
+    toast.error('Login first to like or dislike this article!');
+  } else { await this.props.postDataThunkPrivate('post', `articles/${id}/dislike`, dislikeArticleAction, null); }
+  await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
+  await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
+}
 
-  componentWillUnmount = () => {
-    this.props.clearLikesOrDislikes();
-  }
+componentWillUnmount = () => {
+  this.props.clearLikesOrDislikes();
+}
 
-  render() {
-    const { likes, dislikes } = this.props;
-    const { title, body, username } = this.state;
-    const { id } = this.props.match.params;
-    const url = `https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
-    const tweet = `'${this.state.title}' -by ${this.state.username} @ https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
 
-    return (
+render() {
+  const { likes, dislikes } = this.props;
+  const { title, body, username } = this.state;
+  const { id } = this.props.match.params;
+  const url = `https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
+  const tweet = `'${this.state.title}' -by ${this.state.username} @ https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
+
+  return (
       <Layout>
         <div className='read-article-body'>
-          <ToastContainer position={toast.POSITION.TOP_RIGHT} />
+         <ToastContainer position={toast.POSITION.TOP_RIGHT} />
           <div className='container read-article-container'>
             <h2 className='article-text title'>{title}</h2>
             <br />
-            <p className='article-text'>{ReactHtmlParser(body)}{body && <div className='vote'><LikeDislike
+            <p className='article-text'>{ReactHtmlParser(body)}{ body && <div className='vote'><LikeDislike
               handleLike={this.handleLike}
               handleDislike={this.handleDislike}
               likes={likes}
-              dislikes={dislikes} /></div>}</p>
+              dislikes={dislikes}/></div>}</p>
             <br />
             <p className='author-name'>{username && `By ${username}`}</p>
           </div>
@@ -139,10 +206,77 @@ export class ReadArticle extends Component {
               <img className="" src={Bookmark} alt="Bookmark" />
             </a>
           </div>}
+        <div id="comment-section" className="comment-section">
+          {(localStorage.username)
+            && <CommentComponent
+              onChange={this.onChange}
+              onSubmit={this.handleSubmit}
+              comment={this.state.comment}
+            />
+          }
+          </div>
+          < div className='col-md-5 comments'>
+            {this.props.comments.allComments
+              && this.props.comments.allComments.map((comment, index) => (
+                <div className="card" key={comment.id}>
+                  <div className="card-header">
+                    <ReactImageFallback
+                      src={comment.User.image && (comment.User.image.split(':')[0] === 'https') ? comment.User.image : `https://res.cloudinary.com/djxhcwowp/image/upload/v${comment.User.image}`}
+                      fallbackImage={profileImagePlaceHolder}
+                      initialImage={LoadingGif}
+                      alt="profile image"
+                      className="authorUsername"
+                    />
+                  </div>
+                  <div className='edit-comment-icons'>
+                    <img
+                      src={edit} onClick={() => this.setState({
+                        modal: 'block',
+                        body: comment.body,
+                        id: comment.id,
+                      })}
+                      id={`comment-edit-icon${index}`}
+                      className="comment-edit-icon"
+                    />
+                      <img
+                        src={remove}
+                        id={`comment-remove-icon${index}`}
+                        className="comment-remove-icon"
+                        onClick={this.handleDelete(comment.id)}
+                      />
+                  </div>
+                  <div className="card-body">
+                    <blockquote className="blockquote mb-0">
+                      <p>{comment.body}</p>
+                      <small className="text-muted">{moment(comment.updatedAt).fromNow()}</small>
+                    </blockquote>
+                  </div>
+                  <div className={`modals ${this.state.modal}`}>
+                    <div className="modal-dialog modal-dialog-centered">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title">Edit comment</h5>
+                          <button id={`hideModel${index}`} type="button" className="close" onClick={this.hideModal}>
+                            <span aria-hidden="true" >&times;</span>
+                          </button>
+                        </div>
+                        <div className="modal-body">
+                          <textarea id={`textarea${index}`} className="form-control comment-body" name="body" value={this.state.body} onChange={this.onComment.bind(this)} />
+                        </div>
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={this.hideModal}>Cancel</button>
+                          <button id={`updatebutton${index}`} type="button" className="btn btn-primary edit-submit" onClick={this.handleUpdate(this.state.id)}>Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </Layout>
-    );
-  }
+  );
+}
 }
 
 ReadArticle.propTypes = {
@@ -155,7 +289,13 @@ ReadArticle.propTypes = {
   dislikes: PropTypes.number,
   clearLikesOrDislikes: PropTypes.func,
   bookmark: PropTypes.string,
-  errors: PropTypes.string,
+  errorsbookmark: PropTypes.string,
+  location: PropTypes.object,
+  comments: PropTypes.object,
+  history: PropTypes.object,
+  errors: PropTypes.object,
+  id: PropTypes.string,
+  comment: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
@@ -163,11 +303,16 @@ const mapStateToProps = (state) => ({
   likes: state.likeDislikeReducer.likes.count,
   dislikes: state.likeDislikeReducer.dislikes.count,
   bookmark: state.bookmark.message,
-  errors: state.bookmark.errors,
+  errorsbookmark: state.bookmark.errors,
+  comments: state.comments.comments,
+  errors: state.comments.errors,
+  userProfile: state.getUser,
 });
 
 const actionCreator = {
-  getDataThunk, postDataThunkPrivate, clearLikesOrDislikes,
+  getDataThunk,
+  postDataThunkPrivate,
+  clearLikesOrDislikes,
 };
 
 

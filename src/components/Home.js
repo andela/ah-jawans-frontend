@@ -8,7 +8,7 @@ import books from '../assets/images/books.jpg';
 import SingleArticle from './article/singleArticle';
 import { getDataThunk } from '../redux/thunks/index';
 import fetchImage from './article/fetchImage';
-import Pagination from './article/Pagination';
+import PaginationComponent from './article/Pagination';
 
 export class Home extends Component {
   render() {
@@ -35,7 +35,7 @@ export class Home extends Component {
                 </Link>)}
               </div>
               <div className="row pagination center-align">
-                <Pagination />
+                <PaginationComponent />
               </div>
               <div className="clear" />
             </div>

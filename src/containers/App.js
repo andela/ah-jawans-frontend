@@ -19,7 +19,6 @@ import CreateArticle from '../components/article/ArticleComponent';
 import UpdateArticle from '../components/article/updateArticle';
 import SearchPage from './searchPage';
 
-
 const App = () => (
   <BrowserRouter>
     <Switch>
