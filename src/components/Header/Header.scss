@@ -38,6 +38,35 @@
         padding-top: 27px;
     }
 
+    .header-create-article-icon img{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        left: 63%;
+        top: 45px;
+    }
+
+    .header-search-icon img{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        top: 45px;
+        right: 21%;
+    }
+
+    .create-article-text-header {
+        margin-right: 24%;
+        color: black;
+        outline: none;
+        padding-right: 0;
+    }
+    .create-article-text-header:focus {
+        outline: 0px dotted;
+    }
+    .header-create-article-icon small {
+        border: solid 1px red;
+    }
+
     @media screen and (min-width: 761px) {
         .Header {
             .logo {

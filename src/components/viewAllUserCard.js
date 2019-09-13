@@ -30,7 +30,7 @@ const ViewAllUserCard = ({
                     </button>
               {
                 followThem(use.username)
-                  ? <button type="button" id={`${index}unfollow`} className="followerbtn  btnd card__inf_btn" onClick={unfollow(use)}>
+                  ? <button type="button" id={`${index}unfollow`} className="followerbtn  btnd card__inf_btn unfollow-btn" onClick={unfollow(use)}>
                     unfollow
                       </button>
                   : <button type="button" id={`${index}f`} className="followerbtn  btnd card__inf_btn" onClick={follow(use)}>

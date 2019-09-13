@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import '../assets/scss/components/article/homePage.scss';
 import Layout from './Layout/Layout';
-import books from '../assets/images/books.jpg';
+import books from '../assets/images/bookcase.jpg';
 import SingleArticle from './article/singleArticle';
 import { getDataThunk } from '../redux/thunks/index';
 import fetchImage from './article/fetchImage';
@@ -14,8 +14,14 @@ export class Home extends Component {
   render() {
     return (
       <Layout>
-        <div className='header-image'>
-          <img src={books} />
+         <div className='header-image'>
+          <img src={books}/>
+          <div className='welcome'>
+            <p>Author’s Heaven taps into the brains of the world’s most insightful writers,
+              thinkers, and storytellers to bring you the smartest takes on topics that matter. </p>
+            <br/>
+            {!localStorage.id && <Link to="/signup"><button type="submit" className="button1">Get started</button></Link>}
+          </div>
         </div>
         <main role='main'>
           <div className='album py-5 bg-light home-page-container'>

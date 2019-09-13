@@ -29,7 +29,7 @@ const FollowingCard = ({
                 Profile
                     </button>
               {followThem(use.followedUser && use.followedUser.username)
-                && <button type="button" id={`${index}dd`} className="followerbtn  btnd card__inf_btn" onClick={unfollow({ username: use.followedUser.username })}>
+                && <button type="button" id={`${index}dd`} className="followerbtn  btnd card__inf_btn unfollow-btn" onClick={unfollow({ username: use.followedUser.username })}>
                   unfollow
                     </button>}
             </div>

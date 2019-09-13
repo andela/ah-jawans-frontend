@@ -28,7 +28,7 @@ const FollowerCard = ({
                 View Profile
             </button>
               {followThem(use.follower.username)
-                ? <button type="button" id={`${index}unfollowbt`} className="followerbtn  btnd card__inf_btn" onClick={unfollow({ username: use.follower.username })}>
+                ? <button type="button" id={`${index}unfollowbt`} className="followerbtn  btnd card__inf_btn unfollow-btn" onClick={unfollow({ username: use.follower.username })}>
                   unfollow
               </button>
                 : <button type="button" id={`${index}followbt`} className="followerbtn  btnd card__inf_btn" onClick={follow({ username: use.follower.username })}>

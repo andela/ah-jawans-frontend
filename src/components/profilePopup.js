@@ -30,7 +30,7 @@ const ProfileView = ({
               <h6 className="profile__profilecontent_h">bio:</h6> <p className="profile__profilecontent_p">{bio}</p>
               {
                 followThem(username)
-                  ? <button type="button" className="followerbtn  btnd" onClick={unfollow({ username })}>
+                  ? <button type="button" className="followerbtn  btnd unfollow-btn" onClick={unfollow({ username })}>
                 unfollow
               </button>
                   : <button type="button" className="followerbtn  btnd" onClick={follow({ username })}>
