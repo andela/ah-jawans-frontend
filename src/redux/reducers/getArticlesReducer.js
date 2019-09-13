@@ -1,7 +1,7 @@
 import { GET_ARTICLES } from '../actions/actionTypes';
 
 export const initialState = {
-  articles: [],
+  articles: {},
 };
 
 export default (state = initialState, action) => {

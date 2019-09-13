@@ -2,18 +2,24 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { mount, shallow } from '../../../../config/enzymeConfig';
 import { MemoryRouter } from 'react-router-dom';
-import { ReadArticle as ReadArticleComponent } from '../../../components/article/readArticle';
+import {ReadArticle as ReadArticleComponent} from '../../../components/article/readArticle';
 import configureStore from '../../../redux/store/index';
 import '../../../components/Header/Header';
-
-jest.mock('../../../components/Header/Header', () => () => (
-  <div id="mocked">hello</div>
-))
+import { ReadArticle } from '../../../components/article/readArticle';
 
 const store = configureStore();
+global.window = Object.create(window);
+Object.defineProperty(window, 'location', {
+  value: {
+    replace: jest.fn(),
+  },
+});
+
+jest.mock('../../../components/Header/Header', () => () => (
+  <div id="mockHeader">mockHeader</div>
+))
 
 const props = {
-  articles: {},
   postDataThunkPrivate: jest.fn(),
   getDataThunk: jest.fn(),
   likes: 0,
@@ -26,11 +32,13 @@ const props = {
     author: { username: 'shaluc' }
   },
   bookmark: { message: {} },
-  errors: { errors: {} },
   match: { params: 3 },
   handleClick: jest.fn(),
+  comments: { allComments: [] ,errors: {}},
+  errors: { comments: {errors: ''}},
+  userCredentials: { userCredentials: {} }
 }
-
+ 
 const state = {
   id: 1,
   username: 'Joe',
@@ -45,19 +53,169 @@ const state = {
   handleClick: jest.fn(),
   likes: 0,
   dislikes: 0,
+  comments: { allComments: [] },
+  clearLikesOrDislikes: jest.fn(),
 }
 
+let wrapper;
+
 describe('<ReadArticle/>', () => {
-  it('Should render', () => {
-    localStorage.setItem('id', ' ');
-    const wrapper = mount(
+  beforeAll(() => {
+    Object.defineProperty(window.location, 'replace', {
+      configurable: true,
+    });
+    window.location.replace = jest.fn();
+    wrapper = shallow(
       <MemoryRouter>
-        <ReadArticleComponent {...props} />
+        <Provider store={store}><ReadArticle {...props} />
+        </Provider>
+      </MemoryRouter>);
+  })
+
+  afterAll(() => {
+    window.location.replace = replace;
+  });
+  it('Should give initial state', () => {
+    expect(wrapper.state()).toBeDefined();
+    expect(wrapper.find('ReadArticle')).toBeDefined();
+  });
+  
+  it('Should contain <Form/> element inside <CommentComponent/>', () => {
+    const newprops = {
+      articles: {
+        title: '',
+        body: '',
+      },
+      match: {
+        params: {
+          id: 12,
+        },
+      },
+      comments: {
+        comments: {},
+      },
+      getDataThunk: jest.fn(),
+      postDataThunkPrivate: jest.fn(),
+    }
+    const wrapper1 = mount(
+      <MemoryRouter>
+        <ReadArticle {...newprops} />
       </MemoryRouter>
-    );
-    expect(wrapper.contains(<div></div>));
+    )
   });
 
+  it('Should contain <Form/> element inside <CommentComponent/>', () => {
+    localStorage.setItem('id', '111');
+    localStorage.setItem('username', 'efhwruj');
+    const newprops = {
+      articles: {
+        title: '',
+        body: '',
+        author: { username: 'djhf' }
+      },
+      match: {
+        params: {
+          id: 12,
+        },
+      },
+      comments: {
+        allComments: [
+          {
+            User: { image: 'djhfejr' },
+            id: 1,
+            body: 'dfwjkehnkdewhj'
+          },
+          {
+            User: { image: 'djhfejr' },
+            id: 2,
+            body: 'dfwjkehnkdewhj'
+          }
+        ]
+      },
+      getDataThunk: jest.fn(),
+      postDataThunkPrivate: jest.fn(),
+    }
+    const newWrapper = mount(
+      <MemoryRouter>
+        <ReadArticle {...newprops} />
+      </MemoryRouter>
+    );
+    newWrapper.setState({
+      id: 10,
+      username: 'ewfer',
+      title: 'ewqr',
+      body: 'jihqfek',
+      likes: 0,
+      dislikes: 0,
+      bookmark: 'rb4',
+      errors: 'bterb',
+      modal: 'none',
+      comment: {
+        body: 'b3w4t',
+      },
+    });
+    newWrapper.find('#comment-body').simulate('change', { value: 'k' });
+    newWrapper.find('#comment-remove-icon0').simulate('click', {});
+    newWrapper.find('#updatebutton0').simulate('click', {});
+    newWrapper.find('#submit1').simulate('click', {});
+    window.location.replace();
+    expect(window.location.replace).toHaveBeenCalled();
+  });
+
+  it('Should contain <Form/> element inside <CommentComponent/>', () => {
+    localStorage.setItem('id', '111');
+    localStorage.setItem('username', 'efhwruj');
+    const newprops = {
+      match: { params: {id: 1} },
+      articles: {
+        title: '',
+        body: '',
+        articles: { author: '' }
+      },
+      comments: {
+        allComments: [
+          {
+            User: { image: 'djhfejr' },
+            id: 1,
+            body: 'dfwjkehnkdewhj'
+          },
+          {
+            User: { image: 'djhfejr' },
+            id: 2,
+            body: 'dfwjkehnkdewhj'
+          }
+        ],
+        errors: 'hgwefg',
+        likes: 0,
+        dislikes: 0,
+      },
+      getDataThunk: jest.fn(),
+      postDataThunkPrivate: jest.fn(),
+      clearLikesOrDislikes: jest.fn(),
+    }
+    const newWrapper = mount(
+      <MemoryRouter>
+        <ReadArticleComponent {...newprops} />
+      </MemoryRouter>
+    );
+    newWrapper.setState({
+      id: 10,
+      body: 'whfjg',
+    });
+    newWrapper.find('#comment-body').simulate('change', { value: 'k' });
+    newWrapper.find('#comment-remove-icon0').simulate('click', {});
+    newWrapper.find('#updatebutton0').simulate('click', {});
+    newWrapper.find('#textarea0').simulate('change', { value: 'b' });
+    newWrapper.find('#submit1').simulate('click', {});
+    newWrapper.find('#comment-edit-icon0').simulate('click', {});
+    newWrapper.find('#hideModel0').simulate('click', {});
+    newWrapper.find('#like').simulate('click', {});
+
+  });
+});
+  
+
+describe('<ReadArticle/> on', () => {
   it('Should render', () => {
     const wrapper = shallow(
       <ReadArticleComponent {...props} />

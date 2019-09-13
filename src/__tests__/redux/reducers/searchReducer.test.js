@@ -5,7 +5,7 @@ import user from '../../../__mocks__/user';
 
 describe('User reducers', () => {
 
-    test('EDIT_PROFILE_SUCCESS', () => {
+    test('SEARCH_ARTICLES', () => {
         const reducer = searchReducer(initialState, {
             type: types.SEARCH_ARTICLES, payload: { user }
         });

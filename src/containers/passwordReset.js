@@ -45,7 +45,7 @@ export class PasswordReset extends Component {
       return <Modal />;
     }
     return (
-      <Card className='card'>
+      <Card className='card card-password'>
         <Link to='/' style={{ margin: '0 auto' }} />
         <h1 className='card__title'>Authors Haven</h1>
         <br />

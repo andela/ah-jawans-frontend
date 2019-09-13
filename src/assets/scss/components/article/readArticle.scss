@@ -49,3 +49,88 @@
         padding-left: 200px;
     }
 }
+.comment-form{
+    width: 45%;
+    margin: 0 auto;
+    border: 1px solid #cacdcf;
+    padding: 20px;
+}
+.comment-section textarea{
+ resize: none;
+ font-size: 12px;
+ padding: 20px;
+}
+.comment-btn{
+    background-color: #12699b !important;
+    font-weight: bold;
+    border: none !important;
+}
+
+.edit-submit{
+    border: none !important;
+    background-color: #12699b !important;
+}
+.form-header img{
+    width: 40px;
+    border-radius: 50px;
+}
+.comments{
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr;
+    margin-top: 20px;
+}
+.comments .card {
+    margin-top: 0px;
+}
+.comments{
+    position: absolute;
+}
+.authorUsername{
+    width: 30px;
+    border-radius: 50px;
+    margin-right: 20px;
+    background: #12699B;
+}
+
+.edit-comment-icons{
+    position: absolute;
+    top:20px;
+    left: 50px;
+}
+.edit-icon-comment button{
+   margin-left: 400px;
+   background: #ffffff;
+}
+.remove-icon-comment button{
+   margin-left: 420px;
+   background: #ffffff;
+}
+.comments p{
+   font-size: 15px;
+}
+.modal-body textarea{
+ resize: none;
+ font-size: 14px;
+ padding: 20px;
+}
+.card-header{
+    background: #ffffff !important;
+}
+
+.comment-edit-icon{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 330px;
+    top: 0; 
+}
+
+.comment-remove-icon{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 380px;
+    top: 0; 
+}
