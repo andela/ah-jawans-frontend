@@ -21,7 +21,7 @@ import {
   createCommentAction, getAllCommentsAction, deleteCommentAction, updateCommentAction,
 } from '../../redux/actions/commentsActions/commentsActions';
 import getArticlesAction from '../../redux/actions/getArticlesAction';
-import postbookmarkAction from '../../redux/actions/user/BookmarkAction';
+import { postbookmarkAction } from '../../redux/actions/user/BookmarkAction';
 import '../../assets/scss/components/article/readArticle.scss';
 import '../../assets/scss/components/article/sharingArticle.scss';
 import facebookIcon from '../../assets/images/facebook-logo.png';

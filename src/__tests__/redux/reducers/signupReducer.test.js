@@ -54,7 +54,7 @@ describe('Signup reducer', () => {
             followingNumber: '',
             articles: [],
             searchData: {},
-            bookmark: {},
+            bookmark: [],
         }
     });
 

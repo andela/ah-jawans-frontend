@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { mount, shallow } from '../../../../config/enzymeConfig';
 import { MemoryRouter } from 'react-router-dom';
-import {ReadArticle as ReadArticleComponent} from '../../../components/article/readArticle';
+import { ReadArticle as ReadArticleComponent } from '../../../components/article/readArticle';
 import configureStore from '../../../redux/store/index';
 import '../../../components/Header/Header';
 import { ReadArticle } from '../../../components/article/readArticle';
@@ -31,16 +31,16 @@ const props = {
     title: 'This is title of the article',
     body: 'This is the body of the article',
     author: { username: 'shaluc' },
-    tagList: []
+    tagList: ['article', 'mirror']
   },
   bookmark: { message: {} },
   match: { params: 3 },
   handleClick: jest.fn(),
-  comments: { allComments: [] ,errors: {}},
-  errors: { comments: {errors: ''}},
+  comments: { allComments: [], errors: {} },
+  errors: { comments: { errors: '' } },
   userCredentials: { userCredentials: {} },
 }
- 
+
 const state = {
   id: 1,
   username: 'Joe',
@@ -57,7 +57,7 @@ const state = {
   dislikes: 0,
   comments: { allComments: [] },
   clearLikesOrDislikes: jest.fn(),
-  articles: {tagList: []}
+  articles: { tagList: [] }
 }
 
 let wrapper;
@@ -82,7 +82,7 @@ describe('<ReadArticle/>', () => {
     expect(wrapper.state()).toBeDefined();
     expect(wrapper.find('ReadArticle')).toBeDefined();
   });
-  
+
   it('Should contain <Form/> element inside <CommentComponent/>', () => {
     const newprops = {
       articles: {
@@ -169,7 +169,7 @@ describe('<ReadArticle/>', () => {
     localStorage.setItem('id', '111');
     localStorage.setItem('username', 'efhwruj');
     const newprops = {
-      match: { params: {id: 1} },
+      match: { params: { id: 1 } },
       articles: {
         title: '',
         body: '',
@@ -216,7 +216,7 @@ describe('<ReadArticle/>', () => {
 
   });
 });
-  
+
 
 describe('<ReadArticle/> on', () => {
   it('Should render', () => {
@@ -248,7 +248,7 @@ describe('<ReadArticle/> on', () => {
     component.instance().handleClick(49);
   });
   it('should bookmark article ', () => {
-    component.setProps({ errors: 'eerrorr', bookmark: 'heypassed', body: 'hey body', articles: {tagList: []} });
+    component.setProps({ errors: 'eerrorr', bookmark: 'heypassed', body: 'hey body', articles: { tagList: [] } });
     component.setState({ username: 'shalu', title: 'hey dear', body: 'hey body' });
     localStorage.setItem('id', '9');
     localStorage.setItem('articleId', '19');

@@ -10,4 +10,16 @@ describe('User reducers', () => {
             payload: { user }
         });
     });
+    test('Bookmark TESTS', () => {
+        const reducer = BookmarkReducer(initialState, {
+            type: userActionsTypes.GET_BOOKMARK_SUCCESS,
+            payload: { user }
+        });
+    });
+    test('Bookmark TESTS', () => {
+        const reducer = BookmarkReducer(initialState, {
+            type: userActionsTypes.DELETE_BOOKMARK_SUCCESS,
+            payload: { user }
+        });
+    });
 });
