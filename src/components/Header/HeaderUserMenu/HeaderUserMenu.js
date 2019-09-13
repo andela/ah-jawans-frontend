@@ -10,6 +10,7 @@ import {
   faCog,
   faUsers,
   faPencilAlt,
+  faBookmark,
 } from '@fortawesome/free-solid-svg-icons';
 import './HeaderUserMenu.scss';
 
@@ -86,7 +87,7 @@ class HeaderUserMenu extends Component {
             </li>
           )}
 
-                    {isAuth && (
+          {isAuth && (
             <li>
               <Link to="/createArticle">
                 <label htmlFor="profile">
@@ -95,7 +96,18 @@ class HeaderUserMenu extends Component {
                 <p id="profile" className="menu-links">Create Article</p>
               </Link>
             </li>
-                    )}
+          )}
+
+          {isAuth && (
+            <li>
+              <Link to="/BookmarkedArticles">
+                <label htmlFor="profile">
+                  <FontAwesomeIcon icon={faBookmark} size="lg" />
+                </label>
+                <p id="profile" className="menu-links">Bookmarks</p>
+              </Link>
+            </li>
+          )}
 
           {isAuth && (
             <li>

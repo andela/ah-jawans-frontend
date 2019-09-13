@@ -70,5 +70,5 @@ module.exports = {
     data: {},
     count: 0,
   },
-  bookmark: {},
+  bookmark: [],
 };

@@ -22,8 +22,10 @@ const SingleArticle = ({
         <small className='read-time'>{readTime}</small>
         {page === 'Author' && <small className='edit-icon'><small className='edit-icon'><Link to={`/updateArticle/${id}`}><img src={edit} /></Link></small>
           <small className='remove-icon' onClick={onClick}><Link to='/profile'><img src={remove} /></Link></small></small>}
-      </div>
-    </div>
+        {page === 'Bookmark' && <small className='edit-icon'>
+          <small className='remove-icon' onClick={onClick}><Link to='/BookmarkedArticles'><img src={remove} /></Link></small></small>}
+      </div >
+    </div >
 );
 
 SingleArticle.propTypes = {

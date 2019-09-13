@@ -18,6 +18,7 @@ import ReadArticle from '../components/article/readArticle';
 import CreateArticle from '../components/article/ArticleComponent';
 import UpdateArticle from '../components/article/updateArticle';
 import SearchPage from './searchPage';
+import BookmarkedArticles from '../components/Header/Bookmarks/bookmarkedArticles';
 
 const App = () => (
   <BrowserRouter>
@@ -29,13 +30,14 @@ const App = () => (
       <Route exact path="/profileOne" component={Profile} />
       <Route exact path="/passwordReset" component={PasswordReset} />
       <Route exact path="/updatePassword" component={UpdatePassword} />
-      <Route exact path="/following" component={FollowingView}/>
-      <Route exact path="/follower" component={followerView}/>
-      <Route exact path="/users" component={AllUserView}/>
+      <Route exact path="/following" component={FollowingView} />
+      <Route exact path="/follower" component={followerView} />
+      <Route exact path="/users" component={AllUserView} />
       <Route path="/updateArticle/:articleId" component={UpdateArticle} />
       <Route path="/readArticle/:id" component={ReadArticle} />
       <Route path="/createArticle" component={CreateArticle} />
-      <Route path="/search" component={SearchPage}/>
+      <Route path="/search" component={SearchPage} />
+      <Route path="/BookmarkedArticles" component={BookmarkedArticles} />
       <Route component={PageNotFound} />
     </Switch>
   </BrowserRouter>

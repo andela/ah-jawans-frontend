@@ -5,5 +5,14 @@ const postbookmarkAction = (payload) => ({
   payload,
 });
 
+const getbookmarkAction = (payload) => ({
+  type: userActionsTypes.GET_BOOKMARK_SUCCESS,
+  payload,
+});
 
-export default postbookmarkAction;
+const deletebookmarkAction = (payload) => ({
+  type: userActionsTypes.DELETE_BOOKMARK_SUCCESS,
+  payload,
+});
+
+export { postbookmarkAction, getbookmarkAction, deletebookmarkAction };

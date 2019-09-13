@@ -26,7 +26,7 @@ const getDataThunk = (method,
   .catch((error) => {
     dispatch(actionCreator({
       errors: error.response.data.error
-      || error.response.data.errors[0] || 'No data found!',
+          || error.response.data.errors[0] || 'No data found!',
     }));
   });
 
@@ -46,7 +46,7 @@ const getDataThunkPrivate = (method, endpoint, actionCreator) => (dispatch) => {
   return axiosInstance[method](endpoint).then((response) => {
     dispatch(actionCreator(response.data));
   }).catch((error) => {
-    dispatch(actionCreator({ errors: error.response.data.error || error.response.data.errors[0] }));
+    dispatch(actionCreator({ errors: error.response.data.error || error.response.data.errors[0] || 'No data found!' }));
   });
 };
 
