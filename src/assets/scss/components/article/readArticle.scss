@@ -20,6 +20,7 @@
     font-family: 'Poppins', sans-serif;
     color: black;
     text-align: justify;
+    margin-top: 50px
 }
 
 .title{
@@ -36,8 +37,51 @@
     color: black;
 }
 .author-name {
-    padding-left: 770px;
+    padding-left: 700px;
     color: #005EA3;
+}
+
+.display-tags {
+    position: relative;
+    left:27%;
+    border: solid 1px #ccc;
+    padding: 3px 10px;
+    display: inline-block;
+    margin-right:10px
+}
+
+.display-tags text{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 27px;
+    color: #8A8888;
+    align-items: center;
+    text-align: center;
+    margin-left:10px
+}
+.author-image-on-read-article{
+   position: relative;
+   left: 80px
+}
+.author-image-on-read-article img{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 140px
+ }
+
+ .author-image-on-read-article text{
+    position: absolute;
+    padding-left: 60px;
+    margin-top: 10px;
+    left: 140px
+ }
+
+ .vote {
+    margin-left: 390px;
+    margin-top: 30px;
 }
 
 @media (max-width: 425px) {
@@ -54,6 +98,7 @@
     margin: 0 auto;
     border: 1px solid #cacdcf;
     padding: 20px;
+    margin-top: 50px;
 }
 .comment-section textarea{
  resize: none;

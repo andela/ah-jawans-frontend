@@ -6,6 +6,7 @@ import {ReadArticle as ReadArticleComponent} from '../../../components/article/r
 import configureStore from '../../../redux/store/index';
 import '../../../components/Header/Header';
 import { ReadArticle } from '../../../components/article/readArticle';
+import Tags from '../../../components/article/displayTags';
 
 const store = configureStore();
 global.window = Object.create(window);
@@ -29,14 +30,15 @@ const props = {
     username: 'Joe',
     title: 'This is title of the article',
     body: 'This is the body of the article',
-    author: { username: 'shaluc' }
+    author: { username: 'shaluc' },
+    tagList: []
   },
   bookmark: { message: {} },
   match: { params: 3 },
   handleClick: jest.fn(),
   comments: { allComments: [] ,errors: {}},
   errors: { comments: {errors: ''}},
-  userCredentials: { userCredentials: {} }
+  userCredentials: { userCredentials: {} },
 }
  
 const state = {
@@ -55,6 +57,7 @@ const state = {
   dislikes: 0,
   comments: { allComments: [] },
   clearLikesOrDislikes: jest.fn(),
+  articles: {tagList: []}
 }
 
 let wrapper;
@@ -245,7 +248,7 @@ describe('<ReadArticle/> on', () => {
     component.instance().handleClick(49);
   });
   it('should bookmark article ', () => {
-    component.setProps({ errors: 'eerrorr', bookmark: 'heypassed', body: 'hey body' });
+    component.setProps({ errors: 'eerrorr', bookmark: 'heypassed', body: 'hey body', articles: {tagList: []} });
     component.setState({ username: 'shalu', title: 'hey dear', body: 'hey body' });
     localStorage.setItem('id', '9');
     localStorage.setItem('articleId', '19');
@@ -254,5 +257,13 @@ describe('<ReadArticle/> on', () => {
       .at(0)
       .simulate('click');
     component.instance().handleClick({ errors: 'eerrorr', bookmark: 'heypassed', body: 'hey body' });
+  });
+
+  it('Should render Tags', () => {
+    const wrapper = mount(
+      <ReadArticleComponent {...props} />
+    );
+    wrapper.setProps(props);
+    expect(wrapper.contains(<div className='display-tags'></div>));
   });
 });

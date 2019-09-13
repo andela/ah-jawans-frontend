@@ -24,9 +24,9 @@ import getArticlesAction from '../../redux/actions/getArticlesAction';
 import postbookmarkAction from '../../redux/actions/user/BookmarkAction';
 import '../../assets/scss/components/article/readArticle.scss';
 import '../../assets/scss/components/article/sharingArticle.scss';
-import facebookIcon from '../../assets/images/facebookIcon.png';
-import gmail from '../../assets/images/gmail.png';
-import twitter from '../../assets/images/twitter.png';
+import facebookIcon from '../../assets/images/facebook-logo.png';
+import gmail from '../../assets/images/share-on-email.jpg';
+import twitter from '../../assets/images/twitter-logo.png';
 import LikeDislike from './likeDislikeArticle';
 import Bookmark from '../../assets/images/Bookmark.png';
 import { CommentComponent } from '../comments/CommentComponent';
@@ -34,12 +34,14 @@ import remove from '../../assets/icons/delete.png';
 import edit from '../../assets/icons/edit.png';
 import profileImagePlaceHolder from '../../assets/images/profile_plaholder.png';
 import LoadingGif from '../../assets/images/loadingGif.gif';
+import Tags from './displayTags';
 
 export class ReadArticle extends Component {
   state = {
     username: '',
     title: '',
     body: '',
+    image: null,
     likes: 0,
     dislikes: 0,
     bookmark: '',
@@ -71,12 +73,12 @@ export class ReadArticle extends Component {
     await this.props.getDataThunk('get', `articles/${id}`, getArticlesAction);
     const { title, body } = this.props.articles;
     localStorage.setItem('articleId', this.props.articles.id);
-    const { username } = this.props.articles.author;
+    const { username, image } = this.props.articles.author;
     this.setState({
-      ...this.state,
       username,
       title,
       body,
+      image,
     });
     await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
     await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
@@ -169,7 +171,9 @@ componentWillUnmount = () => {
 
 render() {
   const { likes, dislikes } = this.props;
-  const { title, body, username } = this.state;
+  const {
+    title, body, username, image,
+  } = this.state;
   const { id } = this.props.match.params;
   const url = `https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
   const tweet = `'${this.state.title}' -by ${this.state.username} @ https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
@@ -181,13 +185,19 @@ render() {
           <div className='container read-article-container'>
             <h2 className='article-text title'>{title}</h2>
             <br />
-            <p className='article-text'>{ReactHtmlParser(body)}{ body && <div className='vote'><LikeDislike
-              handleLike={this.handleLike}
-              handleDislike={this.handleDislike}
-              likes={likes}
-              dislikes={dislikes}/></div>}</p>
+            { username && <div className='author-image-on-read-article author-name'>
+            <ReactImageFallback
+              src={image && (image.split(':')[0] === 'https') ? image : `https://res.cloudinary.com/djxhcwowp/image/upload/v${image}`}
+              fallbackImage={profileImagePlaceHolder}
+              initialImage={LoadingGif}
+              alt="profile image"
+              className="authorUsername"
+            />
+              <text>{username}</text>
+              </div>}
+              <br/>
+            <p className='article-text'>{ReactHtmlParser(body)}</p>
             <br />
-            <p className='author-name'>{username && `By ${username}`}</p>
           </div>
           {body && <div className='sharing-icons'>
             <a href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}>
@@ -206,6 +216,16 @@ render() {
               <img className="" src={Bookmark} alt="Bookmark" />
             </a>
           </div>}
+          {this.props.articles.tagList && this.props.articles.tagList.map(
+            (tag, index) => <Tags key={index} tagText={tag}/>,
+          )}
+
+          { body && <div className='vote'><LikeDislike
+              handleLike={this.handleLike}
+              handleDislike={this.handleDislike}
+              likes={likes}
+              dislikes={dislikes}/></div>}
+
         <div id="comment-section" className="comment-section">
           {(localStorage.username)
             && <CommentComponent
