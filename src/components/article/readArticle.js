@@ -1,4 +1,3 @@
-/* eslint-disable no-irregular-whitespace */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
@@ -36,6 +35,8 @@ import edit from '../../assets/icons/edit.png';
 import profileImagePlaceHolder from '../../assets/images/profile_plaholder.png';
 import LoadingGif from '../../assets/images/loadingGif.gif';
 import Tags from './displayTags';
+import ReportArticle from './reportArticle';
+import reportAction from '../../redux/actions/reportAction';
 
 export class ReadArticle extends Component {
   state = {
@@ -45,13 +46,17 @@ export class ReadArticle extends Component {
     image: null,
     likes: 0,
     dislikes: 0,
-    readers: 0,
     bookmark: '',
     errors: '',
     modal: 'none',
     comment: {
       body: '',
     },
+    report: {
+      reportType: '',
+      comment: '',
+    },
+    readers: 0,
   }
 
   handleClick = async () => {
@@ -170,6 +175,41 @@ componentWillUnmount = () => {
   this.props.clearLikesOrDislikes();
 }
 
+handleReport = () => {
+  const modal = document.getElementById('myModal2');
+  modal.classList.remove('modal');
+  modal.classList.add('modalsd');
+}
+
+handleConsel = () => {
+  const modal = document.getElementById('myModal2');
+  modal.classList.remove('modalsd');
+  modal.classList.add('modal');
+}
+
+handleReportData = (e) => {
+  const report = { ...this.state.report };
+  report[e.target.name] = e.target.value;
+  this.setState({
+    ...this.state,
+    report,
+  });
+}
+
+handleReportAction = async (e) => {
+  e.preventDefault();
+  !localStorage.id && toast.error('Login first in order to report this article!');
+  const modal = document.getElementById('myModal2');
+  const { id } = this.props.match.params;
+  await this.props.postDataThunkPrivate('post', `/reports/${id}`, reportAction, this.state.report);
+  this.props.reportMessage.message
+    ? (toast.success(this.props.reportMessage.message),
+    modal.classList.remove('modalsd'),
+    modal.classList.add('modal'))
+    : (toast.error('Comment and report type are required in order to report an article.'));
+}
+
+
 render() {
   const { likes, dislikes } = this.props;
   const {
@@ -221,12 +261,30 @@ render() {
             (tag, index) => <Tags key={index} tagText={tag}/>,
           )}
 
-          { body && <div className='vote'><LikeDislike
-              handleLike={this.handleLike}
-              handleDislike={this.handleDislike}
-              likes={likes}
-          dislikes={dislikes} /><span className="views">{`Views: ${readers}`}</span></div>}
-
+          { body
+            && <div className='vote bottom-article'>
+              {/* <div>
+              </div> */}
+              <div className='bottom-article__likes'>
+                <LikeDislike
+                  handleLike={this.handleLike}
+                  handleDislike={this.handleDislike}
+                  likes={likes}
+                  dislikes={dislikes}
+              />
+              <span className="views">{`Views: ${readers}`}</span>
+              </div>
+              <div
+              id="reporting-button"
+              className="bottom-article__report"
+              onClick={this.handleReport}>Report article</div>
+              <ReportArticle
+                consel={this.handleConsel}
+                onChange={this.handleReportData}
+                handleReport={this.handleReportAction}
+              />
+              </div>
+            }
         <div id="comment-section" className="comment-section">
           {(localStorage.username)
             && <CommentComponent
@@ -317,8 +375,8 @@ ReadArticle.propTypes = {
   errors: PropTypes.object,
   id: PropTypes.string,
   comment: PropTypes.object,
+  reportMessage: PropTypes.object,
 };
-
 const mapStateToProps = (state) => ({
   articles: state.articles.articles,
   likes: state.likeDislikeReducer.likes.count,
@@ -328,12 +386,11 @@ const mapStateToProps = (state) => ({
   comments: state.comments.comments,
   errors: state.comments.errors,
   userProfile: state.getUser,
+  reportMessage: state.reportData.reportData,
 });
-
 const actionCreator = {
   getDataThunk,
   postDataThunkPrivate,
   clearLikesOrDislikes,
 };
-
 export default connect(mapStateToProps, actionCreator)(ReadArticle);

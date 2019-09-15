@@ -71,4 +71,5 @@ module.exports = {
     count: 0,
   },
   bookmark: [],
+  reportData: {},
 };

@@ -15,3 +15,4 @@ export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const GET_ARTICLES = 'GET_ARTICLES';
 
 export const SEARCH_ARTICLES = 'SEARCH_ARTICLES';
+export const REPORT_ARTICLES = 'REPORT_ARTICLES';
