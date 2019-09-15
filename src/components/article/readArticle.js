@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
@@ -44,6 +45,7 @@ export class ReadArticle extends Component {
     image: null,
     likes: 0,
     dislikes: 0,
+    readers: 0,
     bookmark: '',
     errors: '',
     modal: 'none',
@@ -51,7 +53,6 @@ export class ReadArticle extends Component {
       body: '',
     },
   }
-
 
   handleClick = async () => {
     let articleId;
@@ -71,7 +72,7 @@ export class ReadArticle extends Component {
   componentDidMount = async () => {
     const { id } = this.props.match.params;
     await this.props.getDataThunk('get', `articles/${id}`, getArticlesAction);
-    const { title, body } = this.props.articles;
+    const { title, body, readers } = this.props.articles;
     localStorage.setItem('articleId', this.props.articles.id);
     const { username, image } = this.props.articles.author;
     this.setState({
@@ -79,6 +80,7 @@ export class ReadArticle extends Component {
       title,
       body,
       image,
+      readers,
     });
     await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
     await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
@@ -168,11 +170,10 @@ componentWillUnmount = () => {
   this.props.clearLikesOrDislikes();
 }
 
-
 render() {
   const { likes, dislikes } = this.props;
   const {
-    title, body, username, image,
+    title, body, readers, username, image,
   } = this.state;
   const { id } = this.props.match.params;
   const url = `https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
@@ -224,7 +225,7 @@ render() {
               handleLike={this.handleLike}
               handleDislike={this.handleDislike}
               likes={likes}
-              dislikes={dislikes}/></div>}
+          dislikes={dislikes} /><span className="views">{`Views: ${readers}`}</span></div>}
 
         <div id="comment-section" className="comment-section">
           {(localStorage.username)
@@ -334,6 +335,5 @@ const actionCreator = {
   postDataThunkPrivate,
   clearLikesOrDislikes,
 };
-
 
 export default connect(mapStateToProps, actionCreator)(ReadArticle);
