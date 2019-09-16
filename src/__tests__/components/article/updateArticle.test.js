@@ -1,11 +1,15 @@
 import React from 'react';
 import { shallow, mount } from '../../../../config/enzymeConfig';
-import { UpdateArticle } from '../../../components/article/updateArticle';
+import { UpdateArticle, mapStateToProps } from '../../../components/article/updateArticle';
 
 jest.mock('../../../components/Layout/Layout', () => () => (
   <div id="mockFileLayout">mockFileLayout</div>
 ))
 localStorage.setItem('token', 'ssssssss');
+const state = {
+  articles: {},
+  articles: { articles: { errors: {} }}
+}
 const props = {
   articles: { articles: {} },
   postDataThunkPrivate: jest.fn(),
@@ -25,6 +29,7 @@ describe('<CreateArticle />', () => {
     })
     it('Should give initial state', () => {
       expect(wrapper.state()).toBeDefined();
+      mapStateToProps(state);
       expect(wrapper.find('UpdateArticle')).toBeDefined();
     });
    it('should render a container-fluid class', () => {
@@ -45,6 +50,7 @@ it('should type in tags ', () => {
   it('should change state onChange', () => {
   const title = wrapper.find('.editor-wrapper').find('#title');
   title.simulate('change', { target: { value: 'patrick' } });
+  wrapper.instance().handleCKEditorChange(null, { getData: jest.fn() });
   wrapper.find('#tags').simulate('change', { target: { value: 'andela' } });
   });
 

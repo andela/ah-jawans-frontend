@@ -1,0 +1,2 @@
+export const HIGHLIGHT_TEXT = 'HIGHLIGHT_TEXT';
+export const GET_HIGHLIGHT = 'GET_HIGHLIGHT';

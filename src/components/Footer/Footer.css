@@ -1,0 +1,191 @@
+/* background anim colors */
+/* colors */
+.black {
+  background: #101010;
+}
+
+.text-black {
+  color: #101010;
+}
+
+.yellow {
+  background: #12699b;
+  color: #ffffff;
+}
+
+.twitter-color {
+  background: #50abf1;
+}
+
+.text-yellow {
+  color: #f9d342;
+}
+
+.light {
+  background: #f4f4f4;
+}
+
+.text-light {
+  color: #f4f4f4;
+}
+
+.grey {
+  background: #42413e;
+}
+
+.light-grey {
+  background: #e6e6e6;
+}
+
+.text-grey {
+  color: #42413e;
+}
+
+.white {
+  background: #ffffff;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.primary {
+  background: #282667;
+}
+
+.text-primary {
+  color: #282667;
+}
+
+.secondary {
+  background: #1843b8;
+}
+
+.text-secondary {
+  color: #1843b8;
+}
+
+.danger {
+  background: #d64c4c;
+}
+
+.text-danger {
+  color: #d64c4c;
+}
+
+.success {
+  background: #1c8a4a;
+}
+
+.text-success {
+  color: #1c8a4a;
+}
+
+.info {
+  background: #1cbdee;
+}
+
+.text-info {
+  color: #1cbdee;
+}
+
+.xxlarge-text {
+  font-size: 40px;
+}
+
+.xlarge-text {
+  font-size: 32px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.medium-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+/* Padding Formatting */
+.xxlarge-padding {
+  padding: 60px;
+}
+
+.xlarge-padding {
+  padding: 30px;
+}
+
+.large-padding {
+  padding: 15px;
+}
+
+.medium-padding {
+  padding: 10px;
+}
+
+.small-padding {
+  padding: 5px;
+}
+
+.xxlarge-h-padding {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.xlarge-h-padding {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.large-h-padding {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.medium-h-padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.small-h-padding {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.xxlarge-v-padding {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.xlarge-v-padding {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.large-v-padding {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.medium-v-padding {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.small-v-padding {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.Footer .divider + div {
+  margin-top: 30px;
+  border-top: solid 4px #12699b;
+}
+
+.Footer .small-screen-4 large-v-padding center-align + div {
+  background: #12699b;
+}
+/*# sourceMappingURL=Footer.css.map */

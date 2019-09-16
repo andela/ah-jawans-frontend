@@ -46,6 +46,8 @@ import ReportArticle from './reportArticle';
 import reportAction from '../../redux/actions/reportAction';
 import CommentHistoryModel from '../comments/commentHistory';
 import Spinner from '../../assets/icons/spinner.gif';
+import highlightingTextAction from '../../redux/actions/highlightingAction';
+import { HighlightArticle } from './HighlightArticle/HighlightArticle';
 
 export class ReadArticle extends Component {
   state = {
@@ -68,6 +70,7 @@ export class ReadArticle extends Component {
       comment: '',
     },
     readers: 0,
+    message: '',
   }
 
   handleClick = async () => {
@@ -91,6 +94,7 @@ export class ReadArticle extends Component {
     const { title, body, readers } = this.props.articles;
     localStorage.setItem('articleId', this.props.articles.id);
     const { username, image } = this.props.articles.author;
+    console.log('>>>>>>>>>>>>> ');
     this.setState({
       username,
       title,
@@ -107,6 +111,16 @@ export class ReadArticle extends Component {
     this.setState({
       username: this.props.articles.author.username,
     });
+
+    let count = 1200;
+    const interval = setInterval(() => {
+      count -= 1;
+      const highlights = document.querySelectorAll('.highligthComment') || [];
+      if (Array.from(highlights) || count <= 0) {
+        clearInterval(interval);
+      }
+      this.showHighlights();
+    }, 100);
   }
 
   componentWillUnmount = () => {
@@ -221,17 +235,21 @@ renderModel = () => {
     await this.props.postDataThunkPrivate('get', `articles/${id}/comments`, getAllCommentsAction, null);
   }
 
+  componentWillUnmount = () => {
+    this.props.clearLikesOrDislikes();
+  };
+
   handleReport = () => {
     const modal = document.getElementById('myModal2');
     modal.classList.remove('modal');
     modal.classList.add('modalsd');
-  }
+  };
 
   handleConsel = () => {
     const modal = document.getElementById('myModal2');
     modal.classList.remove('modalsd');
     modal.classList.add('modal');
-  }
+  };
 
   handleReportData = (e) => {
     const report = { ...this.state.report };
@@ -240,7 +258,7 @@ renderModel = () => {
       ...this.state,
       report,
     });
-  }
+  };
 
   handleReportAction = async (e) => {
     e.preventDefault();
@@ -253,7 +271,63 @@ renderModel = () => {
       modal.classList.remove('modalsd'),
       modal.classList.add('modal'))
       : (toast.error('Comment and report type are required in order to report an article.'));
-  }
+  };
+
+  postHighlight = async (data, articleId) => {
+    await this.props.postDataThunkPrivate('post', `articles/${articleId}/highlights`, highlightingTextAction, data);
+    toast.success('Text succesfully highlighted.');
+    setTimeout(() => window.location.reload(), 2000);
+  };
+
+  showHighlights = () => {
+    const { highlights } = this.props;
+    const elements = document.querySelectorAll('.read-article-container *') || [];
+    let articleLength = document.querySelector('.read-article-container')
+                      && document.querySelector('.read-article-container').innerText
+                      && document.querySelector('.read-article-container').innerText.length;
+
+    (elements || []).forEach((element) => {
+      articleLength -= 1;
+      const elementClass = element.getAttribute('class');
+      if (elementClass && elementClass.includes('highligthComment')) {
+        return element;
+      }
+      return element.setAttribute('id', `element-${articleLength}`);
+    });
+
+    const elementIds = (highlights || []).map((highlight) => highlight.elementId);
+    const filteredElements = (Array.from(elements)).filter((element) => elementIds.includes(element.getAttribute('id')));
+
+    (highlights || []).forEach(({
+      text, comment, elementId,
+    }) => {
+      const element = filteredElements.filter((val) => val.getAttribute('id') === elementId)[0];
+      if (element && elementIds.includes(elementId)) {
+        const highlightedText = `<span
+          class="highligthComment"
+          style="background: yellow; cursor: pointer; display: inline-block"
+          data-toggle="modal"
+          data-target="#highlightDetailsModal"
+          comment="${comment}">${text}</span>`;
+
+        const updatedHtml = element.innerHTML.replace(text, highlightedText);
+        element.innerHTML = updatedHtml;
+      }
+    });
+
+    const highligthComments = document.querySelectorAll('.highligthComment');
+
+    (highligthComments || []).forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const comment = e.target.getAttribute('comment');
+        document.querySelector('#highlightDetailsModalBody').innerHTML = comment;
+        // eslint-disable-next-line no-undef
+        $('#highlightDetailsModal').modal('show');
+      });
+    });
+    return highlights;
+  };
 
   render() {
     const {
@@ -261,6 +335,7 @@ renderModel = () => {
     } = this.props;
     const {
       title, body, readers, username, image,
+
     } = this.state;
     const { id } = this.props.match.params;
     const url = `https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
@@ -272,6 +347,7 @@ renderModel = () => {
         this.props.articles.body
           ? <div className='read-article-body'>
           <ToastContainer position={toast.POSITION.TOP_RIGHT} />
+          <HighlightArticle articleId={id} postHighlight={this.postHighlight} />
           <div className='container read-article-container'>
             <h2 className='article-text title'>{title}</h2>
             <br />
@@ -419,8 +495,8 @@ renderModel = () => {
               </div>
                 </div>
               ))}
+            </div>
           </div>
-        </div>
           : <div>
             <img src={Spinner} className="spinnerImage"/>
           </div>
@@ -429,6 +505,7 @@ renderModel = () => {
     );
   }
 }
+
 
 ReadArticle.propTypes = {
   getDataThunk: PropTypes.func,
@@ -452,8 +529,11 @@ ReadArticle.propTypes = {
   comment: PropTypes.object,
   reportMessage: PropTypes.object,
   commentHistory: PropTypes.object,
+  highlights: PropTypes.array,
 };
-const mapStateToProps = (state) => ({
+
+
+export const mapStateToProps = (state) => ({
   articles: state.articles.articles,
   likes: state.likeDislikeArticleReducer.likes.count,
   dislikes: state.likeDislikeArticleReducer.dislikes.count,
@@ -464,6 +544,7 @@ const mapStateToProps = (state) => ({
   userProfile: state.getUser,
   reportMessage: state.reportData.reportData,
   commentHistory: state.commentHistory.commentHistory.data,
+  highlights: state.articles.articles.highlight,
 });
 const actionCreator = {
   getDataThunk,

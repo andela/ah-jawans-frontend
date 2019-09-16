@@ -1,0 +1,312 @@
+.xxlarge-text {
+  font-size: 40px;
+}
+
+.xlarge-text {
+  font-size: 32px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.medium-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+/* background anim colors */
+/* colors */
+.black {
+  background: #101010;
+}
+
+.text-black, .HeaderUserMenu {
+  color: #101010;
+}
+
+.yellow {
+  background: #12699b;
+  color: #ffffff;
+}
+
+.twitter-color {
+  background: #50abf1;
+}
+
+.text-yellow {
+  color: #f9d342;
+}
+
+.light {
+  background: #f4f4f4;
+}
+
+.text-light {
+  color: #f4f4f4;
+}
+
+.grey {
+  background: #42413e;
+}
+
+.light-grey {
+  background: #e6e6e6;
+}
+
+.text-grey {
+  color: #42413e;
+}
+
+.white, .HeaderUserMenu {
+  background: #ffffff;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.primary {
+  background: #282667;
+}
+
+.text-primary {
+  color: #282667;
+}
+
+.secondary {
+  background: #1843b8;
+}
+
+.text-secondary {
+  color: #1843b8;
+}
+
+.danger {
+  background: #d64c4c;
+}
+
+.text-danger {
+  color: #d64c4c;
+}
+
+.success {
+  background: #1c8a4a;
+}
+
+.text-success {
+  color: #1c8a4a;
+}
+
+.info {
+  background: #1cbdee;
+}
+
+.text-info {
+  color: #1cbdee;
+}
+
+/* shadow */
+.shadow-1 {
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.shadow-2, .HeaderUserMenu {
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-3 {
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+.shadow-4 {
+  -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+}
+
+.shadow-5 {
+  -webkit-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+          box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+}
+
+.xxlarge-text {
+  font-size: 40px;
+}
+
+.xlarge-text {
+  font-size: 32px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.medium-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+.radius-1, .HeaderUserMenu {
+  border-radius: 5px;
+}
+
+.radius-2 {
+  border-radius: 10px;
+}
+
+.radius-3 {
+  border-radius: 15px;
+}
+
+.radius-4 {
+  border-radius: 20px;
+}
+
+.radius-5 {
+  border-radius: 30px;
+}
+
+.radius-6 {
+  border-radius: 50%;
+}
+
+.xxlarge-text {
+  font-size: 40px;
+}
+
+.xlarge-text {
+  font-size: 32px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.medium-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+/* Padding Formatting */
+.xxlarge-padding {
+  padding: 60px;
+}
+
+.xlarge-padding {
+  padding: 30px;
+}
+
+.large-padding {
+  padding: 15px;
+}
+
+.medium-padding {
+  padding: 10px;
+}
+
+.small-padding {
+  padding: 5px;
+}
+
+.xxlarge-h-padding {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.xlarge-h-padding {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.large-h-padding {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.medium-h-padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.small-h-padding {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.xxlarge-v-padding {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.xlarge-v-padding {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.large-v-padding {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.medium-v-padding {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.small-v-padding {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.HeaderUserMenu {
+  position: fixed;
+  right: 15px;
+  top: 75px;
+  width: 200px;
+  padding-top: 0px !important;
+}
+
+.HeaderUserMenu .username {
+  text-align: center;
+  border-bottom: solid 1px #e6e6e6;
+  font-weight: bold;
+  padding: 5px;
+  margin-top: -5px;
+  margin-bottom: 0px;
+  background: #12699b;
+}
+
+.HeaderUserMenu ul {
+  list-style-type: none;
+  padding-left: 0;
+  display: inline;
+}
+
+.HeaderUserMenu ul li a {
+  margin: 0 !important;
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.HeaderUserMenu ul li a:hover {
+  background-color: #e6e6e6;
+}
+
+.menu-links {
+  padding-left: 30px;
+}
+/*# sourceMappingURL=HeaderUserMenu.css.map */

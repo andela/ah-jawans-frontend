@@ -28,6 +28,8 @@ export class CreateArticle extends Component {
         toast.success('Article created successfully '));
   }
 
+  handleCKEditorChange = (event, editor) => this.setState({ body: editor.getData() });
+
   render() {
     const { title, tags } = this.state;
     return (
@@ -47,15 +49,12 @@ export class CreateArticle extends Component {
             />
             <div className="spacer" />
             <div className="body-content">
-          <CKEditor
+            <CKEditor
               editor={ClassicEditor}
               data={this.state.body}
               config={editorConfigs}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                this.setState({ body: data });
-              }}
-                  id="bodyck"
+              onChange={this.handleCKEditorChange}
+              id="bodyck"
             />
             </div>
             <div className="row">
@@ -99,7 +98,7 @@ const actionCreator = {
   postDataThunkPrivate,
 };
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   article: state.article,
   errors: state.article.article.errors,
 });

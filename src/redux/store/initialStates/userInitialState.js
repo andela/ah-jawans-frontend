@@ -72,4 +72,9 @@ module.exports = {
   },
   bookmark: [],
   reportData: {},
+  highlighting: {
+    loading: false,
+    errors: {},
+    highlights: [],
+  },
 };

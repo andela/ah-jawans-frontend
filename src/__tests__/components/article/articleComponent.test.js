@@ -1,7 +1,7 @@
 import React from 'react';
 import '@ckeditor/ckeditor5-react';
 import { shallow, mount } from '../../../../config/enzymeConfig';
-import { CreateArticle } from '../../../components/article/ArticleComponent';
+import { CreateArticle, mapStateToProps } from '../../../components/article/ArticleComponent';
 
 jest.mock('../../../components/Header/Header', () => () => (
   <div id="mockFileLayout">mockFileLayout</div>
@@ -10,6 +10,10 @@ jest.mock('@ckeditor/ckeditor5-react', () => () => {
   <div id="ckeditor">ckeditor</div>
 });
 
+const state = {
+  article: {},
+  article: { article: { errors: {} }}
+}
 global.MutationObserver = class {
   constructor() {}
 
@@ -32,6 +36,7 @@ describe('<CreateArticle />', () => {
     })
     it('Should give initial state', () => {
       expect(wrapper.state()).toBeDefined();
+      mapStateToProps(state);
       expect(wrapper.find('CreateArticle')).toBeDefined();
     });
     
@@ -59,6 +64,7 @@ it('should change state onChange', () => {
   const title = wrapper.find('.editor-wrapper').find('#title');
   title.simulate('change', { target: { value: 'patrick' } });
   wrapper.find('#tags').simulate('change', { target: { value: 'andela' } });
+  wrapper.instance().handleCKEditorChange(null, { getData: jest.fn() });
   const ckEditor = wrapper.find('#bodyck')
 });
     describe('submit button test...', () => {

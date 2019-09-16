@@ -2,12 +2,13 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { mount, shallow } from '../../../../config/enzymeConfig';
 import { MemoryRouter } from 'react-router-dom';
-import { ReadArticle as ReadArticleComponent } from '../../../components/article/readArticle';
 import configureStore from '../../../redux/store/index';
 import '../../../components/Header/Header';
 import { ReadArticle } from '../../../components/article/readArticle';
-import Tags from '../../../components/article/displayTags';
-import CommentHistoryModel from '../../../components/comments/commentHistory';
+// import Tags from '../../../components/article/displayTags';
+// import CommentHistoryModel from '../../../components/comments/commentHistory';
+import {ReadArticle as ReadArticleComponent, mapStateToProps} from '../../../components/article/readArticle';
+import '../../../__mocks__/window';
 
 const store = configureStore();
 global.window = Object.create(window);
@@ -29,9 +30,14 @@ jest.mock('../../../components/Header/Header', () => () => (
 
 const props = {
   match: { params: { id: 1 } },
+  postDataThunkPrivate: jest.fn(),
+  getDataThunk: jest.fn(),
+  clearLikesOrDislikes: jest.fn(),
+  likes: 0,
+  dislikes: 0,
   articles: {
-    title: '',
-    body: 'jhfqwg jghwef',
+    title: 'wjhfe jhqwe hb',
+    body: 'jhfqwg jghwef reerw',
     articles: { author: '' }
   },
   comments: {
@@ -55,8 +61,6 @@ const props = {
     likes: 0,
     dislikes: 0,
   },
-  getDataThunk: jest.fn(),
-  postDataThunkPrivate: jest.fn(),
   clearLikesOrDislikes: jest.fn(),
   clearLikesOrDislikesComments: jest.fn(),
   commentHistory: {
@@ -75,6 +79,8 @@ const props = {
     open : 'blcok',
     hideModal1: jest.fn(),
     Model1Data: jest.fn(),
+    articles: { tagList: [] },
+    tagText: 'work'
 }
 
 const state = {
@@ -85,8 +91,6 @@ const state = {
   author: { username: 'shaluc' },
   bookmark: { message: {} },
   errors: { errors: {} },
-  postDataThunkPrivate: jest.fn(),
-  getDataThunk: jest.fn(),
   match: { params: 3 },
   handleClick: jest.fn(),
   likes: 0,
@@ -114,10 +118,21 @@ const state = {
   },
   clearLikesOrDislikes: jest.fn(),
   clearLikesOrDislikesComments: jest.fn(),
-  articles: { tagList: [] }
+  articles: { articles: {} },
+  likeDislikeArticleReducer: { likes: { count : 0 }, dislikes: { count : 0 } },
+  bookmark: { message: {} },
+  bookmark: { errors: {} },
+  comments: { comments: {} },
+  comments: { errors: {} },
+  articles: { articles: { highlight : []} },
+  reportData: { reportData: {} },
+  commentHistory: {commentHistory: {} },
+  postDataThunkPrivate: jest.fn(),
+  getDataThunk: jest.fn(),
 }
 
 let wrapper;
+jest.runAllTimers();
 
 describe('<ReadArticle/>', () => {
   beforeAll(() => {
@@ -137,6 +152,7 @@ describe('<ReadArticle/>', () => {
   });
   it('Should give initial state', () => {
     expect(wrapper.state()).toBeDefined();
+    mapStateToProps(state);
     expect(wrapper.find('ReadArticle')).toBeDefined();
   });
 
@@ -159,11 +175,10 @@ describe('<ReadArticle/>', () => {
     }
     const wrapper1 = mount(
       <MemoryRouter>
-        <ReadArticle {...newprops} />
+        <ReadArticle {...props} />
       </MemoryRouter>
     )
   });
-
   it('Should contain <Form/> element inside <CommentComponent/>', () => {
     localStorage.setItem('id', '111');
     localStorage.setItem('username', 'kagabo');
@@ -342,8 +357,25 @@ describe('<ReadArticle/> on', () => {
     const wrapper = mount(
       <ReadArticleComponent {...props} />
     );
+    wrapper.setProps({
+      articles:{body: 'ejkrng ekjnferv'},
+    })
     wrapper.find('#comment-history0').simulate('click', {});
     wrapper.find('#close-modal0').simulate('click', {});
     expect(wrapper.contains(<button className="comment-history" id="comment-history1">Edited</button>));
   });
+  it('should show highlights', () => {
+    const newProps = {
+     ...props,
+     highlights: [{
+        text: 'text',
+        elementId: 'elementId',
+        comment: 'comment'
+      }] 
+    }
+    const component = shallow(<ReadArticle {...newProps} />);
+    component.instance().showHighlights();
+    component.instance().postHighlight({}, 1);
+    component.instance().componentWillUnmount();
+  })
 });

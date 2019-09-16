@@ -1,0 +1,152 @@
+/* background anim colors */
+/* colors */
+.black {
+  background: #101010;
+}
+
+.text-black {
+  color: #101010;
+}
+
+.yellow {
+  background: #12699b;
+  color: #ffffff;
+}
+
+.twitter-color {
+  background: #50abf1;
+}
+
+.text-yellow {
+  color: #f9d342;
+}
+
+.light {
+  background: #f4f4f4;
+}
+
+.text-light {
+  color: #f4f4f4;
+}
+
+.grey {
+  background: #42413e;
+}
+
+.light-grey {
+  background: #e6e6e6;
+}
+
+.text-grey {
+  color: #42413e;
+}
+
+.white {
+  background: #ffffff;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.primary {
+  background: #282667;
+}
+
+.text-primary {
+  color: #282667;
+}
+
+.secondary {
+  background: #1843b8;
+}
+
+.text-secondary {
+  color: #1843b8;
+}
+
+.danger {
+  background: #d64c4c;
+}
+
+.text-danger {
+  color: #d64c4c;
+}
+
+.success {
+  background: #1c8a4a;
+}
+
+.text-success {
+  color: #1c8a4a;
+}
+
+.info {
+  background: #1cbdee;
+}
+
+.text-info {
+  color: #1cbdee;
+}
+
+.xxlarge-text {
+  font-size: 40px;
+}
+
+.xlarge-text {
+  font-size: 32px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.medium-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+.radius-1 {
+  border-radius: 5px;
+}
+
+.radius-2 {
+  border-radius: 10px;
+}
+
+.radius-3 {
+  border-radius: 15px;
+}
+
+.radius-4, .pagination ul li button {
+  border-radius: 20px;
+}
+
+.radius-5 {
+  border-radius: 30px;
+}
+
+.radius-6 {
+  border-radius: 50%;
+}
+
+.pagination {
+  margin: 10px 10px;
+  display: block !important;
+}
+
+.pagination ul li {
+  background: none !important;
+}
+
+.pagination ul li button {
+  padding: 8px 20px;
+  border: none;
+  margin-right: 5px;
+  cursor: pointer;
+  outline: 0px dotted;
+}
+/*# sourceMappingURL=Pagination.css.map */

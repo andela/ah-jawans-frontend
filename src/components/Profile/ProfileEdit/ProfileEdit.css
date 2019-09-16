@@ -1,0 +1,131 @@
+.xxlarge-text {
+  font-size: 40px;
+}
+
+.xlarge-text {
+  font-size: 32px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.medium-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+/* background anim colors */
+/* colors */
+.black {
+  background: #101010;
+}
+
+.text-black {
+  color: #101010;
+}
+
+.yellow {
+  background: #12699b;
+  color: #ffffff;
+}
+
+.twitter-color {
+  background: #50abf1;
+}
+
+.text-yellow {
+  color: #f9d342;
+}
+
+.light {
+  background: #f4f4f4;
+}
+
+.text-light {
+  color: #f4f4f4;
+}
+
+.grey {
+  background: #42413e;
+}
+
+.light-grey {
+  background: #e6e6e6;
+}
+
+.text-grey {
+  color: #42413e;
+}
+
+.white {
+  background: #ffffff;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.primary {
+  background: #282667;
+}
+
+.text-primary {
+  color: #282667;
+}
+
+.secondary {
+  background: #1843b8;
+}
+
+.text-secondary {
+  color: #1843b8;
+}
+
+.danger {
+  background: #d64c4c;
+}
+
+.text-danger {
+  color: #d64c4c;
+}
+
+.success {
+  background: #1c8a4a;
+}
+
+.text-success {
+  color: #1c8a4a;
+}
+
+.info {
+  background: #1cbdee;
+}
+
+.text-info {
+  color: #1cbdee;
+}
+
+.ProfileEdit {
+  display: inline-block;
+}
+
+.ProfileEdit .modal-content {
+  border: 0px;
+  padding-left: 15px !important;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: initial;
+}
+
+@media screen and (max-width: 760px) {
+  .ProfileEdit .modal-content {
+    width: 90%;
+  }
+}
+/*# sourceMappingURL=ProfileEdit.css.map */

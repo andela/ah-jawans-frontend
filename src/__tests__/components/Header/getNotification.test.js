@@ -2,8 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import { mount } from '../../../../config/enzymeConfig';
-import GetNotifications from '../../../components/Header/Notifications/getNotifications';
+import { mount , shallow } from '../../../../config/enzymeConfig';
+import GetNotifications, { GetNotifications as GetNotificationsComponent} from '../../../components/Header/Notifications/getNotifications';
 
 const mockStore = configureMockStore([thunk]);
 const props = {
@@ -50,4 +50,9 @@ describe('Notification test', () => {
 
         wrapper.find('.button').simulate('click', { preventDefault: jest.fn() });
     });
+    it('should call close Modal', () => {
+        const wrapper = shallow(<GetNotificationsComponent {...props1} />)
+        wrapper.instance().closeModal({preventDefault:jest.fn()})
+    });
 });
+

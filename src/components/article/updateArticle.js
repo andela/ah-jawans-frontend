@@ -41,6 +41,8 @@ export class UpdateArticle extends Component {
         toast.success('Article updated successfully '));
   }
 
+  handleCKEditorChange = (event, editor) => this.setState({ body: editor.getData() });
+
   render() {
     const { title, tags } = this.state;
     return (
@@ -63,10 +65,7 @@ export class UpdateArticle extends Component {
               editor={ClassicEditor}
               data={this.state.body}
               config={editorConfigs}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                this.setState({ body: data });
-              }}
+              onChange={this.handleCKEditorChange}
             />
             </div>
             <div className="row">
@@ -116,7 +115,7 @@ const actionCreator = {
   postDataThunkPrivate,
 };
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   articles: state.articles,
   errors: state.articles.articles.errors,
 });

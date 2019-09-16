@@ -1,0 +1,264 @@
+.xxlarge-text {
+  font-size: 40px;
+}
+
+.xlarge-text {
+  font-size: 32px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.medium-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+/* background anim colors */
+/* colors */
+.black {
+  background: #101010;
+}
+
+.text-black {
+  color: #101010;
+}
+
+.yellow {
+  background: #12699b;
+  color: #ffffff;
+}
+
+.twitter-color {
+  background: #50abf1;
+}
+
+.text-yellow {
+  color: #f9d342;
+}
+
+.light {
+  background: #f4f4f4;
+}
+
+.text-light {
+  color: #f4f4f4;
+}
+
+.grey {
+  background: #42413e;
+}
+
+.light-grey {
+  background: #e6e6e6;
+}
+
+.text-grey {
+  color: #42413e;
+}
+
+.white {
+  background: #ffffff;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.primary {
+  background: #282667;
+}
+
+.text-primary {
+  color: #282667;
+}
+
+.secondary {
+  background: #1843b8;
+}
+
+.text-secondary {
+  color: #1843b8;
+}
+
+.danger {
+  background: #d64c4c;
+}
+
+.text-danger {
+  color: #d64c4c;
+}
+
+.success {
+  background: #1c8a4a;
+}
+
+.text-success {
+  color: #1c8a4a;
+}
+
+.info {
+  background: #1cbdee;
+}
+
+.text-info {
+  color: #1cbdee;
+}
+
+/* shadow */
+.shadow-1 {
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.shadow-2, .ProfileEditPicture img {
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-3 {
+  -webkit-box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+}
+
+.shadow-4 {
+  -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+}
+
+.shadow-5 {
+  -webkit-box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+          box-shadow: 0 0 24px rgba(0, 0, 0, 0.8);
+}
+
+.ProfileEditPicture img {
+  border: 0 !important;
+}
+
+@media screen and (min-width: 761px) {
+  .ProfileEditPicture .Form {
+    margin-top: 15px;
+    margin-left: 26% !important;
+    width: 40% !important;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .ProfileEditPicture {
+    width: 100%;
+  }
+  .ProfileEditPicture .Form {
+    width: 70% !important;
+    margin-left: 7% !important;
+  }
+  .ProfileEditPicture img {
+    max-width: 320px !important;
+  }
+}
+
+.notify {
+  margin-top: 2px;
+  display: -ms-grid;
+  display: grid;
+  grid-auto-flow: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  grid-gap: 10px;
+}
+
+.notify .on-app {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: start;
+  color: #12699b;
+  grid-gap: 10px;
+}
+
+.notify .on-app-inputs {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.notify .on-app-inputs > input,
+.notify .on-app-inputs > p {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  padding: 0;
+  margin: 0;
+}
+
+.notify .on-email {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: start;
+  color: #12699b;
+  grid-gap: 10px;
+}
+
+.notify .on-email-inputs {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.notify .on-email-inputs > input,
+.notify .on-email-inputs > p {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  padding: 0;
+  margin: 0;
+}
+
+.notify h4 {
+  color: #12699b;
+  margin: 0;
+}
+
+.notify h5 {
+  color: black;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+}
+
+.notify p {
+  -ms-flex-line-pack: center;
+      align-content: center;
+  color: black;
+}
+
+.notify .styling {
+  -ms-grid-column-align: end;
+      justify-self: end;
+  margin: 0;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 22px;
+  width: 8rem;
+}
+/*# sourceMappingURL=ProfileEditPicture.css.map */

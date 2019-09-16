@@ -6,7 +6,7 @@ import twitter from '../../assets/images/twitter.png';
 
 class SocialLogin extends React.Component {
   handleOnclick = (provider) => () => {
-    window.location.replace(`${process.env.BACKEND_BASE_URL}/api/social/login/${provider}`);
+    window.location.replace(`https://ah-jawans-backend.herokuapp.com/api/social/login/${provider}`);
   };
 
   render() {

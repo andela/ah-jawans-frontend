@@ -56,6 +56,7 @@ describe('Signup reducer', () => {
             searchData: {},
             bookmark: [],
             reportData: {},
+            highlighting:{errors:{},highlights:[],loading:false},
         }
     });
 
