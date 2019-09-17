@@ -13,10 +13,11 @@ import optInOutAppReducer from './optInOutAppReducer';
 import getArticlesReducer from './getArticlesReducer';
 import articleReducer from './articleReducer/articleReducer';
 import searchReducer from './searchReducer';
-import likeDislikeReducer from './likeDislikeReducer';
+import likeDislikeArticleReducer from './likeDislikeReducer';
 import BookmarkReducer from './user/BookmarkReducer';
 import commentReducers from './commentReducer/commentReducer';
 import reportReducer from './reportReducer';
+import likeDislikeCommentsReducer from './likeDislikeCommentReducer';
 
 const rootReducers = combineReducers({
   userCredentials: loginReducer,
@@ -31,13 +32,14 @@ const rootReducers = combineReducers({
   followerData: followerReducer,
   optInOutEmailReducer,
   optInOutAppReducer,
-  likeDislikeReducer,
+  likeDislikeArticleReducer,
   articles: getArticlesReducer,
   article: articleReducer,
   searchData: searchReducer,
   bookmark: BookmarkReducer,
   comments: commentReducers,
   reportData: reportReducer,
+  likeDislikeCommentsReducer,
 });
 
 export default rootReducers;

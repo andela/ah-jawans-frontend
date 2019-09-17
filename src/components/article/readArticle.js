@@ -18,6 +18,11 @@ import {
   clearLikesOrDislikes,
 } from '../../redux/actions/likeDislikeAction';
 import {
+  clearLikesOrDislikesComments,
+  likeCommentsAction,
+  dislikeCommentsAction,
+} from '../../redux/actions/likesDislikesCommentsAction';
+import {
   createCommentAction, getAllCommentsAction, deleteCommentAction, updateCommentAction,
 } from '../../redux/actions/commentsActions/commentsActions';
 import getArticlesAction from '../../redux/actions/getArticlesAction';
@@ -28,6 +33,7 @@ import facebookIcon from '../../assets/images/facebook-logo.png';
 import gmail from '../../assets/images/share-on-email.jpg';
 import twitter from '../../assets/images/twitter-logo.png';
 import LikeDislike from './likeDislikeArticle';
+import LikeDislikeComments from './likeDislikeComments';
 import Bookmark from '../../assets/images/Bookmark.png';
 import { CommentComponent } from '../comments/CommentComponent';
 import remove from '../../assets/icons/delete.png';
@@ -100,6 +106,7 @@ export class ReadArticle extends Component {
 
   componentWillUnmount = () => {
     this.props.clearLikesOrDislikes();
+    this.props.clearLikesOrDislikesComments();
   }
 
   onChange = (event) => {
@@ -153,90 +160,103 @@ export class ReadArticle extends Component {
     await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
   }
 
-componentWillReceiveProps = (nextProps) => {
-  const { dislikes, likes } = nextProps;
-  this.setState((prevState) => ({
-    ...prevState,
-    likes: likes || prevState.likes,
-    dislikes: dislikes || prevState.dislikes,
-  }));
-}
+  componentWillReceiveProps = (nextProps) => {
+    const { dislikes, likes } = nextProps;
+    this.setState((prevState) => ({
+      ...prevState,
+      likes: likes || prevState.likes,
+      dislikes: dislikes || prevState.dislikes,
+    }));
+  }
 
-handleDislike = async () => {
-  const { id } = this.props.match.params;
-  if (localStorage.getItem('id') === null) {
-    toast.error('Login first to like or dislike this article!');
-  } else { await this.props.postDataThunkPrivate('post', `articles/${id}/dislike`, dislikeArticleAction, null); }
-  await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
-  await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
-}
+  handleDislike = async () => {
+    const { id } = this.props.match.params;
+    if (localStorage.getItem('id') === null) {
+      toast.error('Login first to like or dislike this article!');
+    } else { await this.props.postDataThunkPrivate('post', `articles/${id}/dislike`, dislikeArticleAction, null); }
+    await this.props.getDataThunk('get', `articles/${id}/dislikes`, getArticleDislikesAction);
+    await this.props.getDataThunk('get', `articles/${id}/likes`, getArticleLikesAction);
+  }
 
-componentWillUnmount = () => {
-  this.props.clearLikesOrDislikes();
-}
+  handleLikeComments = async (comment) => {
+    const { id } = this.props.match.params;
+    if (localStorage.getItem('id') === null) {
+      toast.error('Login first to like or dislike this comment!');
+    } else { await this.props.postDataThunkPrivate('post', `articles/comments/${comment.id}/likes`, likeCommentsAction, null); }
+    await this.props.postDataThunkPrivate('get', `articles/${id}/comments`, getAllCommentsAction, null);
+  }
 
-handleReport = () => {
-  const modal = document.getElementById('myModal2');
-  modal.classList.remove('modal');
-  modal.classList.add('modalsd');
-}
+  handleDislikeComments = async (comment) => {
+    const { id } = this.props.match.params;
+    if (localStorage.getItem('id') === null) {
+      toast.error('Login first to like or dislike this comments!');
+    } else { await this.props.postDataThunkPrivate('post', `articles/comments/${comment.id}/dislikes`, dislikeCommentsAction, null); }
+    await this.props.postDataThunkPrivate('get', `articles/${id}/comments`, getAllCommentsAction, null);
+  }
 
-handleConsel = () => {
-  const modal = document.getElementById('myModal2');
-  modal.classList.remove('modalsd');
-  modal.classList.add('modal');
-}
+  handleReport = () => {
+    const modal = document.getElementById('myModal2');
+    modal.classList.remove('modal');
+    modal.classList.add('modalsd');
+  }
 
-handleReportData = (e) => {
-  const report = { ...this.state.report };
-  report[e.target.name] = e.target.value;
-  this.setState({
-    ...this.state,
-    report,
-  });
-}
+  handleConsel = () => {
+    const modal = document.getElementById('myModal2');
+    modal.classList.remove('modalsd');
+    modal.classList.add('modal');
+  }
 
-handleReportAction = async (e) => {
-  e.preventDefault();
-  !localStorage.id && toast.error('Login first in order to report this article!');
-  const modal = document.getElementById('myModal2');
-  const { id } = this.props.match.params;
-  await this.props.postDataThunkPrivate('post', `/reports/${id}`, reportAction, this.state.report);
-  this.props.reportMessage.message
-    ? (toast.success(this.props.reportMessage.message),
-    modal.classList.remove('modalsd'),
-    modal.classList.add('modal'))
-    : (toast.error('Comment and report type are required in order to report an article.'));
-}
+  handleReportData = (e) => {
+    const report = { ...this.state.report };
+    report[e.target.name] = e.target.value;
+    this.setState({
+      ...this.state,
+      report,
+    });
+  }
 
+  handleReportAction = async (e) => {
+    e.preventDefault();
+    !localStorage.id && toast.error('Login first in order to report this article!');
+    const modal = document.getElementById('myModal2');
+    const { id } = this.props.match.params;
+    await this.props.postDataThunkPrivate('post', `/reports/${id}`, reportAction, this.state.report);
+    this.props.reportMessage.message
+      ? (toast.success(this.props.reportMessage.message),
+      modal.classList.remove('modalsd'),
+      modal.classList.add('modal'))
+      : (toast.error('Comment and report type are required in order to report an article.'));
+  }
 
-render() {
-  const { likes, dislikes } = this.props;
-  const {
-    title, body, readers, username, image,
-  } = this.state;
-  const { id } = this.props.match.params;
-  const url = `https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
-  const tweet = `'${this.state.title}' -by ${this.state.username} @ https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
+  render() {
+    const {
+      likes, dislikes,
+    } = this.props;
+    const {
+      title, body, readers, username, image,
+    } = this.state;
+    const { id } = this.props.match.params;
+    const url = `https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
+    const tweet = `'${this.state.title}' -by ${this.state.username} @ https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
 
-  return (
+    return (
       <Layout>
         <div className='read-article-body'>
-         <ToastContainer position={toast.POSITION.TOP_RIGHT} />
+          <ToastContainer position={toast.POSITION.TOP_RIGHT} />
           <div className='container read-article-container'>
             <h2 className='article-text title'>{title}</h2>
             <br />
-            { username && <div className='author-image-on-read-article author-name'>
-            <ReactImageFallback
-              src={image && (image.split(':')[0] === 'https') ? image : `https://res.cloudinary.com/djxhcwowp/image/upload/v${image}`}
-              fallbackImage={profileImagePlaceHolder}
-              initialImage={LoadingGif}
-              alt="profile image"
-              className="authorUsername"
-            />
+            {username && <div className='author-image-on-read-article author-name'>
+              <ReactImageFallback
+                src={image && (image.split(':')[0] === 'https') ? image : `https://res.cloudinary.com/djxhcwowp/image/upload/v${image}`}
+                fallbackImage={profileImagePlaceHolder}
+                initialImage={LoadingGif}
+                alt="profile image"
+                className="authorUsername"
+              />
               <text>{username}</text>
-              </div>}
-              <br/>
+            </div>}
+            <br />
             <p className='article-text'>{ReactHtmlParser(body)}</p>
             <br />
           </div>
@@ -258,10 +278,10 @@ render() {
             </a>
           </div>}
           {this.props.articles.tagList && this.props.articles.tagList.map(
-            (tag, index) => <Tags key={index} tagText={tag}/>,
+            (tag, index) => <Tags key={index} tagText={tag} />,
           )}
 
-          { body
+          {body
             && <div className='vote bottom-article'>
               {/* <div>
               </div> */}
@@ -271,28 +291,28 @@ render() {
                   handleDislike={this.handleDislike}
                   likes={likes}
                   dislikes={dislikes}
-              />
-              <span className="views">{`Views: ${readers}`}</span>
+                />
+                <span className="views">{`Views: ${readers}`}</span>
               </div>
               <div
-              id="reporting-button"
-              className="bottom-article__report"
-              onClick={this.handleReport}>Report article</div>
+                id="reporting-button"
+                className="bottom-article__report"
+                onClick={this.handleReport}>Report article</div>
               <ReportArticle
                 consel={this.handleConsel}
                 onChange={this.handleReportData}
                 handleReport={this.handleReportAction}
               />
-              </div>
-            }
-        <div id="comment-section" className="comment-section">
-          {(localStorage.username)
-            && <CommentComponent
-              onChange={this.onChange}
-              onSubmit={this.handleSubmit}
-              comment={this.state.comment}
-            />
+            </div>
           }
+          <div id="comment-section" className="comment-section">
+            {(localStorage.username)
+              && <CommentComponent
+                onChange={this.onChange}
+                onSubmit={this.handleSubmit}
+                comment={this.state.comment}
+              />
+            }
           </div>
           < div className='col-md-5 comments'>
             {this.props.comments.allComments
@@ -317,18 +337,27 @@ render() {
                       id={`comment-edit-icon${index}`}
                       className="comment-edit-icon"
                     />
-                      <img
-                        src={remove}
-                        id={`comment-remove-icon${index}`}
-                        className="comment-remove-icon"
-                        onClick={this.handleDelete(comment.id)}
-                      />
+                    <img
+                      src={remove}
+                      id={`comment-remove-icon${index}`}
+                      className="comment-remove-icon"
+                      onClick={this.handleDelete(comment.id)}
+                    />
                   </div>
                   <div className="card-body">
                     <blockquote className="blockquote mb-0">
                       <p>{comment.body}</p>
                       <small className="text-muted">{moment(comment.updatedAt).fromNow()}</small>
                     </blockquote>
+                  </div>
+                  <div className="card-footer">
+                    {body && <div className='vote1'><LikeDislikeComments
+                      handleLikeComments={() => this.handleLikeComments(comment)}
+                      handleDislikeComments={() => this.handleDislikeComments(comment)}
+                      likesComments={comment.Comment.filter((like) => like.likes === true).length}
+                      dislikesComments=
+                      {comment.Comment.filter((like) => like.dislikes === true).length} />
+                    </div>}
                   </div>
                   <div className={`modals ${this.state.modal}`}>
                     <div className="modal-dialog modal-dialog-centered">
@@ -354,8 +383,8 @@ render() {
           </div>
         </div>
       </Layout>
-  );
-}
+    );
+  }
 }
 
 ReadArticle.propTypes = {
@@ -366,7 +395,10 @@ ReadArticle.propTypes = {
   author: PropTypes.string,
   likes: PropTypes.number,
   dislikes: PropTypes.number,
+  likesComments: PropTypes.number,
+  dislikesComments: PropTypes.number,
   clearLikesOrDislikes: PropTypes.func,
+  clearLikesOrDislikesComments: PropTypes.func,
   bookmark: PropTypes.string,
   errorsbookmark: PropTypes.string,
   location: PropTypes.object,
@@ -379,8 +411,8 @@ ReadArticle.propTypes = {
 };
 const mapStateToProps = (state) => ({
   articles: state.articles.articles,
-  likes: state.likeDislikeReducer.likes.count,
-  dislikes: state.likeDislikeReducer.dislikes.count,
+  likes: state.likeDislikeArticleReducer.likes.count,
+  dislikes: state.likeDislikeArticleReducer.dislikes.count,
   bookmark: state.bookmark.message,
   errorsbookmark: state.bookmark.errors,
   comments: state.comments.comments,
@@ -392,5 +424,6 @@ const actionCreator = {
   getDataThunk,
   postDataThunkPrivate,
   clearLikesOrDislikes,
+  clearLikesOrDislikesComments,
 };
 export default connect(mapStateToProps, actionCreator)(ReadArticle);
