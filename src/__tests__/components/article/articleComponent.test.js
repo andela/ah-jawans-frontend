@@ -59,7 +59,7 @@ it('should change state onChange', () => {
   const title = wrapper.find('.editor-wrapper').find('#title');
   title.simulate('change', { target: { value: 'patrick' } });
   wrapper.find('#tags').simulate('change', { target: { value: 'andela' } });
-  const ckEditor = wrapper.find('#bodyck')
+  // const ckEditor = wrapper.find('#bodyck')
 });
     describe('submit button test...', () => {
       let instance
