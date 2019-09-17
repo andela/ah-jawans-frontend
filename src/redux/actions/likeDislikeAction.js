@@ -22,6 +22,7 @@ const getArticleDislikesAction = (payload) => ({
   type: types.GET_DISLIKES_ARTICLE,
   payload,
 });
+
 export {
   likeArticleAction,
   dislikeArticleAction,

@@ -1,11 +1,20 @@
-import { likeArticleAction, dislikeArticleAction, 
-    getArticleLikesAction,getArticleDislikesAction } from '../../../redux/actions/likeDislikeAction';
+import {
+    likeArticleAction, dislikeArticleAction,
+    getArticleLikesAction, getArticleDislikesAction, clearLikesOrDislikes
+} from '../../../redux/actions/likeDislikeAction';
 import * as types from '../../../redux/actionTypes/likeDislikeTypes';
 
 describe('actions', () => {
     it('should allow users to like articles', () => {
+        const type = 'CLEAR_LIKES_DISLIKES';
+        const expectedAction = {
+            type: types.CLEAR_LIKES_DISLIKES,
+        };
+        expect(clearLikesOrDislikes(type)).toEqual(expectedAction);
+    })
+    it('should allow users to like articles', () => {
         const payload = {
-            count: 1 ,
+            count: 1,
         };
         const expectedAction = {
             type: types.LIKE_ARTICLE,
@@ -15,7 +24,7 @@ describe('actions', () => {
     })
     it('should allow users to dislike articles', () => {
         const payload = {
-            count: 1 ,
+            count: 1,
         };
         const expectedAction = {
             type: types.DISLIKE_ARTICLE,
@@ -25,7 +34,7 @@ describe('actions', () => {
     })
     it('should allow users to get all likes', () => {
         const payload = {
-            count: 1 ,
+            count: 1,
         };
         const expectedAction = {
             type: types.GET_LIKES_ARTICLE,
@@ -35,7 +44,7 @@ describe('actions', () => {
     })
     it('should allow users to get all dislikes', () => {
         const payload = {
-            count: 1 ,
+            count: 1,
         };
         const expectedAction = {
             type: types.GET_DISLIKES_ARTICLE,

@@ -1,9 +1,9 @@
 import * as types from '../actionTypes/likeDislikeTypes';
 import initialState from '../store/initialStates/userInitialState';
 
-const likeDislikeArticleReducer = (state = initialState, { type, payload }) => {
+const likeDislikeCommentsReducer = (state = initialState, { type }) => {
   switch (type) {
-    case types.CLEAR_LIKES_DISLIKES:
+    case types.CLEAR_LIKES_DISLIKES_COMMENTS:
       return {
         ...state,
         likes: {
@@ -15,34 +15,18 @@ const likeDislikeArticleReducer = (state = initialState, { type, payload }) => {
           count: 0,
         },
       };
-    case types.LIKE_ARTICLE:
+    case types.LIKE_COMMENTS:
       return {
         ...state,
         likes: {
           ...state.likes,
         },
       };
-    case types.DISLIKE_ARTICLE:
+    case types.DISLIKE_COMMENTS:
       return {
         ...state,
         dislikes: {
           ...state.dislikes,
-        },
-      };
-    case types.GET_LIKES_ARTICLE:
-      return {
-        ...state,
-        likes: {
-          ...state.likes,
-          count: payload.likes,
-        },
-      };
-    case types.GET_DISLIKES_ARTICLE:
-      return {
-        ...state,
-        dislikes: {
-          ...state.dislikes,
-          count: payload.dislikes,
         },
       };
     default:
@@ -50,4 +34,4 @@ const likeDislikeArticleReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export default likeDislikeArticleReducer;
+export default likeDislikeCommentsReducer;

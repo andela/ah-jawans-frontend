@@ -17,10 +17,10 @@ Object.defineProperty(window, 'location', {
 });
 
 document.body.innerHTML =
- '<div id="myModal2"></div> ' +
- '<input id="concel-btn" value="h"/>' +
- '<h5 class="btn-pagination-next1">khd</h5>' +
- '<div class="cards"></div> ';
+  '<div id="myModal2"></div> ' +
+  '<input id="concel-btn" value="h"/>' +
+  '<h5 class="btn-pagination-next1">khd</h5>' +
+  '<div class="cards"></div> ';
 
 jest.mock('../../../components/Header/Header', () => () => (
   <div id="mockHeader">mockHeader</div>
@@ -45,6 +45,8 @@ const props = {
   comments: { allComments: [], errors: {} },
   errors: { comments: { errors: '' } },
   userCredentials: { userCredentials: {} },
+  clearLikesOrDislikes: jest.fn(),
+  clearLikesOrDislikesComments: jest.fn(),
 }
 
 const state = {
@@ -61,8 +63,11 @@ const state = {
   handleClick: jest.fn(),
   likes: 0,
   dislikes: 0,
-  comments: { allComments: [] },
+  comments: {
+    allComments: [],
+  },
   clearLikesOrDislikes: jest.fn(),
+  clearLikesOrDislikesComments: jest.fn(),
   articles: { tagList: [] }
 }
 
@@ -186,12 +191,14 @@ describe('<ReadArticle/>', () => {
           {
             User: { image: 'djhfejr' },
             id: 1,
-            body: 'dfwjkehnkdewhj'
+            body: 'dfwjkehnkdewhj',
+            Comment: [{ likes: true, dislikes: false }]
           },
           {
             User: { image: 'djhfejr' },
             id: 2,
-            body: 'dfwjkehnkdewhj'
+            body: 'dfwjkehnkdewhj',
+            Comment: [{ likes: true, dislikes: false }]
           }
         ],
         errors: 'hgwefg',
@@ -201,6 +208,7 @@ describe('<ReadArticle/>', () => {
       getDataThunk: jest.fn(),
       postDataThunkPrivate: jest.fn(),
       clearLikesOrDislikes: jest.fn(),
+      clearLikesOrDislikesComments: jest.fn(),
     }
     const newWrapper = mount(
       <MemoryRouter>
@@ -219,11 +227,10 @@ describe('<ReadArticle/>', () => {
     newWrapper.find('#comment-edit-icon0').simulate('click', {});
     newWrapper.find('#hideModel0').simulate('click', {});
     newWrapper.find('#like').simulate('click', {});
-    newWrapper.find('#comment-report').simulate('change', { value: 'k'});
+    newWrapper.find('#comment-report').simulate('change', { value: 'k' });
     newWrapper.find('#reporting-button').simulate('click', {});
     newWrapper.find('#concel-btn').simulate('click', {});
     newWrapper.find('#reporting-submit').simulate('submit', {});
-
   });
 });
 
@@ -236,6 +243,8 @@ describe('<ReadArticle/> on', () => {
     wrapper.setProps(props);
     wrapper.instance().handleLike();
     wrapper.instance().handleDislike();
+    wrapper.instance().handleLikeComments(2);
+    wrapper.instance().handleDislikeComments(2);
     expect(wrapper.contains(<div></div>));
   });
 
@@ -247,6 +256,8 @@ describe('<ReadArticle/> on', () => {
     wrapper.setProps(props);
     wrapper.instance().handleLike();
     wrapper.instance().handleDislike();
+    wrapper.instance().handleLikeComments(2);
+    wrapper.instance().handleDislikeComments(2);
     expect(wrapper.contains(<div></div>));
   });
 

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import Form from '../common/formContainer';
@@ -16,25 +17,25 @@ export class CommentComponent extends Component {
     return (
       <div className="comment-form">
         <div className="form-header">
-          <img src={image1 || authorImage}/>
+          <img src={image1 || authorImage} />
         </div>
         <Form onSubmit={this.props.onSubmit}>
-        <div className="form-group">
-        <textarea id="comment-body"
-            value={this.props.body}
-            name="body"
-            type="text"
-            placeholder="Write your comment..."
-            onChange={this.props.onChange}
-            className="form-control"
+          <div className="form-group">
+            <textarea id="comment-body"
+              value={this.props.body}
+              name="body"
+              type="text"
+              placeholder="Write your comment..."
+              onChange={this.props.onChange}
+              className="form-control"
             />
-            </div>
-          <div>
-          <button id="submit1"
-            type = "button"
-            className = "btn btn-primary comment-btn" onClick = { this.props.onSubmit } > Submit</button >
           </div>
-      </Form>
+          <div>
+            <button id="submit1"
+              type="button"
+              className="btn btn-primary comment-btn" onClick={this.props.onSubmit} > Submit</button >
+          </div>
+        </Form>
       </div>
     );
   }
