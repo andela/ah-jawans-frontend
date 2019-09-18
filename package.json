@@ -95,15 +95,16 @@
         "joi-browser": "13.4.0",
         "lodash": "^4.17.15",
         "mini-css-extract-plugin": "^0.8.0",
+        "moment": "2.24.0",
         "moxios": "^0.4.0",
         "node-sass": "^4.12.0",
         "prop-types": "^15.7.2",
         "query-string": "^6.8.2",
         "react": "^16.9.0",
-        "react-image-fallback": "^8.0.0",
         "react-contenteditable": "3.3.1",
         "react-dom": "^16.9.0",
         "react-html-parser": "2.0.2",
+        "react-image-fallback": "^8.0.0",
         "react-redux": "^7.1.0",
         "react-router-dom": "^5.0.1",
         "react-strap": "0.0.1",
@@ -123,8 +124,7 @@
         "url-loader": "^2.1.0",
         "webpack": "^4.39.1",
         "webpack-cli": "^3.3.6",
-        "webpack-dev-server": "^3.8.0",
-        "moment": "2.24.0"
+        "webpack-dev-server": "^3.8.0"
     },
     "jest": {
         "verbose": true,

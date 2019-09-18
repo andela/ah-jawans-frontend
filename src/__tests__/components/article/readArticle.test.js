@@ -7,6 +7,7 @@ import configureStore from '../../../redux/store/index';
 import '../../../components/Header/Header';
 import { ReadArticle } from '../../../components/article/readArticle';
 import Tags from '../../../components/article/displayTags';
+import CommentHistoryModel from '../../../components/comments/commentHistory';
 
 const store = configureStore();
 global.window = Object.create(window);
@@ -27,26 +28,53 @@ jest.mock('../../../components/Header/Header', () => () => (
 ))
 
 const props = {
-  postDataThunkPrivate: jest.fn(),
-  getDataThunk: jest.fn(),
-  likes: 0,
-  dislikes: 0,
+  match: { params: { id: 1 } },
   articles: {
-    id: 1,
-    username: 'Joe',
-    title: 'This is title of the article',
-    body: 'This is the body of the article',
-    author: { username: 'shaluc' },
-    tagList: ['article', 'mirror']
+    title: '',
+    body: '',
+    articles: { author: '' }
   },
-  bookmark: { message: {} },
-  match: { params: 3 },
-  handleClick: jest.fn(),
-  comments: { allComments: [], errors: {} },
-  errors: { comments: { errors: '' } },
-  userCredentials: { userCredentials: {} },
+  comments: {
+    allComments: [
+      {
+        User: { image: 'djhfejr.jpg' },
+        id: 1,
+        body: 'dfwjkehnkdewhj',
+        Comment: [{ likes: true, dislikes: false }],
+        edited: true,
+      },
+      {
+        User: { image: 'djhfejr.jpg' },
+        id: 2,
+        body: 'dfwjkehnkdewhj',
+        Comment: [{ likes: true, dislikes: false }],
+        edited: false,
+      }
+    ],
+    errors: 'hgwefg',
+    likes: 0,
+    dislikes: 0,
+  },
+  getDataThunk: jest.fn(),
+  postDataThunkPrivate: jest.fn(),
   clearLikesOrDislikes: jest.fn(),
   clearLikesOrDislikesComments: jest.fn(),
+  commentHistory: {
+    findHistory: [
+      {
+        "id": 1,
+        "userId": 3,
+        "editedComment": "Comment here",
+        "commentId": 1
+    },
+    ]
+  },
+    comment: {
+      edited: true
+    },
+    open : 'blcok',
+    hideModal1: jest.fn(),
+    Model1Data: jest.fn(),
 }
 
 const state = {
@@ -64,7 +92,25 @@ const state = {
   likes: 0,
   dislikes: 0,
   comments: {
-    allComments: [],
+    allComments: [
+      {
+        User: { image: 'djhfejr.jpg' },
+        id: 1,
+        body: 'dfwjkehnkdewhj',
+        Comment: [{ likes: true, dislikes: false }],
+        edited: true,
+      },
+      {
+        User: { image: 'djhfejr.jpg' },
+        id: 2,
+        body: 'dfwjkehnkdewhj',
+        Comment: [{ likes: true, dislikes: false }],
+        edited: false,
+      }
+    ],
+    errors: 'hgwefg',
+    likes: 0,
+    dislikes: 0,
   },
   clearLikesOrDislikes: jest.fn(),
   clearLikesOrDislikesComments: jest.fn(),
@@ -135,14 +181,16 @@ describe('<ReadArticle/>', () => {
       comments: {
         allComments: [
           {
-            User: { image: 'djhfejr' },
+            User: { image: 'djhfejr.jpg' },
             id: 1,
-            body: 'dfwjkehnkdewhj'
+            body: 'dfwjkehnkdewhj',
+            edited: true,
           },
           {
-            User: { image: 'djhfejr' },
+            User: { image: 'djhfejr.jpg' },
             id: 2,
-            body: 'dfwjkehnkdewhj'
+            body: 'dfwjkehnkdewhj',
+            edited: true,
           }
         ]
       },
@@ -189,16 +237,18 @@ describe('<ReadArticle/>', () => {
       comments: {
         allComments: [
           {
-            User: { image: 'djhfejr' },
+            User: { image: 'djhfejr.jpg' },
             id: 1,
             body: 'dfwjkehnkdewhj',
-            Comment: [{ likes: true, dislikes: false }]
+            Comment: [{ likes: true, dislikes: false }],
+            edited: true,
           },
           {
-            User: { image: 'djhfejr' },
+            User: { image: 'djhfejr.jpg' },
             id: 2,
             body: 'dfwjkehnkdewhj',
-            Comment: [{ likes: true, dislikes: false }]
+            Comment: [{ likes: true, dislikes: false }],
+            edited: false,
           }
         ],
         errors: 'hgwefg',
@@ -218,6 +268,9 @@ describe('<ReadArticle/>', () => {
     newWrapper.setState({
       id: 10,
       body: 'whfjg',
+      comment: {
+        edited: true
+      }
     });
     newWrapper.find('#comment-body').simulate('change', { value: 'k' });
     newWrapper.find('#comment-remove-icon0').simulate('click', {});
@@ -286,5 +339,14 @@ describe('<ReadArticle/> on', () => {
     );
     wrapper.setProps(props);
     expect(wrapper.contains(<div className='display-tags'></div>));
+  });
+
+  it('Should render <CommentHistoryModel>', () => {
+    const wrapper = mount(
+      <ReadArticleComponent {...props} />
+    );
+    wrapper.find('#comment-history0').simulate('click', {});
+    wrapper.find('#close-modal0').simulate('click', {});
+    expect(wrapper.contains(<button className="comment-history" id="comment-history1">Edited</button>));
   });
 });

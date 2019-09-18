@@ -25,6 +25,7 @@ import {
 import {
   createCommentAction, getAllCommentsAction, deleteCommentAction, updateCommentAction,
 } from '../../redux/actions/commentsActions/commentsActions';
+import getCommentHistoryAction from '../../redux/actions/commentsActions/commentHistoryAction';
 import getArticlesAction from '../../redux/actions/getArticlesAction';
 import { postbookmarkAction } from '../../redux/actions/user/BookmarkAction';
 import '../../assets/scss/components/article/readArticle.scss';
@@ -43,6 +44,7 @@ import LoadingGif from '../../assets/images/loadingGif.gif';
 import Tags from './displayTags';
 import ReportArticle from './reportArticle';
 import reportAction from '../../redux/actions/reportAction';
+import CommentHistoryModel from '../comments/commentHistory';
 
 export class ReadArticle extends Component {
   state = {
@@ -54,7 +56,9 @@ export class ReadArticle extends Component {
     dislikes: 0,
     bookmark: '',
     errors: '',
-    modal: 'none',
+    model: 'none',
+    modal: false,
+    model1: 'none',
     comment: {
       body: '',
     },
@@ -148,7 +152,11 @@ export class ReadArticle extends Component {
   }
 
   hideModal = () => {
-    this.setState({ modal: 'none' });
+    this.setState({ model: 'none' });
+  }
+
+  hideModal1 = () => {
+    this.setState({ model1: 'none' });
   }
 
   handleLike = async () => {
@@ -185,6 +193,28 @@ export class ReadArticle extends Component {
     } else { await this.props.postDataThunkPrivate('post', `articles/comments/${comment.id}/likes`, likeCommentsAction, null); }
     await this.props.postDataThunkPrivate('get', `articles/${id}/comments`, getAllCommentsAction, null);
   }
+
+toggle = async (commentId) => {
+  this.setState({
+    model1: 'block',
+    model: 'none',
+    modal: false,
+  });
+  await this.props.getDataThunk('get', `articles/comments/${commentId}/history`, getCommentHistoryAction);
+}
+
+// eslint-disable-next-line consistent-return
+renderModel = () => {
+  if (this.props.commentHistory) {
+    return this.props.commentHistory.findHistory.map((history) => (
+      <div key={history.id}className="all-comment-history"><p>{history.editedComment}</p></div>
+    ));
+  }
+}
+
+componentWillUnmount = () => {
+  this.props.clearLikesOrDislikes();
+}
 
   handleDislikeComments = async (comment) => {
     const { id } = this.props.match.params;
@@ -240,7 +270,7 @@ export class ReadArticle extends Component {
     const tweet = `'${this.state.title}' -by ${this.state.username} @ https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
 
     return (
-      <Layout>
+    <Layout>
         <div className='read-article-body'>
           <ToastContainer position={toast.POSITION.TOP_RIGHT} />
           <div className='container read-article-container'>
@@ -330,7 +360,7 @@ export class ReadArticle extends Component {
                   <div className='edit-comment-icons'>
                     <img
                       src={edit} onClick={() => this.setState({
-                        modal: 'block',
+                        model: 'block',
                         body: comment.body,
                         id: comment.id,
                       })}
@@ -348,6 +378,9 @@ export class ReadArticle extends Component {
                     <blockquote className="blockquote mb-0">
                       <p>{comment.body}</p>
                       <small className="text-muted">{moment(comment.updatedAt).fromNow()}</small>
+                      {comment.edited && <button
+                        onClick={() => this.toggle(comment.id)}
+                        className="comment-history" id={`comment-history${index}`}>Edited</button>}
                     </blockquote>
                   </div>
                   <div className="card-footer">
@@ -359,8 +392,8 @@ export class ReadArticle extends Component {
                       {comment.Comment.filter((like) => like.dislikes === true).length} />
                     </div>}
                   </div>
-                  <div className={`modals ${this.state.modal}`}>
-                    <div className="modal-dialog modal-dialog-centered">
+                  <div className={`modals ${this.state.model}`}>
+                    <div className="centere-it">
                       <div className="modal-content">
                         <div className="modal-header">
                           <h5 className="modal-title">Edit comment</h5>
@@ -378,6 +411,13 @@ export class ReadArticle extends Component {
                       </div>
                     </div>
                   </div>
+                  <div>
+                  <CommentHistoryModel
+                  open={this.state.model1}
+                  hideModal1={this.hideModal1}
+                  Model1Data={this.renderModel()}
+                  index={index}/>
+              </div>
                 </div>
               ))}
           </div>
@@ -408,6 +448,7 @@ ReadArticle.propTypes = {
   id: PropTypes.string,
   comment: PropTypes.object,
   reportMessage: PropTypes.object,
+  commentHistory: PropTypes.object,
 };
 const mapStateToProps = (state) => ({
   articles: state.articles.articles,
@@ -419,6 +460,7 @@ const mapStateToProps = (state) => ({
   errors: state.comments.errors,
   userProfile: state.getUser,
   reportMessage: state.reportData.reportData,
+  commentHistory: state.commentHistory.commentHistory.data,
 });
 const actionCreator = {
   getDataThunk,

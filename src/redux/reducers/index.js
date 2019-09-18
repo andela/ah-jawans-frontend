@@ -18,6 +18,7 @@ import BookmarkReducer from './user/BookmarkReducer';
 import commentReducers from './commentReducer/commentReducer';
 import reportReducer from './reportReducer';
 import likeDislikeCommentsReducer from './likeDislikeCommentReducer';
+import commentHistoryReducer from './commentReducer/commentHistory';
 
 const rootReducers = combineReducers({
   userCredentials: loginReducer,
@@ -40,6 +41,7 @@ const rootReducers = combineReducers({
   comments: commentReducers,
   reportData: reportReducer,
   likeDislikeCommentsReducer,
+  commentHistory: commentHistoryReducer,
 });
 
 export default rootReducers;
