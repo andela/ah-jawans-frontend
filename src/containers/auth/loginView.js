@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import computerHand from '../../assets/images/computerHand.jpg';
 import LoginComponet from '../../components/auth/Login';
-import '../../assets/scss/components/login.scss';
+import '../../assets/scss/components/_Signup.scss';
 import loginUserAction from '../../redux/actions/auth/loginAction';
 import { postDataThunk } from '../../redux/thunks';
 import socialLoginAction from '../../redux/actions/auth/sosialLoginAction';
@@ -54,17 +54,16 @@ export class Login extends Component {
 
   render() {
     return (
-      < div className="container">
-
-
-        < div className="row">
-          <div className="col loginLeftSide">
-            < h1>Login</h1>
-            <h2>Authors Haven</h2>
-            <img className='images' src={computerHand} />
-          </div>
-          <div className="col-md-6 myForm">
-            <h4> Signin </h4>
+    <div className="container h-100 main">
+      <div className="row">
+        <div className="col-md-7 col-sm-7 main-content">
+          <div className="main__leftSide">
+           <h1>Login</h1>
+           <h5>Authors Haven</h5>
+              <img className="img-responsive main__images" src={computerHand} />
+            </div>
+            </div>
+              <div className="col-md-5 col-sm-5">
             <LoginComponet
               onChange={this.handleChange}
               onSubmit={this.handleSubmit}
@@ -72,7 +71,7 @@ export class Login extends Component {
             />
           </div>
         </div>
-      </div>
+        </div>
     );
   }
 }

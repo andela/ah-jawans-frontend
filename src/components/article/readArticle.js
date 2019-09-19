@@ -240,7 +240,7 @@ export class ReadArticle extends Component {
     const tweet = `'${this.state.title}' -by ${this.state.username} @ https://ah-jawans-frontend.herokuapp.com/readArticle/${id}`;
 
     return (
-      <Layout>
+    <Layout>
         <div className='read-article-body'>
           <ToastContainer position={toast.POSITION.TOP_RIGHT} />
           <div className='container read-article-container'>
