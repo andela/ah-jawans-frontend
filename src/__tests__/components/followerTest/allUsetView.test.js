@@ -35,7 +35,7 @@ describe('<AllUserView />', () => {
               follower: 0,
               following: 0,
               followMessage: '',
-              
+              searchData:{searchData:{data: []}}
             })}
           >
             <MemoryRouter>
@@ -50,6 +50,7 @@ describe('<AllUserView />', () => {
         const component = mount(<Provider 
             store={mockStore({
               ...initialState,
+              searchData:{searchData:{data: []}},
               user: { ...initialState.user, profile: { ...user }, userProfile: { ...user } },
               followerData:{
                 unfollow: {message: ''},
@@ -85,7 +86,6 @@ describe('<AllUserView />', () => {
               <AllUserView />
             </MemoryRouter>
           </Provider>);
-          component.find("button[id='0']").simulate('click', {  });
         expect(component).toBeDefined();
     });
 
@@ -94,6 +94,7 @@ describe('<AllUserView />', () => {
         const component = mount(<Provider 
             store={mockStore({
               ...initialState,
+              searchData:{ searchData:{data: []}},
               user: { ...initialState.user, profile: { ...user }, userProfile: { ...user } },
               followerData:{
                 unfollow:{ message: '' },
@@ -194,6 +195,8 @@ describe('<AllUserView />', () => {
 
     test('should test view profile event followe pass', () => {
         const props = {
+          getDataThunk: jest.fn(),
+          postDataThunkPrivate: jest.fn(),
             allUsers: [
                     {
                   username: 'kag',
@@ -220,6 +223,22 @@ describe('<AllUserView />', () => {
             <MemoryRouter>
               <View { ...props } />
             </MemoryRouter>);
+        component.setState({
+          image: '',
+          username: '',
+          firstName: '',
+          lastName: '',
+          dob: '',
+          bio: '',
+          message: '',
+          search: {
+            authorName: '',
+            keyword: '',
+            tag: '',
+            title: 'a',
+          },
+          searchData: [],
+        });
           component.find("#search-btn").simulate('change', { target:{value: 'k'}});
           component.setProps({followMessage: 'dwkjhf'});
           component.find("button[id='0unfollow']").simulate('click', {  });
@@ -242,8 +261,9 @@ describe('<AllUserView />', () => {
                 image: '',
                     }
                 ],
-        unfollowMessage: 'wegjfnen',
-          getDataThunkPrivate: jest.fn(), 
+        // unfollowMessage: 'wegjfnen',
+        followMessage: 'wekfq',
+        getDataThunkPrivate: jest.fn(), 
       };
       const component = mount(
           <MemoryRouter>
@@ -254,6 +274,6 @@ describe('<AllUserView />', () => {
         component.find("#close").simulate('click', {  });
         component.find("button[id='0f']").simulate('click', {  });
         component.instance().unfollowEvent = jest.fn();
-      expect(component).toBeDefined();
+        expect(component).toBeDefined();
   });
 });

@@ -31,7 +31,7 @@ const props = {
   match: { params: { id: 1 } },
   articles: {
     title: '',
-    body: '',
+    body: 'jhfqwg jghwef',
     articles: { author: '' }
   },
   comments: {
@@ -166,11 +166,11 @@ describe('<ReadArticle/>', () => {
 
   it('Should contain <Form/> element inside <CommentComponent/>', () => {
     localStorage.setItem('id', '111');
-    localStorage.setItem('username', 'efhwruj');
+    localStorage.setItem('username', 'kagabo');
     const newprops = {
       articles: {
         title: '',
-        body: '',
+        body: 'fofo',
         author: { username: 'djhf' }
       },
       match: {
@@ -181,13 +181,13 @@ describe('<ReadArticle/>', () => {
       comments: {
         allComments: [
           {
-            User: { image: 'djhfejr.jpg' },
+            User: { image: 'djhfejr.jpg', username: 'kagabo' },
             id: 1,
             body: 'dfwjkehnkdewhj',
             edited: true,
           },
           {
-            User: { image: 'djhfejr.jpg' },
+            User: { image: 'djhfejr.jpg', username: 'kagabo' },
             id: 2,
             body: 'dfwjkehnkdewhj',
             edited: true,
@@ -196,6 +196,8 @@ describe('<ReadArticle/>', () => {
       },
       getDataThunk: jest.fn(),
       postDataThunkPrivate: jest.fn(),
+      clearLikesOrDislikes: jest.fn(),
+      clearLikesOrDislikesComments: jest.fn(),
     }
     const newWrapper = mount(
       <MemoryRouter>
@@ -203,10 +205,10 @@ describe('<ReadArticle/>', () => {
       </MemoryRouter>
     );
     newWrapper.setState({
+      body:'fofo',
       id: 10,
       username: 'ewfer',
       title: 'ewqr',
-      body: 'jihqfek',
       likes: 0,
       dislikes: 0,
       bookmark: 'rb4',
@@ -226,25 +228,25 @@ describe('<ReadArticle/>', () => {
 
   it('Should contain <Form/> element inside <CommentComponent/>', () => {
     localStorage.setItem('id', '111');
-    localStorage.setItem('username', 'efhwruj');
+    localStorage.setItem('username', 'kagabo');
     const newprops = {
       match: { params: { id: 1 } },
       articles: {
         title: '',
-        body: '',
+        body: 'iwhfqg ihqvir ',
         articles: { author: '' }
       },
       comments: {
         allComments: [
           {
-            User: { image: 'djhfejr.jpg' },
+            User: { image: 'djhfejr.jpg', username: 'kagabo' },
             id: 1,
             body: 'dfwjkehnkdewhj',
             Comment: [{ likes: true, dislikes: false }],
             edited: true,
           },
           {
-            User: { image: 'djhfejr.jpg' },
+            User: { image: 'djhfejr.jpg', username: 'kagabo' },
             id: 2,
             body: 'dfwjkehnkdewhj',
             Comment: [{ likes: true, dislikes: false }],
@@ -267,7 +269,7 @@ describe('<ReadArticle/>', () => {
     );
     newWrapper.setState({
       id: 10,
-      body: 'whfjg',
+      body: 'whfjg ashfjasvcbnvsdchgsdhbcv ',
       comment: {
         edited: true
       }
@@ -326,11 +328,6 @@ describe('<ReadArticle/> on', () => {
     component.setState({ username: 'shalu', title: 'hey dear', body: 'hey body' });
     localStorage.setItem('id', '9');
     localStorage.setItem('articleId', '19');
-    component
-      .find('#bookmarkarticle')
-      .at(0)
-      .simulate('click');
-    component.instance().handleClick({ errors: 'eerrorr', bookmark: 'heypassed', body: 'hey body' });
   });
 
   it('Should render Tags', () => {

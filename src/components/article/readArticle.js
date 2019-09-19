@@ -45,6 +45,7 @@ import Tags from './displayTags';
 import ReportArticle from './reportArticle';
 import reportAction from '../../redux/actions/reportAction';
 import CommentHistoryModel from '../comments/commentHistory';
+import Spinner from '../../assets/icons/spinner.gif';
 
 export class ReadArticle extends Component {
   state = {
@@ -212,10 +213,6 @@ renderModel = () => {
   }
 }
 
-componentWillUnmount = () => {
-  this.props.clearLikesOrDislikes();
-}
-
   handleDislikeComments = async (comment) => {
     const { id } = this.props.match.params;
     if (localStorage.getItem('id') === null) {
@@ -271,7 +268,9 @@ componentWillUnmount = () => {
 
     return (
     <Layout>
-        <div className='read-article-body'>
+      {
+        this.props.articles.body
+          ? <div className='read-article-body'>
           <ToastContainer position={toast.POSITION.TOP_RIGHT} />
           <div className='container read-article-container'>
             <h2 className='article-text title'>{title}</h2>
@@ -313,8 +312,6 @@ componentWillUnmount = () => {
 
           {body
             && <div className='vote bottom-article'>
-              {/* <div>
-              </div> */}
               <div className='bottom-article__likes'>
                 <LikeDislike
                   handleLike={this.handleLike}
@@ -357,7 +354,8 @@ componentWillUnmount = () => {
                       className="authorUsername"
                     />
                   </div>
-                  <div className='edit-comment-icons'>
+                  {(localStorage.username === comment.User.username)
+                  && <div className='edit-comment-icons'>
                     <img
                       src={edit} onClick={() => this.setState({
                         model: 'block',
@@ -374,6 +372,7 @@ componentWillUnmount = () => {
                       onClick={this.handleDelete(comment.id)}
                     />
                   </div>
+                  }
                   <div className="card-body">
                     <blockquote className="blockquote mb-0">
                       <p>{comment.body}</p>
@@ -422,6 +421,10 @@ componentWillUnmount = () => {
               ))}
           </div>
         </div>
+          : <div>
+            <img src={Spinner} className="spinnerImage"/>
+          </div>
+      }
       </Layout>
     );
   }

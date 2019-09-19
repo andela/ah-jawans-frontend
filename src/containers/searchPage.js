@@ -8,6 +8,7 @@ import searchAction from '../redux/actions/searchAction';
 import fetchImage from '../components/article/fetchImage';
 import ArticleCard from '../components/article/searchArticlecard';
 import ArticleSearchForm from '../components/article/articleSearchForm';
+import PaginationButtons from '../components/article/paginationButtons';
 
 export class SearchPage extends Component {
   state = {
@@ -16,20 +17,19 @@ export class SearchPage extends Component {
       keyword: '',
       tag: '',
       title: 'a',
-      offset: 0,
-      limit: 10,
     },
     searchData: [],
+    articlePerPage: 10,
+    currentPage: 1,
   };
 
   componentDidMount = async () => {
     await this.props.getDataThunk(
       'get',
-      `article/search?title=${this.state.search.title}&limit=${this.state.search.limit}&offset=${this.state.search.offset}`,
+      `article/search?title=${this.state.search.title}`,
       searchAction,
     );
     this.setState({ ...this.state, searchData: this.props.searchData, search: { ...this.state.search, title: '' } });
-    this.handelDispaly(this.props.counts, this.state.search.offset);
   }
 
   handleOnChange = (e) => {
@@ -38,59 +38,31 @@ export class SearchPage extends Component {
     this.setState({ search });
   }
 
-  handelDispaly = (counts, offset) => {
-    const modal = document.getElementsByClassName('btn-pagination')[0];
-    const prev1 = document.getElementsByClassName('btn-pagination-prev1')[0];
-    const next1 = document.getElementsByClassName('btn-pagination-next1')[0];
-
-    if (this.props.counts <= 10) {
-      modal.classList.remove('pagination');
-      modal.classList.add('pagination-none');
-    } else {
-      modal.classList.remove('pagination-none');
-      modal.classList.add('pagination');
-    }
-
-    if ((counts - offset) < 0) {
-      next1.classList.remove('btn-pagination');
-      next1.classList.add('pagination-none');
-    } else {
-      next1.classList.remove('pagination-none');
-      next1.classList.add('btn-pagination');
-    }
-    if (offset <= 0) {
-      prev1.classList.add('pagination-none');
-    } else {
-      prev1.classList.remove('pagination-none');
-    }
-  }
 
   handleKeyPress = async (e) => {
     const keyCode = e.keyCode || e.which;
     if (keyCode === 13) {
       await this.props.getDataThunk(
         'get',
-        `article/search?title=${this.state.search.title}&limit=${this.state.search.limit}&offset=${this.state.search.offset}`,
+        `article/search?title=${this.state.search.title}`,
         searchAction,
       );
       this.setState({ ...this.state, searchData: this.props.searchData });
-      this.handelDispaly(this.props.counts, this.state.search.offset);
       document.getElementById('mainSearch').value = '';
     }
   }
 
-  handleOnSubmit = (limit, offsets) => async (e) => {
+  handleOnSubmit = () => async (e) => {
     e.preventDefault();
     const {
       authorName, keyword, tag, title,
     } = this.state.search;
     // eslint-disable-next-line no-unused-expressions
-    this.setState({ ...this.state, search: { ...this.state.search, offset: offsets } });
     const titleUrl = title && `title=${this.state.search.title}`;
     const tagUrl = tag && `tag=${tag}`;
     const authorNameUrl = authorName && `authorName=${authorName}`;
     const keywordUrl = keyword && `keyword=${keyword}`;
-    const mainUrl = `article/search?${titleUrl}&${authorNameUrl}&${tagUrl}&${keywordUrl}&limit=${this.state.search.limit}&offset=${this.state.search.offset}`;
+    const mainUrl = `article/search?${titleUrl}&${authorNameUrl}&${tagUrl}&${keywordUrl}`;
 
     await this.props.getDataThunk(
       'get',
@@ -98,8 +70,6 @@ export class SearchPage extends Component {
       searchAction,
     );
     this.setState({ ...this.state, searchData: this.props.searchData });
-
-    this.handelDispaly(this.props.counts, this.state.search.offset);
     document.getElementById('searchForm').reset();
     // eslint-disable-next-line no-unused-expressions
     this.props.errors
@@ -110,8 +80,28 @@ export class SearchPage extends Component {
     this.props.history.push(`/readArticle/${id}`);
   }
 
+  next = () => {
+    this.setState({
+      ...this.state,
+      currentPage: this.state.currentPage + 1,
+    });
+  };
+
+  previous = () => {
+    this.setState({
+      ...this.state,
+      currentPage: this.state.currentPage - 1,
+    });
+  };
+
   render() {
-    const { offset, limit } = this.state.search;
+    const { currentPage, articlePerPage } = this.state;
+    const indexOfLastArticle = currentPage * articlePerPage;
+    const indexOfFirstArticle = indexOfLastArticle - articlePerPage;
+    const currentArticles = this.state.searchData ? this.state.searchData.slice(
+      indexOfFirstArticle,
+      indexOfLastArticle,
+    ) : [];
     return (
         <Layout>
             <div className="searchContainer">
@@ -125,12 +115,17 @@ export class SearchPage extends Component {
                   />
                     <div className="searchContainer__articlesContainer_articleContent ">
                       <ArticleCard
-                        articles={this.state.searchData && this.state.searchData}
+                        articles={currentArticles && currentArticles}
                         fetchImage={fetchImage}
                         handleView={this.handleView}
                         handleOnSubmit={this.handleOnSubmit}
-                        limit={limit}
-                        offset={offset}
+                      />
+                      <PaginationButtons
+                        next={this.next}
+                        previous={this.previous}
+                        currentPage={currentPage}
+                        dataLength={this.state.searchData ? this.state.searchData.length : 0}
+                        indexOfLastArticle={indexOfLastArticle}
                       />
                     </div>
                 </div>

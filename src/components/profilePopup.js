@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 import ReactImageFallback from 'react-image-fallback';
 import profileImagePlaceHolder from '../assets/images/profile_plaholder.png';
 import LoadingGif from '../assets/images/loadingGif.gif';
+import ArticleCard from './article/searchArticlecard';
 
 const ProfileView = ({
   image, firstName, lastName, dob, bio, username, removeModel, follow, unfollow, followThem,
+  fetchImage, limit, offset, articles, handleView, handleOnSubmit,
 }) => (
     <>
     <div id="myModal" className="modal">
-        <div className="modal-content">
+        <div className="modal-content modal-content-profile">
         <span id="close" className="close" onClick={removeModel}>&times;</span>
         <div className="profile">
           <div className="profile__imagecontent">
@@ -28,7 +30,10 @@ const ProfileView = ({
               <h6 className="profile__profilecontent_h">Last Name:</h6> <p className="profile__profilecontent_p">{lastName}</p>
               <h6 className="profile__profilecontent_h">Date of birth:</h6> <p className="profile__profilecontent_p">{dob}</p>
               <h6 className="profile__profilecontent_h">bio:</h6> <p className="profile__profilecontent_p">{bio}</p>
-              {
+          </div>
+        </div>
+        <div className="profile-btn">
+          {
                 followThem(username)
                   ? <button type="button" className="followerbtn  btnd unfollow-btn" onClick={unfollow({ username })}>
                 unfollow
@@ -37,6 +42,15 @@ const ProfileView = ({
               follow
               </button>}
           </div>
+        <div className="articles-cards">
+        <ArticleCard
+            articles={articles && articles}
+            fetchImage={fetchImage}
+            handleView={handleView}
+            handleOnSubmit={handleOnSubmit}
+            limit={limit}
+            offset={offset}
+          />
         </div>
         </div>
         </div>
@@ -46,6 +60,9 @@ const ProfileView = ({
 ProfileView.protoType = {
   users: PropTypes.array,
   handelOnlick: PropTypes.func,
+  articles: PropTypes.array,
+  handleView: PropTypes.func,
+  handleOnSubmit: PropTypes.func,
 };
 
 export default ProfileView;

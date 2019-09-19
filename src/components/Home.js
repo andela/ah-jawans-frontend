@@ -9,6 +9,7 @@ import SingleArticle from './article/singleArticle';
 import { getDataThunk } from '../redux/thunks/index';
 import fetchImage from './article/fetchImage';
 import PaginationComponent from './article/Pagination';
+import Spinner from '../assets/icons/spinner.gif';
 
 export class Home extends Component {
   render() {
@@ -26,7 +27,9 @@ export class Home extends Component {
         <main role='main'>
           <div className='album py-5 bg-light home-page-container'>
             <div className='container'>
-              <div className='row'>
+              {console.log('this.props.articles>>>', this.props.articles.length)}
+              {this.props.articles.length
+                ? <div className='row'>
                 {this.props.articles.length > 0 && this.props.articles.map((article) => <Link
                   key={article.id}
                   to={`/readArticle/${article.id}`}
@@ -40,6 +43,10 @@ export class Home extends Component {
                   />
                 </Link>)}
               </div>
+                : (<div className="spinnerImage11">
+              <img src={Spinner}className="spinnerImage1"/>
+            </div>)
+              }
               <div className="row pagination center-align">
                 <PaginationComponent />
               </div>
