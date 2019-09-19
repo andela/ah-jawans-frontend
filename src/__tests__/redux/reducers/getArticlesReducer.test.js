@@ -12,10 +12,6 @@ describe('User reducers', () => {
   type: GET_ARTICLES,
   payload: {user},
     });
-    expect(user).toHaveProperty('firstName');
-    expect(user).toHaveProperty('lastName');
-    expect(user).toHaveProperty('username');
-    expect(user).toHaveProperty('email');
   });
 });
 
