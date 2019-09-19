@@ -16,7 +16,7 @@ export default class Layout extends Component {
     return (
       <div className="Layout">
         <Header />
-        <div style={{ minHeight: screenHeight }}>{children}</div>
+          <div style={{ minHeight: screenHeight }}>{children}</div>
         <Footer />
       </div>
     );

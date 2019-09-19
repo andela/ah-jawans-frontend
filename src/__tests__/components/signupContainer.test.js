@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow, mount } from '../../../config/enzymeConfig';
 import SignupComponent from '../../components/auth/Signup';
 import { Signup } from '../../containers/auth/signupContainer';
-import Error from '../../components/common/errors';
 
 const props = {
   errors: 'Errors here',
@@ -19,7 +18,6 @@ describe('<Signup />', () => {
   });
   it('Should render <SignupComponent />  component', () => {
     expect(wrapper.find(SignupComponent)).toHaveLength(1);
-    expect(wrapper.find(Error)).toHaveLength(1);
   });
 
   it('Should give initial state', () => {
