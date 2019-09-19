@@ -14,13 +14,6 @@ const ArticleSearchForm = ({ handleOnChange, handleOnSubmit }) => (
                 />
             <input
                 onChange={handleOnChange}
-                name="keyword"
-                type="text"
-                className="sideBar__input"
-                placeholder="Keyword"
-            />
-            <input
-                onChange={handleOnChange}
                 name="tag"
                 type="text"
                 className="sideBar__input"

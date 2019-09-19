@@ -12,7 +12,8 @@ document.body.innerHTML =
   '<div class="btn-pagination"></div> ' +
   '<input class="btn-pagination-prev1" value="h"/>' +
   '<h5 class="btn-pagination-next1">khd</h5>' +
-  '<div class="cards"></div> ';
+  '<div class="cards"></div> ' +
+  '<form id="searchForm"></form> ';
 
 const store = configureStore();
 
@@ -119,8 +120,9 @@ describe('<SearchPage />', () => {
     });
     wrapper.instance().handleOnSubmit(undefined);
     wrapper.find("#searchFormbtn").simulate('submit', {});
-    wrapper.find("#mainSearch").simulate('keypress', { which: { value: 13 } });
-    wrapper.find("#mainSearch").simulate('change', {});
+    wrapper.find("#mainSearch").simulate('keypress', { keyCode: 13  });
+    wrapper.find("#mainSearch").simulate('change', {value: 'efbkjwfe hhjq'});
+    wrapper.find("#mainSearch").simulate('keypress', { which: 13  });
     expect(wrapper).toHaveLength(1);
   });
 
@@ -242,7 +244,6 @@ describe('<SearchPage />', () => {
 
 
     fetchImage(props.articles[0].body);
-    wrapper.instance().handelDispaly();
     expect(wrapper).toHaveLength(1);
   });
 
@@ -281,13 +282,72 @@ describe('<SearchPage />', () => {
           readtime: 'ewhujhef',
           body: '<p>Redux is a JavaScript library developed for maintaining application states. When you are building a complex application, it will add overhead to manage states across components. Redux helps you store all your states in a single source. And of course, React plays well with Redux</p><figure class=\"image\"><img src=\"http://res.cloudinary.com/djxhcwowp/image/upload/v1567753354/x29bkjblgkpd1sepxros.jpg\"><figcaption>image caption</figcaption></figure>'
         },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' },
+
+      ],
+    });
+    fetchImage(props.articles[0].body);
+    wrapper.find("#view1").simulate('click', {keyCode: {value: 13}});
+    // console.log('...............',wrapper.find("#next").length, ">>>>>>>", wrapper.debug());
+    wrapper.find("#next").simulate('click', {});
+    expect(wrapper).toHaveLength(1);
+  });
+
+  it('Should render search article cards', () => {
+    const props = {
+      articles: [
+        {
+          createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv',
+          readtime: 'ewhujhef',
+          body: '<p>Redux is a JavaScript library developed for maintaining application states. When you are building a complex application, it will add overhead to manage states across components. Redux helps you store all your states in a single source. And of course, React plays well with Redux</p><figure class=\"image\"><img src=\"http://res.cloudinary.com/djxhcwowp/image/upload/v1567753354/x29bkjblgkpd1sepxros.jpg\"><figcaption>image caption</figcaption></figure>'
+        },
+        { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' }
+      ],
+      fetchImage: jest.fn(),
+      handleView: jest.fn(),
+      handleOnSubmit: jest.fn(),
+      counts: 2,
+      history: { push: jest.fn() },
+      getDataThunk: jest.fn(),
+    }
+    const wrapper = mount(
+      <View {...props} />);
+
+    wrapper.setState({
+      currentPage: 3,
+      search: {
+        authorName: '',
+        keyword: '',
+        tag: '',
+        title: 'a',
+        offset: 0,
+        limit: 10,
+      },
+      searchData: [
+        {
+          createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv',
+          readtime: 'ewhujhef',
+          body: '<p>Redux is a JavaScript library developed for maintaining application states. When you are building a complex application, it will add overhead to manage states across components. Redux helps you store all your states in a single source. And of course, React plays well with Redux</p><figure class=\"image\"><img src=\"http://res.cloudinary.com/djxhcwowp/image/upload/v1567753354/x29bkjblgkpd1sepxros.jpg\"><figcaption>image caption</figcaption></figure>'
+        },
         { createdAt: '2012-12-20T03:00:00.000Z', description: 'webnwde jhgejwrv', readtime: 'ewhujhef' }
       ],
     });
     fetchImage(props.articles[0].body);
-    wrapper.instance().handelDispaly(3, 4);
-    wrapper.instance().handleView(20);
-    wrapper.find("#view1").simulate('click', {});
+    wrapper.find("#previous").simulate('click', {});
     expect(wrapper).toHaveLength(1);
   });
 }); 

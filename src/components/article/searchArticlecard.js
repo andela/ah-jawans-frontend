@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import timeDispaly from './timeDisplay';
-import PaginationButtons from './paginationButtons';
 
 
 const ArcticleCard = ({
-  articles, fetchImage, handleView, handleOnSubmit, limit, offset,
+  articles, fetchImage, handleView,
 }) => (
     <>
-        {articles ? articles.length && articles.map((article, index) => (
+        {articles ? articles.map((article, index) => (
           article ? (
             <div id={`view${index}`} className="searchContainer__articleContent_card arcticleCard" onClick={handleView(article.id)}>
                 <div className="arcticleCard__image" id={`${index}image`}>
@@ -32,11 +31,11 @@ const ArcticleCard = ({
         )) : (<div className="searchContainer__articleContent_card arcticleCard">
               <h5>No article found after search</h5>
           </div>)}
-        <PaginationButtons
+        {/* <PaginationButtons
             handleOnSubmit={handleOnSubmit}
             limit={limit}
             offset={offset}
-            />
+            /> */}
     </>
 );
 

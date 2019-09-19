@@ -87,7 +87,7 @@ describe('<following />', () => {
               <AllUserView />
             </MemoryRouter>
           </Provider>);
-          component.find("button[id='0d']").simulate('click', {  });
+          // component.find("button[id='0d']").simulate('click', {  });
         expect(component).toBeDefined();
     });
 
@@ -131,7 +131,7 @@ describe('<following />', () => {
             </MemoryRouter>
           </Provider>);
           component.setProps({followMessage: 'dwkjhf'})
-          component.find("button[id='0d']").simulate('click', {  });
+          // component.find("button[id='0d']").simulate('click', {  });
         expect(component).toBeDefined();
     });
 
@@ -187,7 +187,7 @@ describe('<following />', () => {
         component.setProps({followMessage: 'dwkjhf'});
         component.find("#close").simulate('click', {  });
         component.find("button[id='0dd']").simulate('click', {  });
-        component.find("button[id='0d']").simulate('click', {  });
+        // component.find("button[id='0d']").simulate('click', {  });
         component.instance().followerEvent = jest.fn();
       expect(component).toBeDefined();
   });

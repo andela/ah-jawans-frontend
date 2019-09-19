@@ -25,9 +25,6 @@ const ViewAllUserCard = ({
               <p>{use.email}</p>
             </div>
             <div className="card__inf_myBtn">
-              <button type="button" id={`${index}`} className="card__inf_btnPro git btnd card__inf_btn" onClick={handelOnlick(use)}>
-                Profile
-                    </button>
               {
                 followThem(use.username)
                   ? <button type="button" id={`${index}unfollow`} className="followerbtn  btnd card__inf_btn unfollow-btn" onClick={unfollow(use)}>

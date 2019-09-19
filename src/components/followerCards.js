@@ -24,9 +24,6 @@ const FollowerCard = ({
               <h4 className="card__inf_name usernamevalue"> {use.follower.username}</h4>
             </div>
             <div className="card__inf_myBtn">
-              <button type="button" id={`${index}g`} className="card__inf_btnPro git btnd card__inf_btn" onClick={viewProfile(use.follower)}>
-                View Profile
-            </button>
               {followThem(use.follower.username)
                 ? <button type="button" id={`${index}unfollowbt`} className="followerbtn  btnd card__inf_btn unfollow-btn" onClick={unfollow({ username: use.follower.username })}>
                   unfollow

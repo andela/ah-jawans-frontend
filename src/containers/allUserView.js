@@ -10,6 +10,8 @@ import { getDataThunkPrivate, getDataThunk, postDataThunkPrivate } from '../redu
 import ViewAllUserCard from '../components/viewAllUserCard';
 import ProfileView from '../components/profilePopup';
 import Layout from '../components/Layout/Layout';
+import searchAction from '../redux/actions/searchAction';
+import fetchImage from '../components/article/fetchImage';
 
 export class AllUserView extends Component {
     state = {
@@ -20,6 +22,13 @@ export class AllUserView extends Component {
       dob: '',
       bio: '',
       message: '',
+      search: {
+        authorName: '',
+        keyword: '',
+        tag: '',
+        title: 'a',
+      },
+      searchData: [],
     };
 
     componentDidMount = async () => {
@@ -27,7 +36,13 @@ export class AllUserView extends Component {
       await this.props.getDataThunkPrivate('get', 'profiles/following', getFollowingAction);
     }
 
-    handelOnlick = (use) => () => {
+    handelOnlick = (use) => async () => {
+      await this.props.getDataThunk(
+        'get',
+        `article/search?authorName=${use.username}`,
+        searchAction,
+      );
+      this.setState({ ...this.state, searchData: this.props.searchData, search: { ...this.state.search, title: '' } });
       this.setState({
         image: use.image,
         username: use.username,
@@ -49,11 +64,15 @@ export class AllUserView extends Component {
 
     followerEvent = (user) => async () => {
       await this.props.postDataThunkPrivate('post', `profiles/${user.username}/follow`, followAction, null);
+
+      // eslint-disable-next-line no-nested-ternary
+      (!localStorage.id)
+        ? toast.error(`Login first in order to follow @${user.username}!`)
       // eslint-disable-next-line no-unused-expressions
-      this.props.followMessage
-        ? (toast.success(`${this.props.followMessage}!`),
-        window.location.reload())
-        : toast.error(`you already follow ${user.username}!`);
+        : (this.props.followMessage
+          ? (toast.success(`${this.props.followMessage}!`),
+          setTimeout(() => window.location.reload(), 6000))
+          : toast.error(`you already follow ${user.username}!`));
     }
 
     onKeyUpHandle = () => {
@@ -76,7 +95,7 @@ export class AllUserView extends Component {
       await this.props.getDataThunkPrivate('delete', `profiles/${user.username}/follow`, unfollowAction);
       this.props.unfollowMessage
         ? (toast.success(`${this.props.unfollowMessage}!`),
-        window.location.reload())
+        setTimeout(() => window.location.reload(), 6000))
         : toast.error(`you already unfollow ${user.username}!`);
     }
 
@@ -87,7 +106,12 @@ export class AllUserView extends Component {
       return dataUsername.includes(username);
     };
 
+    handleView = (id) => () => {
+      this.props.history.push(`/readArticle/${id}`);
+    }
+
     render() {
+      const { offset, limit } = this.state.search;
       return (
 
           <>
@@ -107,6 +131,13 @@ export class AllUserView extends Component {
                 unfollow={this.unfollowEvent}
                 buttonName='follow'
                 followThem={this.followThem}
+
+                articles={this.props.searchData}
+                fetchImage={fetchImage}
+                handleView={this.handleView}
+                handleOnSubmit={this.handleOnSubmit}
+                limit={limit}
+                offset={offset}
               />
             <div className="contents">
              <ViewAllUserCard
@@ -135,6 +166,7 @@ AllUserView.propTypes = {
   followMessage: PropTypes.string,
   following: PropTypes.array,
   unfollowMessage: PropTypes.string,
+  searchData: PropTypes.array,
 };
 
 export const mapStateToProps = (state) => ({
@@ -142,6 +174,7 @@ export const mapStateToProps = (state) => ({
   following: state.followerData.getAllfollowing.data.following,
   followMessage: state.followerData.follow.message,
   unfollowMessage: state.followerData.unfollow.message,
+  searchData: state.searchData.searchData.data,
 });
 
 const actionCreator = {

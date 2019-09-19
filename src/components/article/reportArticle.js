@@ -5,7 +5,6 @@ const ReportArticle = ({ consel, onChange, handleReport }) => (
     <>
         <div id="myModal2" className="modal">
             <div className="modal-content">
-            {/* <span id="close" className="close">&times;</span> */}
                 <div className="main-div-report">
                     <div className="reporting-content">
                         <div className="reporting-content__story">

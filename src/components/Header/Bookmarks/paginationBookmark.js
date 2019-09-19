@@ -59,7 +59,7 @@ export class Pagination extends Component {
                 {button.label}
               </button>
             </li>
-          )) : (<div className="row1">You do not have bookmark articles</div>)}
+          )) : (<div className="row1">You don’t have any bookmarks</div>)}
         </ul>
       </div>
     );
