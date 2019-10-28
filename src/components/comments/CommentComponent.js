@@ -6,14 +6,8 @@ import authorImage from '../../assets/images/profile_plaholder.png';
 
 export class CommentComponent extends Component {
   render() {
-    const image = localStorage.getItem('image');
-    let image1;
-    if (image !== 'null') {
-      if (image) {
-        // eslint-disable-next-line no-unused-expressions
-        image.split(':')[0] === 'https' ? image1 = image : image1 = `https://res.cloudinary.com/djxhcwowp/image/upload/v${image}`;
-      }
-    }
+    const image = localStorage.image !== 'null' && localStorage.image ? localStorage.image : null;
+    const image1 = (image || '').includes('https') ? image : (image && `https://res.cloudinary.com/djxhcwowp/image/upload/v/${image}`);
     return (
       <div className="comment-form">
         <div className="form-header">

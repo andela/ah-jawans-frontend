@@ -12,7 +12,6 @@ export default (state = initialState, action) => {
         articles: action.payload.article || action.payload.articles,
         articlesCount: action.payload.articlesCount,
       };
-
     default:
       return state;
   }

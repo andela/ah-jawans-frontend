@@ -1,0 +1,133 @@
+.bottom-article {
+  width: 46% !important;
+  margin: auto !important;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  display: block;
+}
+
+.bottom-article__likes {
+  display: inline-block;
+  width: 50%;
+}
+
+.bottom-article__report {
+  display: inline-block;
+  width: 50%;
+  text-align: right;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 27px;
+  color: #C81010;
+  cursor: pointer;
+}
+
+.close {
+  text-align: right;
+}
+
+.main-div-report {
+  display: -ms-grid;
+  display: grid;
+  padding: 5% 20%;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+.main-div-report input {
+  outline: none !important;
+}
+
+.reporting-content__story {
+  margin-bottom: 30px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  color: #000000;
+}
+
+.report-form {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 15px;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  outline: none;
+}
+
+.report-form__label {
+  display: inline;
+  padding-left: 10px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  color: #000000;
+}
+
+.report-form__feedback {
+  border: none;
+  border-bottom: 1px solid #868484;
+  width: 100%;
+  padding: 10px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  color: #656060;
+}
+
+.report-form__feedback-block {
+  margin-top: 20px;
+}
+
+.report-form__buttons {
+  margin-top: 30px;
+}
+
+.report-form__buttons_btn {
+  border: none;
+  width: 126px;
+  height: 38px;
+  left: 603px;
+  top: 659px;
+  border-radius: 5px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  outline: none !important;
+}
+
+.report-form__buttons_report {
+  background: #C81010;
+  color: white;
+  margin-right: 40px;
+}
+
+.report-form__buttons_concel {
+  background: #F9FCFB;
+  border: 1px solid #B5B5B5;
+  color: #C81010;
+}
+/*# sourceMappingURL=articlesDownSide.css.map */

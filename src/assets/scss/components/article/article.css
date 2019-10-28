@@ -1,0 +1,44 @@
+.articleForm {
+  width: 70%;
+  margin: auto;
+}
+
+.articleForm__articleInput {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 30px;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  outline: none;
+}
+
+.articleForm__articleInput__add-tag {
+  border: 1px solid #cccc;
+  width: 80%;
+  height: 32px;
+  margin-bottom: 30px;
+  outline: none;
+}
+
+.articleForm__publish {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  width: 120px;
+  height: 35px;
+  background-color: #12699B;
+  color: #F4F0F0;
+  border-radius: 5px;
+  margin-left: 35px;
+}
+
+.articleForm textarea {
+  resize: none;
+  border: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #3f3f3e;
+  overflow: auto;
+  height: 480px;
+}
+/*# sourceMappingURL=article.css.map */

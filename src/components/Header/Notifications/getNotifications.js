@@ -8,7 +8,7 @@ import { Button } from '../../common';
 import Modal from './Modal/Modal';
 import { getDataThunkPrivate } from '../../../redux/thunks';
 
-class GetNotifications extends Component {
+export class GetNotifications extends Component {
   state = {
     showModal: false,
     notification_number: 0,

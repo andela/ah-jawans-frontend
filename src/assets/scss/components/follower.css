@@ -1,0 +1,270 @@
+.contents {
+  margin-top: 50px;
+  margin: 40px 15%;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 20px;
+  -ms-grid-columns: (minmax(35%, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(35%, 1fr));
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.cards {
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+  grid-gap: 5px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr;
+      grid-template-columns: 1fr 2fr;
+}
+
+.cards__image_pic {
+  border-radius: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.card__inf {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(95%, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(95%, 1fr));
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.card__inf_name {
+  padding: 10%;
+  text-align: center;
+}
+
+.card__inf_myBtn {
+  text-align: center;
+}
+
+.card__inf_btn {
+  padding: 0px;
+  display: inline;
+  margin: 3%;
+  color: white;
+}
+
+.card__inf_btnPro {
+  background-color: #17a2b8;
+  border: none;
+  padding: 1% 2%;
+  color: white;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modalsd {
+  display: block;
+  position: fixed;
+  z-index: 150;
+  padding-top: 150px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  outline: 0px dotted;
+}
+
+.profile {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 5px;
+  -ms-grid-columns: 1fr 3fr;
+      grid-template-columns: 1fr 3fr;
+}
+
+.profile__imagecontent {
+  border-radius: 3px;
+  width: 300px;
+}
+
+.profile__profilecontent {
+  padding: 10px 50px;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 5px;
+  -ms-grid-columns: 1fr 3fr;
+      grid-template-columns: 1fr 3fr;
+}
+
+.messagebox {
+  display: none;
+}
+
+.message {
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #86c386;
+  width: 50%;
+  float: right;
+  text-align: center;
+}
+
+.errormessage {
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #8d1f15;
+  width: 50%;
+  float: right;
+  text-align: center;
+}
+
+.in-p {
+  margin-top: 130px;
+  padding: 0px 30%;
+}
+
+.usenameNoDisplaye {
+  display: none;
+}
+
+.usenamedisplayBlock {
+  display: block;
+}
+
+.followerbtn {
+  border: none;
+  padding: 1% 2% !important;
+  background: #12699B;
+  border-radius: 0px;
+}
+
+@media only screen and (max-width: 630px) {
+  .contents {
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 20px;
+    -ms-grid-columns: (minmax(95%, 1fr))[auto-fit];
+        grid-template-columns: repeat(auto-fit, minmax(95%, 1fr));
+    justify-items: center;
+    margin: 60px 15px;
+  }
+  .cards {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 2fr;
+        grid-template-columns: 1fr 2fr;
+    grid-auto-rows: auto;
+    padding: 0px;
+  }
+  .cards__image_pic {
+    border-radius: 0px;
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+  }
+  .card__inf {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (minmax(95%, 1fr))[auto-fit];
+        grid-template-columns: repeat(auto-fit, minmax(95%, 1fr));
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .card__inf_name {
+    text-align: center;
+  }
+  .card__inf_btn {
+    padding: 0px;
+    display: inline;
+    margin: 3%;
+    color: white;
+  }
+  .card__inf_btn:hover {
+    opacity: 0.7;
+  }
+  .card__inf_btnPro {
+    background-color: #17a2b8;
+    border: none;
+    padding: 1% 2%;
+    color: white;
+  }
+  .card__inf_btnPro:hover {
+    opacity: 0.7;
+  }
+  .followerbtn {
+    border: none;
+    padding: 1% 2% !important;
+    background: #12699B;
+    border-radius: 0px;
+  }
+  .profile {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 3fr;
+        grid-template-columns: 1fr 3fr;
+  }
+  .profile__imagecontent {
+    min-width: 100%;
+    width: 100%;
+  }
+  .profile__profilecontent {
+    padding: 10px 50px;
+    display: -ms-grid;
+    display: grid;
+    grid-gap: 5px;
+    -ms-grid-columns: 1fr 3fr;
+        grid-template-columns: 1fr 3fr;
+  }
+  .button {
+    padding: 0;
+  }
+  .Header .header-notification-button .number {
+    margin-top: 20px;
+  }
+}
+
+.unfollow-btn {
+  background: #C81010 !important;
+  color: white;
+}
+/*# sourceMappingURL=follower.css.map */

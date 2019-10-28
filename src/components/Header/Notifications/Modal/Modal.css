@@ -1,0 +1,347 @@
+/* background anim colors */
+/* colors */
+.black {
+  background: #101010;
+}
+
+.text-black {
+  color: #101010;
+}
+
+.yellow {
+  background: #12699b;
+  color: #ffffff;
+}
+
+.twitter-color {
+  background: #50abf1;
+}
+
+.text-yellow {
+  color: #f9d342;
+}
+
+.light {
+  background: #f4f4f4;
+}
+
+.text-light {
+  color: #f4f4f4;
+}
+
+.grey {
+  background: #42413e;
+}
+
+.light-grey {
+  background: #e6e6e6;
+}
+
+.text-grey {
+  color: #42413e;
+}
+
+.white {
+  background: #ffffff;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.primary {
+  background: #282667;
+}
+
+.text-primary {
+  color: #282667;
+}
+
+.secondary {
+  background: #1843b8;
+}
+
+.text-secondary {
+  color: #1843b8;
+}
+
+.danger {
+  background: #d64c4c;
+}
+
+.text-danger {
+  color: #d64c4c;
+}
+
+.success {
+  background: #1c8a4a;
+}
+
+.text-success {
+  color: #1c8a4a;
+}
+
+.info {
+  background: #1cbdee;
+}
+
+.text-info {
+  color: #1cbdee;
+}
+
+.xxlarge-text {
+  font-size: 40px;
+}
+
+.xlarge-text {
+  font-size: 32px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.medium-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+.xxlarge-text {
+  font-size: 40px;
+}
+
+.xlarge-text {
+  font-size: 32px;
+}
+
+.large-text {
+  font-size: 24px;
+}
+
+.medium-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+.radius-1 {
+  border-radius: 5px;
+}
+
+.radius-2 {
+  border-radius: 10px;
+}
+
+.radius-3 {
+  border-radius: 15px;
+}
+
+.radius-4 {
+  border-radius: 20px;
+}
+
+.radius-5 {
+  border-radius: 30px;
+}
+
+.radius-6 {
+  border-radius: 50%;
+}
+
+/* row */
+.row {
+  margin-left: 0rem;
+  margin-right: 0rem;
+}
+
+/* container1 */
+.container1 {
+  margin: 0 auto;
+  max-width: inherit;
+  width: 98%;
+}
+
+/* grid */
+.small-screen-1,
+.medium-screen-1,
+.large-screen-1,
+.small-screen-2,
+.medium-screen-2,
+.large-screen-2,
+.small-screen-3,
+.medium-screen-3,
+.large-screen-3,
+.small-screen-4,
+.medium-screen-4,
+.large-screen-4 {
+  margin: 0 0.5%;
+  float: left;
+}
+
+.small-screen-4,
+.medium-screen-4,
+.large-screen-4 {
+  width: 99%;
+}
+
+.small-screen-3,
+.medium-screen-3,
+.large-screen-3 {
+  width: 74%;
+}
+
+.small-screen-2,
+.medium-screen-2,
+.large-screen-2 {
+  width: 49%;
+}
+
+.small-screen-1,
+.medium-screen-1,
+.large-screen-1 {
+  width: 24%;
+}
+
+/* media query */
+@media screen and (min-width: 1000px) {
+  .hide-on-large {
+    display: none;
+  }
+  .small-screen-1 {
+    width: auto;
+  }
+  .medium-screen-1 {
+    width: auto;
+  }
+  .large-screen-1 {
+    width: 24% !important;
+  }
+  .large-screen-2 {
+    width: 49% !important;
+  }
+  .large-screen-3 {
+    width: 74% !important;
+  }
+  .large-screen-4 {
+    width: 99% !important;
+  }
+}
+
+@media screen and (min-width: 761px) and (max-width: 999px) {
+  .hide-on-medium {
+    display: none;
+  }
+  .small-screen-1 {
+    width: auto;
+  }
+  .medium-screen-1 {
+    width: 24% !important;
+  }
+  .medium-screen-2 {
+    width: 49% !important;
+  }
+  .medium-screen-3 {
+    width: 74% !important;
+  }
+  .medium-screen-4 {
+    width: 99% !important;
+  }
+  .large-screen-1 {
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .hide-on-small {
+    display: none;
+  }
+  .small-screen-1 {
+    width: 24% !important;
+  }
+  .small-screen-2 {
+    width: 49% !important;
+  }
+  .small-screen-3 {
+    width: 74% !important;
+  }
+  .small-screen-4 {
+    width: 99% !important;
+  }
+  .medium-screen-1 {
+    width: auto;
+  }
+  .large-screen-1 {
+    width: auto;
+  }
+}
+
+#modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  max-width: 780px;
+  width: 98%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.wrap-notification {
+  position: relative;
+  padding: 10px 10px 30px 10px !important;
+  margin: 10px 0 !important;
+}
+
+.wrap-notification .notification-tick {
+  position: relative;
+  top: 22px;
+  width: 2%;
+}
+
+.wrap-notification .notification-message {
+  left: 10px;
+  position: relative;
+  width: 75%;
+}
+
+.wrap-notification .notification-time {
+  position: relative;
+  top: 10px;
+  width: 12%;
+}
+
+.wrap-notification .notification-button {
+  top: 10px;
+  width: 8%;
+}
+
+.wrap-notification .cursor-pointer {
+  cursor: pointer;
+}
+/*# sourceMappingURL=Modal.css.map */

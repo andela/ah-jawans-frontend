@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css?family=Sarina&display=swap");
+.images {
+  position: absolute;
+  width: 90%;
+  height: 76%;
+  border-radius: 5px;
+}
+
+.loginLeftSide {
+  position: fixed;
+  top: 150px;
+  left: 30px;
+}
+
+.loginLeftSide h2 {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Sarina', cursive;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 60px;
+  padding-left: 90px;
+  color: #000000;
+}
+
+.loginLeftSide h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 60px;
+  padding-left: 160px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #000000;
+}
+
+.myForm {
+  top: 210px;
+  left: 80px;
+}
+
+.myForm h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 76px;
+  color: #000000;
+}
+
+.myForm p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: #000000;
+}
+
+.myForm p a {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: #12699b;
+}
+
+.myForm p span {
+  font-weight: bold;
+  color: #12699b;
+  font-size: 16px;
+}
+
+.myForm p span a:hover {
+  text-decoration: none;
+}
+
+.myForm ::-webkit-input-placeholder {
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.myForm :-ms-input-placeholder {
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.myForm ::-ms-input-placeholder {
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.myForm ::placeholder {
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.myForm input[type=text] {
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  color: #000000;
+}
+
+.button1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  width: 120px;
+  height: 35px;
+  background-color: #12699b;
+  color: #f4f0f0;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  outline: 0px dotted;
+}
+
+.displayError span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+.socialLogin img {
+  width: 40px;
+  font-size: 14px;
+  margin-right: 40px;
+  width: 35px;
+}
+
+.socialLogin uol, ul {
+  margin-left: -70px;
+}
+
+.socialLogin li {
+  list-style-type: none;
+  display: inline;
+  padding-left: 29px;
+}
+
+@media (max-width: 768px) {
+  .images {
+    left: 80px;
+  }
+  .loginLeftSide {
+    top: 170px;
+  }
+  .myForm {
+    top: 230px;
+    left: 145px;
+  }
+  .loginLeftSide h5 {
+    padding-left: 90px;
+  }
+}
+
+@media (max-width: 425px) {
+  .loginLeftSide {
+    top: 15px;
+    right: 25px;
+  }
+  .myForm {
+    top: 250px;
+    left: 20px;
+  }
+  .images {
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .loginLeftSide {
+    top: 30px;
+    right: 25px;
+  }
+  .loginLeftSide h5 {
+    font-size: 20px;
+    padding-left: 100px;
+  }
+  .loginLeftSide h1 {
+    font-size: 40px;
+  }
+  .images {
+    border-radius: 0;
+  }
+  .myForm {
+    top: 280px;
+    left: 60px;
+  }
+}
+/*# sourceMappingURL=login.css.map */

@@ -1,0 +1,43 @@
+.sharing-icons img {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-left: 300px;
+  margin-top: 20px;
+}
+
+.sharing-icons {
+  position: fixed;
+  top: 200px;
+}
+
+@media (min-width: 1024px) {
+  .sharing-icons img {
+    margin-left: 130px;
+  }
+}
+
+@media (min-width: 768px) {
+  .sharing-icons img {
+    margin-left: 100px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .sharing-icons img {
+    margin-left: 270px;
+  }
+}
+
+@media (max-width: 425px) {
+  .sharing-icons img {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 764px) {
+  .sharing-icons img {
+    margin-left: 80px;
+  }
+}
+/*# sourceMappingURL=sharingArticle.css.map */
